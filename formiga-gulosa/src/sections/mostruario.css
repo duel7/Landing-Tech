@@ -478,6 +478,21 @@
   .vit__hint {
     display: none;
   }
+
+  /* tablet e celular: o botão do convite quebra a linha em vez de passar da borda */
+  .vit-end .btn {
+    min-height: 44px;
+    padding: 8px 12px;
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.25;
+  }
+
+  .vit-end .btn__icon {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
@@ -521,20 +536,6 @@
 
   .vit-end__text {
     font-size: 0.78rem;
-  }
-
-  .vit-end .btn {
-    min-height: 44px;
-    padding: 8px 12px;
-    font-size: 0.64rem;
-    letter-spacing: 0.08em;
-    white-space: normal;
-    text-align: center;
-    line-height: 1.25;
-  }
-
-  .vit-end .btn__icon {
-    display: none;
   }
 
   .vit__note {
