@@ -1,0 +1,88 @@
+.ant {
+  overflow: visible;
+  flex: none;
+}
+
+.ant__shadow {
+  fill: rgba(43, 23, 22, 0.16);
+}
+
+.dark .ant {
+  filter: drop-shadow(0 0 0.6px rgba(248, 233, 228, 0.75)) drop-shadow(0 0 6px rgba(228, 192, 108, 0.25));
+}
+
+.dark .ant__shadow {
+  fill: rgba(0, 0, 0, 0.35);
+}
+
+.ant__antennae {
+  transform-origin: 54px 19px;
+  animation: ant-sniff 2.6s var(--ease-in-out) infinite;
+}
+
+.ant.is-walking .ant__leg--a {
+  animation: ant-step var(--ant-speed, 0.42s) linear infinite;
+}
+
+.ant.is-walking .ant__leg--b {
+  animation: ant-step var(--ant-speed, 0.42s) linear infinite;
+  animation-delay: calc(var(--ant-speed, 0.42s) / -2);
+}
+
+.ant.is-walking .ant__body {
+  animation: ant-bob calc(var(--ant-speed, 0.42s) / 2) ease-in-out infinite alternate;
+}
+
+.ant.is-walking .ant__load {
+  animation: ant-sway var(--ant-speed, 0.42s) ease-in-out infinite;
+  transform-origin: 40px 30px;
+}
+
+@keyframes ant-step {
+  0%,
+  100% {
+    transform: rotate(-13deg);
+  }
+  50% {
+    transform: rotate(11deg);
+  }
+}
+
+@keyframes ant-bob {
+  to {
+    transform: translateY(-0.9px);
+  }
+}
+
+@keyframes ant-sway {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes ant-sniff {
+  0%,
+  70%,
+  100% {
+    transform: rotate(0);
+  }
+  78% {
+    transform: rotate(-7deg);
+  }
+  86% {
+    transform: rotate(4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ant__antennae,
+  .ant .ant__leg,
+  .ant .ant__body,
+  .ant .ant__load {
+    animation: none !important;
+  }
+}

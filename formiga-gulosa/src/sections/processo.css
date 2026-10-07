@@ -1,0 +1,249 @@
+.proc {
+  position: relative;
+  z-index: 1;
+  padding: clamp(40px, 5vw, 80px) 0 clamp(110px, 12vw, 170px);
+  background:
+    radial-gradient(36% 44% at 100% 42%, rgba(180, 99, 108, 0.14), transparent 100%),
+    radial-gradient(36% 40% at 0% 60%, rgba(110, 70, 66, 0.3), transparent 100%), var(--cacao);
+}
+
+.proc__curve {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(100% - 1px);
+  height: clamp(36px, 6vw, 90px);
+  line-height: 0;
+  pointer-events: none;
+}
+
+.proc__curve svg {
+  width: 100%;
+  height: 100%;
+}
+
+.proc__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+  gap: clamp(30px, 4vw, 70px);
+  align-items: start;
+}
+
+.proc__title {
+  margin: 18px 0 18px;
+}
+
+.proc__script {
+  display: inline-block;
+  font-size: 1.36em;
+  line-height: 0.7;
+  padding: 0.12em 0.1em 0.1em 0;
+  font-style: normal;
+}
+
+.proc__scroll {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 36px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--on-dark-soft);
+}
+
+.proc__scroll-line {
+  position: relative;
+  width: 1px;
+  height: 64px;
+  background: var(--line-dark);
+  overflow: hidden;
+}
+
+.proc__scroll-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -40%;
+  width: 1px;
+  height: 40%;
+  background: var(--gold-bright);
+  animation: drop-line 2.2s var(--ease-in-out) infinite;
+}
+
+@keyframes drop-line {
+  to {
+    top: 100%;
+  }
+}
+
+/* ---------- etapas ---------- */
+.proc__steps {
+  position: relative;
+  container-type: inline-size;
+  padding-top: 10px;
+}
+
+.proc__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.proc__path {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(10px + (100cqw - 72px) / 4 * 0.85 + 23px);
+  height: 2px;
+  background-image: radial-gradient(circle, rgba(228, 192, 108, 0.5) 1px, transparent 1.4px);
+  background-size: 9px 2px;
+}
+
+.proc__ant {
+  position: absolute;
+}
+
+.proc__ant--h {
+  top: -30px;
+}
+
+.proc__ant--v {
+  display: none;
+}
+
+.proc-step__art {
+  position: relative;
+}
+
+.proc-art {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.proc-step__arrow {
+  position: absolute;
+  right: -21px;
+  top: 64%;
+  color: var(--gold-bright);
+  opacity: 0.25;
+  transition: opacity 0.6s ease;
+}
+
+.proc-step.is-active .proc-step__arrow {
+  opacity: 0.7;
+}
+
+.proc-step__mark {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 13px;
+  height: 13px;
+  margin: 17px 0 16px calc(50% - 6.5px);
+  border-radius: 50%;
+  border: 1.5px solid rgba(228, 192, 108, 0.55);
+  background: var(--cacao);
+  transition:
+    background-color 0.5s ease,
+    box-shadow 0.5s ease,
+    transform 0.6s var(--ease-spring);
+}
+
+.proc-step.is-active .proc-step__mark {
+  background: var(--gold-bright);
+  box-shadow: 0 0 0 6px rgba(228, 192, 108, 0.16);
+  transform: scale(1.1);
+}
+
+.proc-step__num {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: var(--on-dark-soft);
+  transition: color 0.5s ease;
+}
+
+.proc-step.is-active .proc-step__num {
+  color: var(--gold-bright);
+}
+
+.proc-step__title {
+  margin: 4px 0 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.proc-step__text {
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--on-dark-soft);
+}
+
+.proc-step {
+  text-align: center;
+}
+
+@media (max-width: 1100px) {
+  .proc__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .proc__scroll {
+    display: none;
+  }
+}
+
+/* celular: linha do tempo vertical, a formiga desce pelas etapas */
+@media (max-width: 767px) {
+  .proc__list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 34px;
+    padding-left: 44px;
+  }
+
+  .proc__path {
+    top: 10px;
+    bottom: 0;
+    left: 14px;
+    right: auto;
+    width: 2px;
+    height: auto;
+    background-size: 2px 9px;
+  }
+
+  .proc__ant--h {
+    display: none;
+  }
+
+  .proc__ant--v {
+    display: block;
+    left: -20px;
+    transform: rotate(90deg);
+  }
+
+  .proc-step {
+    position: relative;
+    text-align: left;
+  }
+
+  .proc-step__art {
+    width: min(72%, 260px);
+  }
+
+  .proc-step__arrow {
+    display: none;
+  }
+
+  .proc-step__mark {
+    position: absolute;
+    left: -37px;
+    top: 6px;
+    margin: 0;
+  }
+}

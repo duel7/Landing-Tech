@@ -1,0 +1,68 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 900;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cursor.is-visible {
+  opacity: 1;
+}
+
+.cursor__ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border-radius: 50%;
+  border: 1px solid rgba(185, 138, 46, 0.75);
+  transition:
+    width 0.45s var(--ease-out),
+    height 0.45s var(--ease-out),
+    margin 0.45s var(--ease-out),
+    background-color 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.cursor--on-dark .cursor__ring {
+  border-color: rgba(228, 192, 108, 0.7);
+}
+
+.cursor--link .cursor__ring {
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+  background: rgba(228, 192, 108, 0.14);
+  border-color: rgba(185, 138, 46, 0.4);
+}
+
+.cursor--rotulo .cursor__ring {
+  width: 86px;
+  height: 86px;
+  margin: -43px 0 0 -43px;
+  background: rgba(43, 23, 22, 0.82);
+  border-color: transparent;
+  backdrop-filter: blur(4px);
+}
+
+.cursor__label {
+  font-family: var(--font-script);
+  font-size: 1.55rem;
+  line-height: 1;
+  color: var(--gold-soft);
+  animation: cursor-label 0.4s var(--ease-out);
+}
+
+@keyframes cursor-label {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}

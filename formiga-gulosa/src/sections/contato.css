@@ -1,0 +1,450 @@
+.ped {
+  position: relative;
+  padding-bottom: clamp(110px, 12vw, 170px);
+  background:
+    radial-gradient(50% 50% at 10% 40%, rgba(255, 248, 245, 0.75), transparent 70%),
+    linear-gradient(180deg, #f5e3de, #f1d8d2);
+}
+
+.ped__head {
+  margin-bottom: clamp(10px, 2vw, 24px);
+}
+
+.ped__title {
+  margin: 16px 0 16px;
+}
+
+.ped__script {
+  display: inline-block;
+  font-size: 1.36em;
+  line-height: 0.7;
+  padding: 0.12em 0.1em 0.1em 0;
+  font-style: normal;
+}
+
+.ped__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(30px, 5vw, 80px);
+  align-items: start;
+  padding-top: clamp(60px, 7vw, 100px);
+}
+
+/* ---------- fatia ---------- */
+.ped__cake {
+  text-align: center;
+}
+
+.fatia {
+  width: min(100%, 420px);
+  margin-inline: auto;
+  overflow: visible;
+}
+
+.fatia__callout line {
+  stroke: #c9aaa3;
+  stroke-dasharray: 3 4;
+}
+
+.fatia__callout circle {
+  fill: var(--paper);
+  stroke: #c9aaa3;
+  stroke-width: 1.2;
+  transition:
+    fill 0.4s ease,
+    stroke 0.4s ease;
+}
+
+.fatia__callout.is-done line {
+  stroke: var(--gold);
+  stroke-dasharray: none;
+}
+
+.fatia__callout.is-done circle {
+  fill: var(--gold);
+  stroke: var(--gold);
+}
+
+.ped__progress {
+  margin-top: 6px;
+  min-height: 2.2rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.ped__progress strong {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0;
+  color: var(--gold-deep);
+}
+
+.ped__progress .note {
+  font-size: 2rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* ---------- formulário ---------- */
+.ped__form {
+  display: grid;
+  gap: 26px;
+}
+
+.ped-field {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ped-field legend,
+.ped-field__label {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 0;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ped-field__num {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--ink-mute);
+  transition: color 0.4s ease;
+}
+
+.ped-field.is-done .ped-field__num {
+  color: var(--gold-deep);
+}
+
+.ped-field__opt {
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  color: var(--ink-mute);
+}
+
+.ped-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 22px;
+}
+
+.ped-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ped-chip {
+  position: relative;
+  cursor: pointer;
+}
+
+.ped-chip input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.ped-chip span {
+  display: inline-flex;
+  align-items: center;
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(43, 23, 22, 0.2);
+  background: rgba(255, 248, 245, 0.7);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.4s var(--ease-spring);
+}
+
+.ped-chip:hover span {
+  border-color: var(--cacao);
+}
+
+.ped-chip input:checked + span {
+  background: var(--cacao);
+  border-color: var(--cacao);
+  color: var(--on-dark);
+  transform: scale(1.04);
+}
+
+.ped-chip input:focus-visible + span {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.ped-input {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(43, 23, 22, 0.2);
+  background: rgba(255, 248, 245, 0.85);
+  font-size: 1rem;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.ped-input::placeholder {
+  color: #856a65;
+}
+
+.ped-input:hover {
+  border-color: rgba(43, 23, 22, 0.4);
+}
+
+.ped-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(228, 192, 108, 0.25);
+}
+
+.ped-input--area {
+  resize: vertical;
+  min-height: 96px;
+  line-height: 1.5;
+}
+
+/* convidados */
+.ped-range {
+  display: grid;
+  gap: 8px;
+  padding-top: 10px;
+}
+
+.ped-range input {
+  --p: 50%;
+  width: 100%;
+  height: 26px;
+  margin: 0;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.ped-range input::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--gold) var(--p), rgba(43, 23, 22, 0.15) var(--p));
+}
+
+.ped-range input::-moz-range-track {
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--gold) var(--p), rgba(43, 23, 22, 0.15) var(--p));
+}
+
+.ped-range input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  margin-top: -11px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 32%, #80503c, #3a1e17 70%);
+  border: 3px solid var(--cream);
+  box-shadow:
+    0 0 0 1px rgba(185, 138, 46, 0.6),
+    0 6px 12px -4px rgba(43, 23, 22, 0.5);
+}
+
+.ped-range input::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 36% 32%, #80503c, #3a1e17 70%);
+  border: 3px solid var(--cream);
+  box-shadow: 0 0 0 1px rgba(185, 138, 46, 0.6);
+}
+
+.ped-range input:focus-visible {
+  outline: none;
+}
+
+.ped-range input:focus-visible::-webkit-slider-thumb {
+  box-shadow:
+    0 0 0 3px var(--gold),
+    0 6px 12px -4px rgba(43, 23, 22, 0.5);
+}
+
+.ped-range__out {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+}
+
+.ped-range__out strong {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--ink);
+}
+
+/* bilhete com a mensagem */
+.ped-note {
+  position: relative;
+  margin-top: 8px;
+  padding: 26px 26px 24px;
+  border-radius: 6px 22px 22px 22px;
+  background: repeating-linear-gradient(180deg, transparent 0 27px, rgba(185, 138, 46, 0.12) 27px 28px), var(--cream);
+  box-shadow: var(--shadow-soft);
+}
+
+.ped-note::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 28px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f17d9b, #b9365a 70%);
+  box-shadow: 0 3px 6px -2px rgba(43, 23, 22, 0.5);
+}
+
+.ped-note__title {
+  font-family: var(--font-script);
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--gold-deep);
+  margin-bottom: 10px;
+}
+
+.ped-note__text {
+  white-space: pre-wrap;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.ped-note__send {
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* ---------- cartões de contato ---------- */
+.ped-contacts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: clamp(50px, 6vw, 90px);
+}
+
+.ped-contact {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    'icon body'
+    'icon cta';
+  column-gap: 16px;
+  row-gap: 6px;
+  align-items: center;
+  height: 100%;
+  padding: 22px 22px 20px;
+  border-radius: 24px;
+  background: rgba(255, 248, 245, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.5s var(--ease-out),
+    box-shadow 0.5s var(--ease-out),
+    background-color 0.4s ease;
+}
+
+.ped-contact:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+  background: var(--cream);
+}
+
+.ped-contact__icon {
+  grid-area: icon;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--cacao);
+  color: var(--gold-soft);
+  transition: transform 0.6s var(--ease-spring);
+}
+
+.ped-contact:hover .ped-contact__icon {
+  transform: rotate(-10deg) scale(1.06);
+}
+
+.ped-contact__body {
+  grid-area: body;
+  min-width: 0;
+}
+
+.ped-contact__label {
+  display: block;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.ped-contact__value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-variation-settings: 'opsz' 24;
+  line-height: 1.3;
+}
+
+.ped-contact__cta {
+  grid-area: cta;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+@media (max-width: 1023px) {
+  .ped__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fatia {
+    width: min(78%, 360px);
+  }
+
+  .ped-contacts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .ped-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ped-note {
+    padding: 24px 20px 20px;
+  }
+}

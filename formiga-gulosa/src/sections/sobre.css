@@ -1,0 +1,306 @@
+.sobre {
+  position: relative;
+  padding-bottom: clamp(80px, 10vw, 150px);
+  overflow: clip;
+  background:
+    radial-gradient(50% 60% at 22% 55%, rgba(241, 211, 206, 0.85), transparent 70%),
+    linear-gradient(180deg, #f8ebe7, var(--paper) 40%);
+}
+
+.sobre__mark {
+  position: absolute;
+  left: 0;
+  top: 58%;
+  z-index: 0;
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 22vw, 21rem);
+  font-weight: 500;
+  font-variation-settings: 'opsz' 96;
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(185, 138, 46, 0.1);
+  pointer-events: none;
+  user-select: none;
+}
+
+.sobre__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 4.4fr) minmax(0, 3fr);
+  align-items: center;
+  gap: clamp(28px, 3.6vw, 60px);
+  padding-top: clamp(70px, 8vw, 120px);
+}
+
+/* ---------- conteúdo ---------- */
+.sobre__title {
+  margin: 18px 0 14px;
+}
+
+.sobre__tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.12rem;
+  color: var(--rose-deep);
+  margin-bottom: 18px;
+}
+
+.sobre__text {
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+
+.sobre__text + .sobre__text {
+  margin-top: 12px;
+}
+
+.sobre__cta {
+  margin-top: 30px;
+}
+
+/* ---------- diferenciais ---------- */
+.sobre__features {
+  display: grid;
+  gap: 30px;
+  padding-left: clamp(20px, 2.4vw, 36px);
+  border-left: 1px solid var(--line);
+}
+
+.sobre__features li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sobre__features strong {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sobre__features li > span:last-child > span {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.sobre__icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid rgba(185, 138, 46, 0.45);
+  color: var(--gold-deep);
+  background: rgba(255, 248, 245, 0.7);
+}
+
+.sobre__cherries {
+  position: absolute;
+  right: -10px;
+  bottom: 20px;
+  width: clamp(120px, 14vw, 200px);
+  color: var(--gold);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* ---------- foto no prato ---------- */
+.prato {
+  position: relative;
+  width: min(100%, 500px);
+  margin-inline: auto;
+}
+
+.prato__frame {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--blush);
+  box-shadow:
+    0 0 0 10px #fffaf8,
+    0 0 0 11.5px rgba(185, 138, 46, 0.55),
+    0 0 0 22px rgba(255, 250, 248, 0.55),
+    0 50px 80px -40px rgba(84, 38, 36, 0.55);
+}
+
+.prato__frame picture,
+.prato__frame img {
+  width: 100%;
+  height: 100%;
+}
+
+.prato__frame img {
+  object-fit: cover;
+}
+
+.prato__lupa {
+  position: absolute;
+  z-index: 2;
+  margin: -85px 0 0 -85px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  box-shadow:
+    0 0 0 3px #fffaf8,
+    0 0 0 4px rgba(185, 138, 46, 0.6),
+    0 20px 40px -14px rgba(43, 23, 22, 0.6);
+  pointer-events: none;
+}
+
+.prato__note {
+  position: absolute;
+  left: -6%;
+  top: -2%;
+  max-width: 11ch;
+  transform: rotate(-10deg);
+}
+
+/* ---------- bandeja giratória (sem fotos) ---------- */
+.tray {
+  position: relative;
+  width: min(100%, 540px);
+  margin-inline: auto;
+  container-type: inline-size;
+}
+
+.tray__scene {
+  position: relative;
+  height: 84cqw;
+  perspective: 1000px;
+  perspective-origin: 50% 20%;
+}
+
+.tray__plate {
+  position: absolute;
+  left: 8cqw;
+  top: 4cqw;
+  width: 84cqw;
+  height: 84cqw;
+  transform-style: preserve-3d;
+  transform: rotateX(60deg);
+}
+
+.tray__doily,
+.tray__sprinkles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(var(--rot, 0deg));
+}
+
+.tray__doily {
+  filter: drop-shadow(0 18px 18px rgba(84, 38, 36, 0.18));
+}
+
+.tray__sprinkles span {
+  position: absolute;
+}
+
+.tray__sprinkles svg {
+  width: 3cqw;
+  height: auto;
+}
+
+.tray__item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  transform: rotate(calc(var(--a) + var(--rot, 0deg))) translateY(-28.5cqw);
+}
+
+.tray__bill {
+  position: absolute;
+  bottom: 0;
+  left: -5.6cqw;
+  width: 11.2cqw;
+  transform-origin: 50% 100%;
+  transform: rotate(calc(-1 * (var(--a) + var(--rot, 0deg)))) rotateX(-60deg);
+}
+
+.tray__bill svg {
+  width: 100%;
+  height: auto;
+}
+
+.tray__item--center {
+  --a: 0deg;
+  transform: rotate(var(--rot, 0deg));
+}
+
+.tray__item--center .tray__bill {
+  left: -8.6cqw;
+  width: 17.2cqw;
+}
+
+.tray__hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: -2cqw;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.tray__hint-arrow {
+  font-size: 1.1rem;
+  letter-spacing: 0;
+  color: var(--gold);
+}
+
+/* ---------- responsivo ---------- */
+@media (max-width: 1100px) {
+  .sobre__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .sobre__features {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding: 28px 0 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .sobre__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .sobre__features {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+
+  .prato {
+    width: min(84vw, 420px);
+  }
+
+  .prato__note {
+    left: -2%;
+    top: -6%;
+  }
+
+  .sobre__mark {
+    top: 8%;
+  }
+}

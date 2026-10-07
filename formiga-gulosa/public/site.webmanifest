@@ -1,0 +1,13 @@
+{
+  "name": "Formiga Gulosa — Bolos personalizados",
+  "short_name": "Formiga Gulosa",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fbf2ef",
+  "theme_color": "#2b1716",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
