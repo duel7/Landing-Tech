@@ -17,19 +17,29 @@ hospedagem. Os caminhos são relativos, então também funciona dentro de uma su
 
 ## Fotos dos bolos (o mais importante)
 
-O site foi montado para as fotografias reais da Formiga Gulosa. **Basta colocar os arquivos em
-`src/assets/bolos/`** (JPG, PNG, WebP ou AVIF) e rodar `npm run build` de novo: cada foto é convertida
-automaticamente para AVIF e WebP em quatro tamanhos, e o navegador baixa só o que a tela precisa.
+As fotografias reais da Formiga Gulosa ficam em duas pastas, sempre com o **mesmo nome de arquivo**:
+
+```
+src/assets/bolos/            foto inteira (PNG, JPG, WebP ou AVIF)
+src/assets/bolos/recortes/   o mesmo bolo recortado, PNG com fundo transparente (opcional)
+```
+
+Rode `npm run build` de novo depois de trocar uma foto: cada imagem é convertida automaticamente para AVIF e
+WebP (mantendo a transparência) em vários tamanhos, e o navegador baixa só o que a tela precisa.
 
 Onde as fotos aparecem:
 
 | Lugar | Qual foto |
 | --- | --- |
-| Abertura, dentro da redoma de vidro | a marcada com `destaque: true` (ou a primeira) |
-| Trilho "Criações" ao lado da redoma | as quatro primeiras; clicar troca a foto da redoma |
-| Sobre, no prato com lupa | a primeira foto diferente da abertura |
-| Mostruário (vitrine) | todas, na ordem definida |
-| Visualização ampliada | todas, com setas, teclado e arrastar no celular |
+| Abertura, dentro da redoma de vidro | o recorte da marcada com `destaque: true` (ou da primeira) |
+| Trilho "Criações" ao lado da redoma | as quatro primeiras; clicar troca o bolo da redoma |
+| Sobre, no prato com lupa | a foto inteira da primeira diferente da abertura |
+| Mostruário (vitrine) | todas, cada uma numa redoma sobre a prateleira |
+| Visualização ampliada | as fotos inteiras, com setas, teclado e arrastar no celular |
+
+O recorte é o que permite o bolo aparecer "dentro" do vidro. Sem recorte, a foto continua aparecendo, só que
+inteira, dentro do arco. Para recortar uma foto nova, qualquer removedor de fundo serve (remove.bg, Photoshop,
+Canva); salve como PNG transparente em `recortes/` com o mesmo nome da foto, sem prato, mesa ou embalagem.
 
 Para dar nome, categoria e descrição a uma foto, edite `src/content/bolos.ts` (a chave é o nome do arquivo):
 
@@ -56,9 +66,9 @@ export const infoBolos: Record<string, InfoBolo> = {
 
 ## Dados da empresa
 
-Telefone, WhatsApp, mensagem pré-preenchida, endereço, Instagram e horário ficam em
-`src/config/site.ts`. Instagram e horário estão vazios de propósito: quando preenchidos, aparecem sozinhos
-no rodapé e em Localização.
+Telefone, WhatsApp, mensagem pré-preenchida, endereço, mapa, Instagram (`@formiga_gulosa_`) e horário ficam
+em `src/config/site.ts`. O horário está vazio de propósito: quando preenchido, aparece sozinho no rodapé e em
+Localização.
 
 Depoimentos de clientes (reais e autorizados) entram em `depoimentos`, em `src/content/bolos.ts`. A seção
 só aparece quando houver pelo menos um.
@@ -70,10 +80,11 @@ index.html                 título, descrição, Open Graph, dados estruturados 
 public/                    favicons (a formiga da logo), ícones, og-image.jpg, manifest
 src/config/site.ts         dados da empresa e links (WhatsApp, telefone, mapa)
 src/content/bolos.ts       informações das fotos e depoimentos
-src/assets/bolos/          ← fotos dos bolos
+src/assets/bolos/          ← fotos dos bolos (e recortes/ com os recortes transparentes)
 src/assets/marca/          logo oficial (apenas recortada no círculo original)
 src/lib/                   carregamento das fotos, hooks, rolagem suave
-src/components/            formiga, doces em vetor, bordas de calda, botões, cursor, trilha de progresso
+src/components/            formiga, redoma de vidro, movimento (parallax, magnético, inclinação), doces em
+                           vetor, bordas de calda, botões, cursor, trilha de progresso
 src/sections/              Navbar, Hero, Diferenciais, Sobre, Mostruário (+ Lightbox), Processo,
                            Localização, Depoimentos, Contato, Final (CTA + rodapé)
 src/styles/global.css      tokens de cor e tipo, base, botões
@@ -98,23 +109,26 @@ botão do WhatsApp — "onde tem festa, tem formiga".
 
 **Experiências próprias**:
 
-- Abertura: entrada em camadas (sem tela de carregamento), parallax de profundidade pelo mouse, redoma de
-  vidro com reflexo que passa, doces na mesa e no ar.
+- Abertura: entrada em camadas (sem tela de carregamento). O bolo sobe para a boleira e a redoma desce sobre
+  ele; vidro de trás, bolo e vidro da frente são camadas separadas, com reflexo que passa e parallax pelo
+  mouse. Ao rolar, a redoma se ergue um pouco e o bolo se aproxima — a rolagem continua sendo só rolagem.
 - Bordas entre seções feitas de calda de chocolate que escorre ao aparecer; toalhinha rendada entre seções
   claras.
-- Mostruário no desktop: a página "prende" e a vitrine desliza para o lado com a rolagem, com etiquetas
-  penduradas na prateleira. No celular, vira um carrossel de deslizar.
+- Mostruário: uma vitrine de confeitaria com redomas em prateleiras. Cada bolo sobe para a prateleira e o
+  vidro desce sobre ele; com o mouse, a redoma inclina e o reflexo acompanha. Clicar abre a foto inteira.
+- Sobre: a foto se revela num círculo que se abre, com lupa para ver os detalhes.
+- Botões principais "magnéticos" (seguem levemente o cursor) e cartões que inclinam ao passar o mouse.
 - "Como funciona": o bolo nasce desenhado em traço dourado, etapa por etapa, conforme a rolagem.
 - Contato: um montador de pedido — cada campo preenchido vira uma camada da fatia de bolo; com as quatro, a
   cereja cai no topo. A mensagem do WhatsApp sai pronta com ocasião, data, convidados, ideia e nome.
-- Celular: menu em tela cheia que se abre como uma gota, barra fixa de WhatsApp e ligação, cartões e
-  vitrine deslizantes, linha do tempo vertical.
+- Celular: menu em tela cheia que se abre como uma gota, barra fixa de WhatsApp e ligação, vitrine em duas
+  colunas, cartões em lista, botões em largura total, linha do tempo vertical.
 
 ## Acessibilidade e desempenho
 
 - HTML semântico, títulos em ordem, textos alternativos, foco visível, link para pular ao conteúdo.
 - Menu e visualização ampliada com foco preso, Esc para fechar e foco devolvido ao botão de origem.
-- "Reduzir movimento" do sistema desliga parallax, rolagem suave, vitrine fixa e animações contínuas; todo o
+- "Reduzir movimento" do sistema desliga parallax, rolagem suave, inclinações e animações contínuas; todo o
   conteúdo continua visível.
 - Animações só com `transform` e `opacity`; imagens responsivas em AVIF/WebP com `lazy loading`; mapa
   carregado sob demanda; fontes auto-hospedadas (só o subconjunto latino é baixado).
@@ -122,14 +136,15 @@ botão do WhatsApp — "onde tem festa, tem formiga".
 
 ## Antes de publicar
 
-- [ ] Colocar as fotos reais em `src/assets/bolos/` e, se quiser, os nomes em `src/content/bolos.ts`.
+- [ ] Revisar nomes e descrições das fotos em `src/content/bolos.ts` (foram escritos a partir do que aparece
+      em cada foto).
 - [ ] Confirmar a grafia do nome: a logo diz **Formiga Gulosa** (usada no site); o briefing citava "Golosa".
       Para mudar, troque em `src/config/site.ts` e `index.html`.
 - [ ] Confirmar o telefone: `(73) 9131-3180` tem 8 dígitos. Se for celular, o formato atual é
       `(73) 9 9131-3180`; o link `tel:` pode precisar de `+5573991313180`. O WhatsApp costuma aceitar os dois.
 - [ ] Trocar `og:image` em `index.html` pelo endereço absoluto (`https://seu-dominio/og-image.jpg`) e
       acrescentar `<link rel="canonical">` com o domínio.
-- [ ] Preencher Instagram e horário em `src/config/site.ts`, se houver.
+- [ ] Preencher o horário em `src/config/site.ts`, se houver.
 - [ ] Abrir o site publicado e conferir o mapa e os botões de WhatsApp e telefone num celular.
 
 ## Licenças
