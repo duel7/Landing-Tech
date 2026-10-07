@@ -28,8 +28,10 @@ export const site = {
     mensagem: 'Olá! Conheci a Formiga Gulosa pelo site e gostaria de saber mais sobre os bolos personalizados.',
   },
 
-  /** Deixe vazio enquanto não houver. Quando preenchido, aparece no rodapé. Ex.: 'https://instagram.com/…' */
-  instagram: '',
+  instagram: {
+    usuario: '@formiga_gulosa_',
+    link: 'https://www.instagram.com/formiga_gulosa_/',
+  },
   /** Deixe vazio enquanto não houver. Quando preenchido, aparece em Localização. Ex.: 'Seg. a sáb., 9h às 18h' */
   horario: '',
 } as const
@@ -41,7 +43,9 @@ const enderecoUrl = encodeURIComponent(enderecoCompleto)
 export const links = {
   mapa: `https://www.google.com/maps/search/?api=1&query=${enderecoUrl}`,
   comoChegar: `https://www.google.com/maps/dir/?api=1&destination=${enderecoUrl}`,
-  mapaEmbed: `https://www.google.com/maps?q=${enderecoUrl}&hl=pt-BR&z=16&output=embed`,
+  // iframe exatamente como fornecido pela Formiga Gulosa
+  mapaEmbed:
+    'https://www.google.com/maps?q=R.%20José%20Alves%20dos%20Reis,%2059%20-%20Góes%20Calmon,%20Itabuna%20-%20BA,%2045605-482,%20Brasil&output=embed',
   telefone: site.telefone.link,
 }
 

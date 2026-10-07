@@ -2,6 +2,7 @@ import { motion, useMotionValueEvent, useScroll, useTransform } from 'motion/rea
 import { ArrowRight } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { Ant } from '../components/Ant'
+import { Parallax } from '../components/Motion'
 import { MaskLines, Reveal } from '../components/Reveal'
 import { useIsScrolling, useReducedMotionPref } from '../lib/hooks'
 import './processo.css'
@@ -40,7 +41,7 @@ export function Processo() {
       </div>
 
       <div className="container proc__grid">
-        <div className="proc__intro">
+        <Parallax speed={26} className="proc__intro">
           <Reveal>
             <p className="eyebrow">Como funciona</p>
           </Reveal>
@@ -55,13 +56,13 @@ export function Processo() {
             />
           </h2>
           <Reveal delay={0.2}>
-            <p className="lead">Role e veja a sua ideia virar bolo, em quatro passos.</p>
+            <p className="lead">Do primeiro recado à mesa da festa, em quatro passos.</p>
           </Reveal>
           <Reveal delay={0.3} className="proc__scroll">
             <span className="proc__scroll-line" aria-hidden="true" />
             <span>Role</span>
           </Reveal>
-        </div>
+        </Parallax>
 
         <div className="proc__steps">
           <div className="proc__path" aria-hidden="true">

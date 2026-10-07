@@ -8,12 +8,14 @@ import {
   type MotionValue,
 } from 'motion/react'
 import { ArrowDown, ArrowRight, MapPin } from 'lucide-react'
-import { useId, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { Ant } from '../components/Ant'
 import { Brush } from '../components/Brush'
 import { Button } from '../components/Button'
 import { Wave } from '../components/Dividers'
 import { Logo } from '../components/Logo'
+import { Magnetic } from '../components/Motion'
+import { BoloRecortado, RedomaFrente, RedomaFundo } from '../components/Redoma'
 import { Picture } from '../components/Picture'
 import { EASE, MaskLines } from '../components/Reveal'
 import { Brigadeiro, Cherry, Heart, Pearl, Sparkle, Sprinkle, Strawberry, WhatsAppIcon } from '../components/Sweets'
@@ -108,10 +110,14 @@ export function Hero() {
           </motion.p>
 
           <motion.div className="hero__ctas" {...entrada(0.9)}>
-            <Button href="#mostruario">Ver nossos bolos</Button>
-            <Button href={linkWhatsapp()} variant="ghost" icon="whatsapp" external>
-              Falar pelo WhatsApp
-            </Button>
+            <Magnetic>
+              <Button href="#mostruario">Ver nossos bolos</Button>
+            </Magnetic>
+            <Magnetic>
+              <Button href={linkWhatsapp()} variant="ghost" icon="whatsapp" external>
+                Falar pelo WhatsApp
+              </Button>
+            </Magnetic>
           </motion.div>
 
           <motion.a href="#diferenciais" className="hero__scroll" {...entrada(1.15, 0)}>
@@ -123,7 +129,7 @@ export function Hero() {
         </motion.div>
 
         <motion.div className="hero__stage-wrap" style={{ y: palcoY }}>
-          <Palco mx={mx} my={my} foto={fotoAtual} />
+          <Palco mx={mx} my={my} foto={fotoAtual} rolagem={scrollYProgress} />
         </motion.div>
 
         <Trilho fotoAtual={fotoAtual} setFotoAtual={setFotoAtual} />
@@ -138,9 +144,44 @@ export function Hero() {
 /* Palco: redoma de vidro sobre a boleira, doces na mesa, formiga.      */
 /* ------------------------------------------------------------------ */
 
-function Palco({ mx, my, foto }: { mx: MotionValue<number>; my: MotionValue<number>; foto?: Foto }) {
+function Palco({
+  mx,
+  my,
+  foto,
+  rolagem,
+}: {
+  mx: MotionValue<number>
+  my: MotionValue<number>
+  foto?: Foto
+  rolagem: MotionValue<number>
+}) {
   const fundo = useCamada(mx, my, -10)
   const redoma = useCamada(mx, my, 12)
+  const boloCamada = useCamada(mx, my, 10)
+  const frente = useCamada(mx, my, 16)
+  // o bolo gira de leve conforme o mouse (profundidade, sem exagero)
+  const boloGiroY = useTransform(mx, (v) => v * 5)
+  const boloGiroX = useTransform(my, (v) => v * -2.5)
+  // ao rolar para fora da abertura, a redoma se ergue e o bolo se aproxima
+  const levantar = useTransform(rolagem, [0, 0.6], ['0%', '-17%'])
+  const vidroOpacidade = useTransform(rolagem, [0.1, 0.6], [1, 0.55])
+  const aproximar = useTransform(rolagem, [0, 0.6], [1, 1.07])
+  // os confeitos no ar sobem mais depressa que o resto: profundidade durante a rolagem
+  const arSobe = useTransform(rolagem, [0, 1], [0, -150])
+  const comRecorte = Boolean(foto?.recorte)
+
+  // ao trocar de bolo pelo trilho, a redoma sobe um pouco enquanto o bolo troca
+  const [trocando, setTrocando] = useState(false)
+  const primeira = useRef(true)
+  useEffect(() => {
+    if (primeira.current) {
+      primeira.current = false
+      return
+    }
+    setTrocando(true)
+    const t = window.setTimeout(() => setTrocando(false), 650)
+    return () => window.clearTimeout(t)
+  }, [foto?.id])
   const boleira = useCamada(mx, my, 8)
   const mesa = useCamada(mx, my, 20)
   const ar = useCamada(mx, my, 34)
@@ -168,59 +209,123 @@ function Palco({ mx, my, foto }: { mx: MotionValue<number>; my: MotionValue<numb
         </motion.div>
       </motion.div>
 
-      {/* redoma */}
-      <motion.div className="stage__layer" style={redoma}>
-        <motion.div
-          className="cloche"
-          initial={{ opacity: 0, y: -36, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 1.2, delay: 0.5, ease: EASE }}
-        >
-          <span className="cloche__knob" aria-hidden="true" />
-          <div className={`cloche__glass ${foto ? 'has-photo' : ''}`}>
-            <AnimatePresence mode="popLayout" initial={false}>
-              {foto ? (
-                <motion.div
-                  key={foto.id}
-                  className="cloche__photo"
-                  initial={{ opacity: 0, scale: 1.08 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.98 }}
-                  transition={{ duration: 0.9, ease: EASE }}
-                >
-                  <Picture
-                    picture={foto.picture}
-                    alt={foto.alt}
-                    sizes="(max-width: 1023px) 70vw, 380px"
-                    priority
-                    objectPosition={foto.enquadramento}
-                  />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="logo"
-                  className="cloche__medal"
-                  initial={{ opacity: 0, scale: 0.7, rotate: -10 }}
-                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                  transition={{ type: 'spring', stiffness: 90, damping: 14, delay: 0.85 }}
-                >
-                  <Logo sizes="(max-width: 1023px) 60vw, 340px" priority />
-                </motion.div>
-              )}
-            </AnimatePresence>
-            <span className="cloche__shine" aria-hidden="true" />
-            <span className="cloche__twinkle cloche__twinkle--1" aria-hidden="true">
-              <Sparkle size={14} color="#fff" />
-            </span>
-            <span className="cloche__twinkle cloche__twinkle--2" aria-hidden="true">
-              <Sparkle size={10} color="var(--gold-bright)" />
-            </span>
-            <span className="cloche__twinkle cloche__twinkle--3" aria-hidden="true">
-              <Sparkle size={12} color="#fff" />
-            </span>
-          </div>
+      {comRecorte && foto ? (
+        <>
+          {/* vidro de trás da redoma */}
+          <motion.div className="stage__layer" style={redoma}>
+            <motion.div className="cloche" style={{ y: levantar, opacity: vidroOpacidade }}>
+              <motion.div
+                className="cloche__lift"
+                initial={{ opacity: 0, y: -70 }}
+                animate={{ opacity: 1, y: trocando ? '-7%' : '0%' }}
+                transition={{ duration: trocando ? 0.45 : 1.25, delay: trocando ? 0 : 0.78, ease: EASE }}
+              >
+                <RedomaFundo />
+              </motion.div>
+            </motion.div>
+          </motion.div>
+
+          {/* o bolo, dentro do vidro */}
+          <motion.div className="stage__layer" style={boloCamada}>
+            <div className="cloche cloche--bolo">
+              <motion.div className="redoma-palco" style={{ scale: aproximar, originY: 1 }}>
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.div
+                    key={foto.id}
+                    className="cloche__bolo-wrap"
+                    initial={{ opacity: 0, y: 26, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -16, scale: 0.97 }}
+                    transition={{ duration: 0.8, ease: EASE }}
+                  >
+                    <motion.div
+                      className="cloche__bolo-entrada"
+                      initial={{ opacity: 0, y: 34 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1.1, delay: 0.42, ease: EASE }}
+                    >
+                      <BoloRecortado
+                        foto={foto}
+                        sizes="(max-width: 1023px) 62vw, 420px"
+                        priority
+                        style={{ rotateY: boloGiroY, rotateX: boloGiroX }}
+                      />
+                    </motion.div>
+                  </motion.div>
+                </AnimatePresence>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* vidro da frente: reflexos por cima do bolo */}
+          <motion.div className="stage__layer" style={frente}>
+            <motion.div className="cloche" style={{ y: levantar, opacity: vidroOpacidade }}>
+              <motion.div
+                className="cloche__lift"
+                initial={{ opacity: 0, y: -70 }}
+                animate={{ opacity: 1, y: trocando ? '-7%' : '0%' }}
+                transition={{ duration: trocando ? 0.45 : 1.25, delay: trocando ? 0 : 0.78, ease: EASE }}
+              >
+                <RedomaFrente />
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </>
+      ) : (
+        /* sem recorte: a foto (ou a logo) fica emoldurada pela redoma */
+        <motion.div className="stage__layer" style={redoma}>
+          <motion.div
+            className="cloche"
+            initial={{ opacity: 0, y: -36, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.5, ease: EASE }}
+          >
+            <span className="cloche__knob" aria-hidden="true" />
+            <div className={`cloche__glass ${foto ? 'has-photo' : ''}`}>
+              <AnimatePresence mode="popLayout" initial={false}>
+                {foto ? (
+                  <motion.div
+                    key={foto.id}
+                    className="cloche__photo"
+                    initial={{ opacity: 0, scale: 1.08 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.98 }}
+                    transition={{ duration: 0.9, ease: EASE }}
+                  >
+                    <Picture
+                      picture={foto.picture}
+                      alt={foto.alt}
+                      sizes="(max-width: 1023px) 70vw, 380px"
+                      priority
+                      objectPosition={foto.enquadramento}
+                    />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="logo"
+                    className="cloche__medal"
+                    initial={{ opacity: 0, scale: 0.7, rotate: -10 }}
+                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                    transition={{ type: 'spring', stiffness: 90, damping: 14, delay: 0.85 }}
+                  >
+                    <Logo sizes="(max-width: 1023px) 60vw, 340px" priority />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <span className="cloche__shine" aria-hidden="true" />
+              <span className="cloche__twinkle cloche__twinkle--1" aria-hidden="true">
+                <Sparkle size={14} color="#fff" />
+              </span>
+              <span className="cloche__twinkle cloche__twinkle--2" aria-hidden="true">
+                <Sparkle size={10} color="var(--gold-bright)" />
+              </span>
+              <span className="cloche__twinkle cloche__twinkle--3" aria-hidden="true">
+                <Sparkle size={12} color="#fff" />
+              </span>
+            </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      )}
 
       {/* boleira: frente do prato, pé e sombra */}
       <motion.div className="stage__layer" style={boleira}>
@@ -272,24 +377,26 @@ function Palco({ mx, my, foto }: { mx: MotionValue<number>; my: MotionValue<numb
 
       {/* confeitos no ar */}
       <motion.div className="stage__layer" style={ar} aria-hidden="true">
-        {[
-          { c: <Sparkle size={20} />, cls: 'fl-1', d: 1.2 },
-          { c: <Pearl size={14} tone="rose" />, cls: 'fl-2', d: 1.3 },
-          { c: <Sprinkle length={18} rotate={-30} color="var(--gold-bright)" />, cls: 'fl-3', d: 1.35 },
-          { c: <Heart size={15} />, cls: 'fl-4', d: 1.4 },
-          { c: <Pearl size={10} tone="gold" />, cls: 'fl-5', d: 1.45 },
-          { c: <Sprinkle length={14} rotate={50} color="var(--rose)" />, cls: 'fl-6', d: 1.5 },
-        ].map(({ c, cls, d }) => (
-          <motion.span
-            key={cls}
-            className={`stage__float ${cls}`}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ type: 'spring', stiffness: 160, damping: 12, delay: d }}
-          >
-            <span className="stage__bob">{c}</span>
-          </motion.span>
-        ))}
+        <motion.div className="stage__layer" style={{ y: arSobe }}>
+          {[
+            { c: <Sparkle size={20} />, cls: 'fl-1', d: 1.2 },
+            { c: <Pearl size={14} tone="rose" />, cls: 'fl-2', d: 1.3 },
+            { c: <Sprinkle length={18} rotate={-30} color="var(--gold-bright)" />, cls: 'fl-3', d: 1.35 },
+            { c: <Heart size={15} />, cls: 'fl-4', d: 1.4 },
+            { c: <Pearl size={10} tone="gold" />, cls: 'fl-5', d: 1.45 },
+            { c: <Sprinkle length={14} rotate={50} color="var(--rose)" />, cls: 'fl-6', d: 1.5 },
+          ].map(({ c, cls, d }) => (
+            <motion.span
+              key={cls}
+              className={`stage__float ${cls}`}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ type: 'spring', stiffness: 160, damping: 12, delay: d }}
+            >
+              <span className="stage__bob">{c}</span>
+            </motion.span>
+          ))}
+        </motion.div>
       </motion.div>
 
       <Anotacao />
@@ -395,6 +502,7 @@ function StandFront() {
 
 function Trilho({ fotoAtual, setFotoAtual }: { fotoAtual?: Foto; setFotoAtual: (f: Foto) => void }) {
   if (fotos.length >= 2) {
+    // no trilho, só os bolos que cabem na redoma (os primeiros, na ordem escolhida)
     const lista = fotos.slice(0, 4)
     return (
       <motion.aside className="rail" aria-label="Escolha uma criação para ver na redoma">
@@ -417,8 +525,8 @@ function Trilho({ fotoAtual, setFotoAtual }: { fotoAtual?: Foto; setFotoAtual: (
                   aria-pressed={ativo}
                   onClick={() => setFotoAtual(f)}
                 >
-                  <span className="rail__thumb">
-                    <Picture picture={f.picture} alt="" sizes="56px" objectPosition={f.enquadramento} />
+                  <span className={`rail__thumb ${f.recorte ? 'rail__thumb--recorte' : ''}`}>
+                    <Picture picture={f.recorte ?? f.picture} alt="" sizes="64px" objectPosition={f.enquadramento} />
                   </span>
                   <span className="rail__label">{rotuloFoto(f)}</span>
                   <span className="rail__arrow" aria-hidden="true">

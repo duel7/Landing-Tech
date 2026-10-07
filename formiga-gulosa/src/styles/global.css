@@ -455,6 +455,12 @@ button {
   padding: 0 1.25em 0 1.35em;
 }
 
+/* invólucro magnético dos CTAs */
+.magnetic {
+  display: inline-flex;
+  will-change: transform;
+}
+
 /* link com sublinhado que se desenha */
 .text-link {
   position: relative;

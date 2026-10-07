@@ -1,8 +1,9 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { ArrowUpRight, MapPin, Phone } from 'lucide-react'
-import { useId, useMemo, useState } from 'react'
+import { useId, useMemo, useState, type ReactNode } from 'react'
+import { Parallax, useTilt } from '../components/Motion'
 import { MaskLines, Reveal } from '../components/Reveal'
-import { Sparkle, WhatsAppIcon } from '../components/Sweets'
+import { InstagramIcon, Sparkle, WhatsAppIcon } from '../components/Sweets'
 import { linkWhatsapp, links, site } from '../config/site'
 import './contato.css'
 
@@ -70,7 +71,7 @@ export function Contato() {
               </p>
             </Reveal>
           </div>
-          <div className="ped__cake">
+          <Parallax speed={18} className="ped__cake">
             <Fatia camadas={camadas} />
             <p className="ped__progress" aria-live="polite">
               {completas === 4 ? (
@@ -81,7 +82,7 @@ export function Contato() {
                 </>
               )}
             </p>
-          </div>
+          </Parallax>
         </div>
 
         <form className="ped__form" onSubmit={(e) => e.preventDefault()} aria-describedby={`${uid}-ajuda`}>
@@ -228,6 +229,15 @@ export function Contato() {
               acao: 'Ligar',
             },
             {
+              href: site.instagram.link,
+              externo: true,
+              icon: <InstagramIcon size={21} />,
+              rotulo: 'Instagram',
+              valor: site.instagram.usuario,
+              acao: 'Ver o perfil',
+              tipo: 'insta',
+            },
+            {
               href: links.comoChegar,
               externo: true,
               icon: <MapPin size={21} strokeWidth={1.5} />,
@@ -243,27 +253,53 @@ export function Contato() {
               viewport={{ once: true, margin: '0px 0px -8% 0px' }}
               transition={{ duration: 0.8, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              <a
-                className="ped-contact"
-                href={c.href}
-                target={c.externo ? '_blank' : undefined}
-                rel={c.externo ? 'noopener noreferrer' : undefined}
-              >
-                <span className="ped-contact__icon">{c.icon}</span>
-                <span className="ped-contact__body">
-                  <span className="ped-contact__label">{c.rotulo}</span>
-                  <span className="ped-contact__value">{c.valor}</span>
-                </span>
-                <span className="ped-contact__cta">
-                  {c.acao} <ArrowUpRight size={14} strokeWidth={1.8} aria-hidden="true" />
-                </span>
-                {c.externo && <span className="sr-only"> (abre em nova aba)</span>}
-              </a>
+              <CartaoContato {...c} />
             </motion.li>
           ))}
         </ul>
       </div>
     </section>
+  )
+}
+
+/** Cartão de contato: inclina de leve com o cursor. */
+function CartaoContato({
+  href,
+  externo,
+  icon,
+  rotulo,
+  valor,
+  acao,
+  tipo,
+}: {
+  href: string
+  externo: boolean
+  icon: ReactNode
+  rotulo: string
+  valor: string
+  acao: string
+  tipo?: string
+}) {
+  const tilt = useTilt(5)
+  return (
+    <motion.a
+      className={`ped-contact ${tipo ? `ped-contact--${tipo}` : ''}`}
+      href={href}
+      target={externo ? '_blank' : undefined}
+      rel={externo ? 'noopener noreferrer' : undefined}
+      style={tilt.ativo ? { rotateX: tilt.rotateX, rotateY: tilt.rotateY } : undefined}
+      {...tilt.handlers}
+    >
+      <span className="ped-contact__icon">{icon}</span>
+      <span className="ped-contact__body">
+        <span className="ped-contact__label">{rotulo}</span>
+        <span className="ped-contact__value">{valor}</span>
+      </span>
+      <span className="ped-contact__cta">
+        {acao} <ArrowUpRight size={14} strokeWidth={1.8} aria-hidden="true" />
+      </span>
+      {externo && <span className="sr-only"> (abre em nova aba)</span>}
+    </motion.a>
   )
 }
 

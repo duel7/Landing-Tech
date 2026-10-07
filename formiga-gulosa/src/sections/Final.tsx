@@ -2,6 +2,7 @@ import { ArrowUp, ArrowUpRight, MapPin, Phone } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Ant, type Carga } from '../components/Ant'
 import { Logo } from '../components/Logo'
+import { Magnetic, Parallax } from '../components/Motion'
 import { MaskLines, Reveal } from '../components/Reveal'
 import { InstagramIcon, Sprinkle, WhatsAppIcon } from '../components/Sweets'
 import { linkWhatsapp, links, secoes, site } from '../config/site'
@@ -52,29 +53,44 @@ export function Final() {
           <Reveal>
             <p className="eyebrow final__eyebrow">Tem festa chegando?</p>
           </Reveal>
-          <h2 id="final-titulo" className="display final__title">
-            <MaskLines
-              lines={[
-                'Onde tem festa,',
-                <>
-                  tem <em className="script gold-text final__script">Formiga.</em>
-                </>,
-              ]}
-            />
-          </h2>
+          <Parallax speed={18} scaleRange={[0.9, 1]}>
+            <h2 id="final-titulo" className="display final__title">
+              <MaskLines
+                lines={[
+                  'Onde tem festa,',
+                  <>
+                    tem <em className="script gold-text final__script">Formiga.</em>
+                  </>,
+                ]}
+              />
+            </h2>
+          </Parallax>
           <Reveal delay={0.2}>
             <p className="lead final__lead">Conte a data e a ideia. A gente transforma em bolo.</p>
           </Reveal>
           <Reveal delay={0.3} className="final__cta-wrap">
             <Trilha lado="esq" />
-            <a className="btn btn--gold final__cta" href={linkWhatsapp()} target="_blank" rel="noopener noreferrer">
-              <span>Falar com a Formiga Gulosa</span>
-              <span className="btn__icon">
-                <WhatsAppIcon size={16} />
-              </span>
-              <span className="sr-only"> pelo WhatsApp (abre em nova aba)</span>
-            </a>
+            <Magnetic strength={0.22}>
+              <a className="btn btn--gold final__cta" href={linkWhatsapp()} target="_blank" rel="noopener noreferrer">
+                <span>Falar com a Formiga Gulosa</span>
+                <span className="btn__icon">
+                  <WhatsAppIcon size={16} />
+                </span>
+                <span className="sr-only"> pelo WhatsApp (abre em nova aba)</span>
+              </a>
+            </Magnetic>
             <Trilha lado="dir" />
+          </Reveal>
+          <Reveal delay={0.45}>
+            <a className="final__insta" href={site.instagram.link} target="_blank" rel="noopener noreferrer">
+              <span className="final__insta-icon" aria-hidden="true">
+                <InstagramIcon size={16} />
+              </span>
+              <span>
+                ou acompanhe as novidades em <strong>{site.instagram.usuario}</strong>
+              </span>
+              <span className="sr-only"> no Instagram (abre em nova aba)</span>
+            </a>
           </Reveal>
         </div>
       </section>
@@ -86,7 +102,7 @@ export function Final() {
             <div>
               <p className="footer__name">{site.nome}</p>
               <p className="footer__sub">{site.assinatura}</p>
-              <p className="footer__desc">Bolos personalizados e doces, feitos à mão em Itabuna - BA.</p>
+              <p className="footer__desc">Bolos personalizados, doces e tortas, feitos à mão em Itabuna - BA.</p>
             </div>
           </div>
 
@@ -112,11 +128,9 @@ export function Final() {
               <FooterLink href={links.telefone} icon={<Phone size={16} strokeWidth={1.6} />}>
                 Telefone {site.telefone.exibicao}
               </FooterLink>
-              {site.instagram && (
-                <FooterLink href={site.instagram} externo icon={<InstagramIcon size={16} />}>
-                  Instagram
-                </FooterLink>
-              )}
+              <FooterLink href={site.instagram.link} externo icon={<InstagramIcon size={16} />}>
+                Instagram {site.instagram.usuario}
+              </FooterLink>
             </ul>
           </div>
 

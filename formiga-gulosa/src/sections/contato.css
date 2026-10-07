@@ -343,7 +343,7 @@
 /* ---------- cartões de contato ---------- */
 .ped-contacts {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
   margin-top: clamp(50px, 6vw, 90px);
 }
@@ -369,10 +369,38 @@
     background-color 0.4s ease;
 }
 
+.ped-contacts li {
+  perspective: 900px;
+}
+
 .ped-contact:hover {
-  transform: translateY(-6px);
   box-shadow: var(--shadow-lift);
   background: var(--cream);
+}
+
+/* Instagram: o círculo ganha o degradê da marca no hover */
+.ped-contact--insta .ped-contact__icon {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.ped-contact--insta .ped-contact__icon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: conic-gradient(from 210deg, #e4c06c, #e6abaa, #d4456a, #b4636c, #e4c06c);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.ped-contact--insta:hover .ped-contact__icon {
+  color: var(--cream);
+}
+
+.ped-contact--insta:hover .ped-contact__icon::before {
+  opacity: 1;
 }
 
 .ped-contact__icon {
@@ -423,6 +451,12 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--gold-deep);
+}
+
+@media (max-width: 1180px) {
+  .ped-contacts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 1023px) {

@@ -133,6 +133,59 @@
   flex: none;
 }
 
+/* Instagram: botão redondo discreto, com o @ aparecendo ao passar o mouse */
+.nav__insta {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid rgba(43, 23, 22, 0.2);
+  color: var(--ink);
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.5s var(--ease-spring);
+}
+
+.nav__insta:hover,
+.nav__insta:focus-visible {
+  background: var(--cacao);
+  border-color: var(--cacao);
+  color: var(--gold-soft);
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.nav__insta::after {
+  content: attr(data-tip);
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--cacao);
+  color: var(--on-dark);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate(-50%, -4px);
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s var(--ease-out);
+}
+
+.nav__insta:hover::after,
+.nav__insta:focus-visible::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
 /* botão do menu (celular e tablet) */
 .nav__toggle {
   display: none;
@@ -185,7 +238,8 @@
 
 @media (max-width: 1023px) {
   .nav__links,
-  .nav__cta {
+  .nav__cta,
+  .nav__insta {
     display: none;
   }
 
@@ -349,6 +403,13 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.mmenu__insta {
+  width: 100%;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-size: 0.82rem;
 }
 
 .mmenu__addr {

@@ -47,6 +47,17 @@
 
 .dif__cards li {
   display: flex;
+  perspective: 1000px;
+}
+
+.dif-card__parallax,
+.dif-card__tilt {
+  display: flex;
+  width: 100%;
+}
+
+.dif-card__tilt {
+  transform-style: preserve-3d;
 }
 
 .dif-card {
@@ -191,33 +202,80 @@
   }
 }
 
-/* celular: cartões deslizam lado a lado e já mostram o texto */
+/* celular: lista organizada — arco do ícone à esquerda, texto à direita, tudo visível */
 @media (max-width: 767px) {
+  .dif__grid {
+    gap: 26px;
+  }
+
   .dif__cards {
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    padding: 18px var(--gutter) 22px;
-    margin-inline: calc(var(--gutter) * -1);
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--gutter);
-    scrollbar-width: none;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
   }
 
-  .dif__cards::-webkit-scrollbar {
-    display: none;
-  }
-
-  .dif__cards li {
-    flex: 0 0 min(68vw, 260px);
-    scroll-snap-align: start;
+  .dif__cards li,
+  .dif-card__parallax,
+  .dif-card__tilt {
+    display: block;
   }
 
   .dif-card {
-    min-height: 330px;
+    display: grid;
+    grid-template-columns: 74px minmax(0, 1fr);
+    grid-template-areas:
+      'art title'
+      'art script'
+      'art desc';
+    align-items: center;
+    column-gap: 16px;
+    min-height: 0;
+    padding: 14px 18px 16px 12px;
+    border-radius: 999px 26px 26px 999px;
+    text-align: left;
+  }
+
+  .dif-card::before {
+    border-radius: 999px 20px 20px 999px;
+  }
+
+  .dif-card__art {
+    grid-area: art;
+    width: 74px;
+    margin: 0;
+    align-self: center;
+  }
+
+  .dif-card__art svg {
+    width: 70%;
+    height: auto;
+  }
+
+  .dif-card__title {
+    grid-area: title;
+    margin-top: 2px;
+  }
+
+  .dif-card__script {
+    grid-area: script;
+    margin-top: 0;
+    font-size: 1.3rem;
+  }
+
+  .dif-card__desc {
+    grid-area: desc;
+    margin-top: 4px;
+    font-size: 0.84rem;
+  }
+
+  .dif-card__arrow {
+    display: none;
   }
 
   .dif-card.is-active {
     transform: none;
+  }
+
+  .dif-card.is-active .dif-card__art {
+    transform: rotate(-6deg);
   }
 }

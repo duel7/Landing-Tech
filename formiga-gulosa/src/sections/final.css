@@ -85,6 +85,51 @@
   box-shadow: 0 20px 50px -18px rgba(228, 192, 108, 0.55);
 }
 
+.final__insta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 34px;
+  font-size: 0.88rem;
+  color: var(--on-dark-soft);
+  transition: color 0.3s ease;
+}
+
+.final__insta strong {
+  color: var(--gold-bright);
+  font-weight: 600;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.45s var(--ease-out);
+}
+
+.final__insta:hover strong,
+.final__insta:focus-visible strong {
+  background-size: 100% 1px;
+}
+
+.final__insta-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line-dark);
+  color: var(--gold-bright);
+  transition:
+    transform 0.5s var(--ease-spring),
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.final__insta:hover .final__insta-icon {
+  background: var(--gold-bright);
+  color: var(--cacao);
+  transform: rotate(-10deg) scale(1.08);
+}
+
 .trilha {
   position: absolute;
   bottom: -18px;
@@ -323,6 +368,16 @@
 @media (max-width: 767px) {
   .final__cta-wrap {
     align-items: stretch;
+  }
+
+  .final__cta-wrap .magnetic,
+  .final__cta-wrap .final__cta {
+    width: 100%;
+  }
+
+  .final__insta {
+    font-size: 0.82rem;
+    text-align: left;
   }
 
   .footer__grid {

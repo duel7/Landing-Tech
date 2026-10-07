@@ -3,7 +3,8 @@ import { Check, Copy } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '../components/Button'
 import { Drip } from '../components/Dividers'
-import { MaskLines, Reveal } from '../components/Reveal'
+import { Magnetic, Parallax } from '../components/Motion'
+import { EASE, MaskLines, Reveal } from '../components/Reveal'
 import { Brigadeiro } from '../components/Sweets'
 import { enderecoCompleto, links, site } from '../config/site'
 import './localizacao.css'
@@ -35,7 +36,7 @@ export function Localizacao() {
     <section id="localizacao" className="loc grain" aria-labelledby="loc-titulo">
       <Drip />
       <div className="container loc__grid">
-        <div className="loc__info">
+        <Parallax speed={14} className="loc__info">
           <Reveal>
             <p className="eyebrow">Localização</p>
           </Reveal>
@@ -69,9 +70,11 @@ export function Localizacao() {
           </Reveal>
 
           <Reveal delay={0.35} className="loc__actions">
-            <Button href={links.comoChegar} external icon="external">
-              Como chegar
-            </Button>
+            <Magnetic>
+              <Button href={links.comoChegar} external icon="external">
+                Como chegar
+              </Button>
+            </Magnetic>
             <button type="button" className="btn btn--ghost" onClick={copiar}>
               <span aria-live="polite">{copiado ? 'Endereço copiado' : 'Copiar endereço'}</span>
               <span className="btn__icon">
@@ -90,18 +93,38 @@ export function Localizacao() {
               </span>
             </button>
           </Reveal>
-        </div>
+        </Parallax>
 
-        <Reveal className="loc__map" y={60} delay={0.1}>
-          <div className="loc__frame">
-            <iframe
-              title={`Mapa: ${site.nome}, ${enderecoCompleto}`}
-              src={links.mapaEmbed}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-            />
-          </div>
+        <Parallax speed={30} className="loc__map">
+          <motion.div
+            className="loc__frame"
+            initial="fechado"
+            whileInView="aberto"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={{ fechado: { opacity: 0, y: 50, scale: 0.97 }, aberto: { opacity: 1, y: 0, scale: 1 } }}
+            transition={{ duration: 1.1, ease: EASE }}
+          >
+            {/* o mapa se abre de dentro para fora, como uma toalha sendo estendida */}
+            <motion.div
+              className="loc__mapa"
+              variants={{
+                fechado: { clipPath: 'inset(22% 18% 22% 18% round 24px)' },
+                aberto: { clipPath: 'inset(0% 0% 0% 0% round 24px)' },
+              }}
+              transition={{ duration: 1.4, delay: 0.15, ease: EASE }}
+            >
+              <iframe
+                title={`Mapa: ${site.nome}, ${enderecoCompleto}`}
+                src={links.mapaEmbed}
+                width="100%"
+                height="450"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </motion.div>
+          </motion.div>
           <a
             className="loc__badge"
             href={links.mapa}
@@ -123,7 +146,7 @@ export function Localizacao() {
               <Brigadeiro size={40} />
             </span>
           </a>
-        </Reveal>
+        </Parallax>
       </div>
     </section>
   )

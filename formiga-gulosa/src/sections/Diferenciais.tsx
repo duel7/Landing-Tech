@@ -2,6 +2,7 @@ import { motion } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { Brilhos, Paleta, SacoConfeitar } from '../components/Illustrations'
+import { Parallax, useTilt } from '../components/Motion'
 import { EASE, MaskLines, Reveal } from '../components/Reveal'
 import { Brigadeiro, Heart } from '../components/Sweets'
 import './diferenciais.css'
@@ -57,7 +58,7 @@ export function Diferenciais() {
       </svg>
 
       <div className="container dif__grid">
-        <div className="dif__intro">
+        <Parallax speed={28} fadeOut className="dif__intro">
           <Reveal>
             <p className="eyebrow">O jeito Formiga</p>
           </Reveal>
@@ -74,39 +75,52 @@ export function Diferenciais() {
           <Reveal delay={0.2}>
             <p className="lead">É assim que um bolo ganha a cara de quem vai comemorar.</p>
           </Reveal>
-        </div>
+        </Parallax>
 
         <ul className="dif__cards">
-          {itens.map((item, i) => {
-            const isAtivo = ativo === i
-            return (
-              <motion.li
-                key={item.titulo}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '0px 0px -10% 0px' }}
-                transition={{ duration: 1, delay: 0.1 + i * 0.1, ease: EASE }}
-              >
-                <button
-                  type="button"
-                  className={`dif-card ${isAtivo ? 'is-active' : ''}`}
-                  onClick={() => setAtivo(i)}
-                  onMouseEnter={() => setAtivo(i)}
-                  onFocus={() => setAtivo(i)}
-                >
-                  <span className="dif-card__art">{item.arte}</span>
-                  <span className="dif-card__title">{item.titulo}</span>
-                  <span className="dif-card__script">{item.script}</span>
-                  <span className="dif-card__desc">{item.texto}</span>
-                  <span className="dif-card__arrow" aria-hidden="true">
-                    <ArrowRight size={14} strokeWidth={1.8} />
-                  </span>
-                </button>
-              </motion.li>
-            )
-          })}
+          {itens.map((item, i) => (
+            <motion.li
+              key={item.titulo}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+              transition={{ duration: 1, delay: 0.1 + i * 0.1, ease: EASE }}
+            >
+              <Parallax speed={[8, 24, 14, 30][i]} somenteDesktop className="dif-card__parallax">
+                <CartaoArco item={item} ativo={ativo === i} ativar={() => setAtivo(i)} />
+              </Parallax>
+            </motion.li>
+          ))}
         </ul>
       </div>
     </section>
+  )
+}
+
+/** Cartão em arco: inclina de leve na direção do cursor e um reflexo acompanha a luz. */
+function CartaoArco({ item, ativo, ativar }: { item: (typeof itens)[number]; ativo: boolean; ativar: () => void }) {
+  const tilt = useTilt(6)
+  return (
+    <motion.div
+      className="dif-card__tilt"
+      style={tilt.ativo ? { rotateX: tilt.rotateX, rotateY: tilt.rotateY } : undefined}
+      {...tilt.handlers}
+    >
+      <button
+        type="button"
+        className={`dif-card ${ativo ? 'is-active' : ''}`}
+        onClick={ativar}
+        onMouseEnter={ativar}
+        onFocus={ativar}
+      >
+        <span className="dif-card__art">{item.arte}</span>
+        <span className="dif-card__title">{item.titulo}</span>
+        <span className="dif-card__script">{item.script}</span>
+        <span className="dif-card__desc">{item.texto}</span>
+        <span className="dif-card__arrow" aria-hidden="true">
+          <ArrowRight size={14} strokeWidth={1.8} />
+        </span>
+      </button>
+    </motion.div>
   )
 }

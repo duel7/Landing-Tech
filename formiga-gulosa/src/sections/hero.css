@@ -181,6 +181,21 @@
   height: 87.5cqw;
 }
 
+.cloche__lift,
+.cloche__bolo-wrap,
+.cloche__bolo-entrada {
+  position: absolute;
+  inset: 0;
+}
+
+/* camada do bolo: mesma área da redoma, com perspectiva para o giro sutil */
+.cloche--bolo {
+  perspective: 900px;
+  --bolo-l: 86cqw;
+  --bolo-a: 72cqh;
+  --bolo-base: 0.2cqh;
+}
+
 .cloche__glass {
   position: absolute;
   inset: 0;
@@ -714,8 +729,8 @@
       'eyebrow'
       'title'
       'stage'
-      'lead'
       'ctas'
+      'lead'
       'rail';
     justify-items: center;
     text-align: center;
@@ -768,12 +783,13 @@
 
   .hero__lead {
     grid-area: lead;
-    margin: 44px auto 0;
+    margin: 26px auto 0;
   }
 
   .hero__ctas {
     grid-area: ctas;
     justify-content: center;
+    margin-top: 30px;
   }
 
   .hero__scroll {
@@ -840,11 +856,16 @@
     width: 100%;
   }
 
+  .hero__ctas .magnetic,
+  .hero__ctas .btn {
+    width: 100%;
+  }
+
   .hero__pre {
     letter-spacing: 0.26em;
   }
 
   .stage {
-    width: min(86vw, 400px);
+    width: min(76vw, 360px);
   }
 }

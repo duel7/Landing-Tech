@@ -1,11 +1,12 @@
-import { motion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { motion, useScroll, useTime, useTransform } from 'motion/react'
 import { CakeSlice, HandHeart, Palette } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { Ant } from '../components/Ant'
 import { Button } from '../components/Button'
 import { Drip } from '../components/Dividers'
 import { Picture } from '../components/Picture'
-import { MaskLines, Reveal } from '../components/Reveal'
+import { Magnetic, Parallax } from '../components/Motion'
+import { EASE, MaskLines, Reveal } from '../components/Reveal'
 import { Brigadeiro, Pearl, Sprinkle } from '../components/Sweets'
 import { linkWhatsapp } from '../config/site'
 import { fotoDestaque, fotos, type Foto } from '../lib/fotos'
@@ -25,7 +26,6 @@ export function Sobre() {
   const ref = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const marcaX = useTransform(scrollYProgress, [0, 1], ['6%', '-22%'])
-  const giro = useTransform(scrollYProgress, [0.1, 0.9], [-40, 220])
 
   return (
     <section ref={ref} id="sobre" className="sobre grain" aria-labelledby="sobre-titulo">
@@ -35,11 +35,11 @@ export function Sobre() {
       </motion.span>
 
       <div className="container sobre__grid">
-        <Reveal className="sobre__visual" y={50}>
-          {fotoSobre ? <PratoFoto foto={fotoSobre} /> : <Bandeja giro={giro} />}
-        </Reveal>
+        <Parallax speed={34} className="sobre__visual">
+          {fotoSobre ? <PratoFoto foto={fotoSobre} /> : <Bandeja />}
+        </Parallax>
 
-        <div className="sobre__content">
+        <Parallax speed={12} className="sobre__content">
           <Reveal>
             <p className="eyebrow">Sobre a Formiga Gulosa</p>
           </Reveal>
@@ -51,8 +51,8 @@ export function Sobre() {
           </Reveal>
           <Reveal delay={0.25}>
             <p className="sobre__text">
-              A Formiga Gulosa é uma confeitaria artesanal de Itabuna, dedicada a bolos personalizados e doces. Cada
-              encomenda começa com uma conversa — a ocasião, o tema, as cores — e o bolo é pensado a partir daí.
+              A Formiga Gulosa é uma confeitaria artesanal de Itabuna, dedicada a bolos personalizados, doces e tortas.
+              Cada encomenda começa com uma conversa — a ocasião, o tema, as cores — e o bolo é pensado a partir daí.
             </p>
             <p className="sobre__text">
               A decoração é feita à mão, detalhe por detalhe, para que o bolo chegue à mesa com a cara de quem vai
@@ -60,11 +60,13 @@ export function Sobre() {
             </p>
           </Reveal>
           <Reveal delay={0.35}>
-            <Button href={linkWhatsapp()} external icon="whatsapp" className="sobre__cta">
-              Conversar sobre o meu bolo
-            </Button>
+            <Magnetic className="sobre__cta">
+              <Button href={linkWhatsapp()} external icon="whatsapp">
+                Conversar sobre o meu bolo
+              </Button>
+            </Magnetic>
           </Reveal>
-        </div>
+        </Parallax>
 
         <ul className="sobre__features">
           {diferenciais.map(({ icon: Icon, titulo, texto }, i) => (
@@ -111,13 +113,23 @@ export function Sobre() {
   )
 }
 
-/* Foto real num prato de porcelana, com lupa para ver os detalhes. */
+/* Foto real num prato de porcelana: abre em círculo ao aparecer, aproxima devagar
+   durante a rolagem e tem lupa para ver os detalhes. */
 function PratoFoto({ foto }: { foto: Foto }) {
   const fino = useFinePointer()
   const [lupa, setLupa] = useState<{ x: number; y: number; w: number; h: number } | null>(null)
+  const ref = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const zoom = useTransform(scrollYProgress, [0, 0.55, 1], [1.16, 1.02, 1.08])
 
   return (
-    <figure className="prato">
+    <motion.figure
+      className="prato"
+      ref={ref}
+      initial="fechado"
+      whileInView="aberto"
+      viewport={{ once: true, amount: 0.3 }}
+    >
       <div
         className="prato__frame"
         onPointerMove={(e) => {
@@ -128,18 +140,30 @@ function PratoFoto({ foto }: { foto: Foto }) {
         onPointerLeave={() => setLupa(null)}
         data-cursor={fino ? 'lupa' : undefined}
       >
-        <Picture
-          picture={foto.picture}
-          alt={foto.alt}
-          sizes="(max-width: 1023px) 80vw, 480px"
-          objectPosition={foto.enquadramento}
-        />
+        {/* o gatilho fica na figura: o próprio recorte começa pequeno demais para "contar" como visível */}
+        <motion.div
+          className="prato__revela"
+          variants={{
+            fechado: { clipPath: 'circle(8% at 50% 55%)', opacity: 0 },
+            aberto: { clipPath: 'circle(72% at 50% 50%)', opacity: 1 },
+          }}
+          transition={{ duration: 1.5, ease: EASE }}
+        >
+          <motion.div className="prato__zoom" style={{ scale: zoom }}>
+            <Picture
+              picture={foto.picture}
+              alt={foto.alt}
+              sizes="(max-width: 1023px) 84vw, 560px"
+              objectPosition={foto.enquadramento}
+            />
+          </motion.div>
+        </motion.div>
         {lupa && <Lupa foto={foto} {...lupa} />}
       </div>
       <figcaption className="note prato__note">
         {fino ? 'passe o mouse e veja os detalhes' : 'feito à mão, detalhe por detalhe'}
       </figcaption>
-    </figure>
+    </motion.figure>
   )
 }
 
@@ -170,9 +194,10 @@ function Lupa({ foto, x, y, w, h }: { foto: Foto; x: number; y: number; w: numbe
   )
 }
 
-/* Sem fotos ainda: uma bandeja de docinhos que gira com a rolagem (como um prato giratório). */
-function Bandeja({ giro }: { giro: MotionValue<number> }) {
-  const rot = useTransform(giro, (v) => `${v}deg`)
+/* Sem fotos ainda: uma bandeja de docinhos que gira devagar, sozinha (como um prato giratório). */
+function Bandeja() {
+  const tempo = useTime()
+  const rot = useTransform(tempo, (t) => `${(t / 90) % 360}deg`)
   const docinhos = Array.from({ length: 8 }, (_, i) => i)
   const confeitos = [
     [32, 22, 30, 'var(--rose)'],
@@ -227,7 +252,7 @@ function Bandeja({ giro }: { giro: MotionValue<number> }) {
         </motion.div>
       </div>
       <p className="tray__hint" aria-hidden="true">
-        <span className="tray__hint-arrow">⟲</span> role para girar <span className="tray__hint-arrow">⟳</span>
+        <span className="tray__hint-arrow">⟲</span> 360° <span className="tray__hint-arrow">⟳</span>
       </p>
     </div>
   )

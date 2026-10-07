@@ -135,6 +135,12 @@
     0 50px 80px -40px rgba(84, 38, 36, 0.55);
 }
 
+.prato__revela,
+.prato__zoom {
+  position: absolute;
+  inset: 0;
+}
+
 .prato__frame picture,
 .prato__frame img {
   width: 100%;

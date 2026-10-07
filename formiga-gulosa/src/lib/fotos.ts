@@ -15,6 +15,10 @@ export interface Foto extends Required<Pick<InfoBolo, 'alt'>> {
   destaque: boolean
   enquadramento: string
   proporcao: number
+  /** Bolo recortado com fundo transparente (PNG), quando existir. */
+  recorte?: Picture
+  /** Largura ÷ altura do recorte. */
+  recorteProporcao?: number
 }
 
 // Cada foto vira AVIF e WebP em quatro larguras (nunca maiores que o original).
@@ -24,7 +28,18 @@ const arquivos = import.meta.glob<Picture>('../assets/bolos/*.{jpg,jpeg,png,webp
   query: '?w=480;800;1200;1800&format=avif;webp&quality=78&as=picture',
 })
 
+// Recortes (PNG com transparência) em src/assets/bolos/recortes/, com o mesmo nome da foto.
+// Viram AVIF e WebP com canal alfa.
+const recortes = import.meta.glob<Picture>('../assets/bolos/recortes/*.{png,PNG,webp,WEBP,avif,AVIF}', {
+  eager: true,
+  import: 'default',
+  query: '?w=320;560;820;1100&format=avif;webp&quality=80&as=picture',
+})
+
 const nomeArquivo = (caminho: string) => caminho.split('/').pop() ?? caminho
+const semExtensao = (nome: string) => nome.replace(/\.[^.]+$/, '')
+
+const recortePorNome = new Map(Object.entries(recortes).map(([c, p]) => [semExtensao(nomeArquivo(c)), p]))
 
 export const fotos: Foto[] = Object.entries(arquivos)
   .map(([caminho, picture]) => {
@@ -37,22 +52,27 @@ export const fotos: Foto[] = Object.entries(arquivos)
     const ob = b.info.ordem ?? Number.POSITIVE_INFINITY
     return oa === ob ? a.id.localeCompare(b.id, 'pt-BR', { numeric: true }) : oa - ob
   })
-  .map(({ id, info, picture }, i) => ({
-    id,
-    numero: i + 1,
-    picture,
-    titulo: info.titulo,
-    categoria: info.categoria,
-    descricao: info.descricao,
-    alt:
-      info.alt ??
-      (info.titulo
-        ? `${info.titulo}, bolo da Formiga Gulosa`
-        : `Bolo personalizado da Formiga Gulosa, criação ${String(i + 1).padStart(2, '0')}`),
-    destaque: Boolean(info.destaque),
-    enquadramento: info.enquadramento ?? 'center',
-    proporcao: picture.img.w / picture.img.h,
-  }))
+  .map(({ id, info, picture }, i) => {
+    const recorte = recortePorNome.get(semExtensao(id))
+    return {
+      id,
+      numero: i + 1,
+      picture,
+      titulo: info.titulo,
+      categoria: info.categoria,
+      descricao: info.descricao,
+      alt:
+        info.alt ??
+        (info.titulo
+          ? `${info.titulo}, da Formiga Gulosa`
+          : `Bolo personalizado da Formiga Gulosa, criação ${String(i + 1).padStart(2, '0')}`),
+      destaque: Boolean(info.destaque),
+      enquadramento: info.enquadramento ?? 'center',
+      proporcao: picture.img.w / picture.img.h,
+      recorte,
+      recorteProporcao: recorte ? recorte.img.w / recorte.img.h : undefined,
+    }
+  })
 
 /** Foto da abertura: a marcada como destaque ou, se nenhuma, a primeira. */
 export const fotoDestaque: Foto | undefined = fotos.find((f) => f.destaque) ?? fotos[0]

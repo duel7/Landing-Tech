@@ -3,7 +3,8 @@ import { MapPin, Phone } from 'lucide-react'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Ant } from '../components/Ant'
 import { Logo } from '../components/Logo'
-import { WhatsAppIcon } from '../components/Sweets'
+import { Magnetic } from '../components/Motion'
+import { InstagramIcon, WhatsAppIcon } from '../components/Sweets'
 import { linkWhatsapp, links, secoes, site } from '../config/site'
 import { useActiveSection, useEscape, useFocusTrap } from '../lib/hooks'
 import { irPara, liberarRolagem, travarRolagem } from '../lib/scroll'
@@ -41,13 +42,26 @@ export function Navbar({ menuAberto, setMenuAberto }: { menuAberto: boolean; set
 
           <NavLinks ativa={ativa} />
 
-          <a className="btn btn--small nav__cta" href={linkWhatsapp()} target="_blank" rel="noopener noreferrer">
-            <span>Encomendar</span>
-            <span className="btn__icon">
-              <WhatsAppIcon size={14} />
-            </span>
-            <span className="sr-only"> pelo WhatsApp (abre em nova aba)</span>
+          <a
+            className="nav__insta"
+            href={site.instagram.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Instagram ${site.instagram.usuario} (abre em nova aba)`}
+            data-tip={site.instagram.usuario}
+          >
+            <InstagramIcon size={18} />
           </a>
+
+          <Magnetic className="nav__cta">
+            <a className="btn btn--small" href={linkWhatsapp()} target="_blank" rel="noopener noreferrer">
+              <span>Encomendar</span>
+              <span className="btn__icon">
+                <WhatsAppIcon size={14} />
+              </span>
+              <span className="sr-only"> pelo WhatsApp (abre em nova aba)</span>
+            </a>
+          </Magnetic>
 
           <button
             type="button"
@@ -207,6 +221,15 @@ function MobileMenu({ aberto, fechar, ativa }: { aberto: boolean; fechar: () => 
                 <MapPin size={16} strokeWidth={1.7} aria-hidden="true" /> Como chegar
               </a>
             </div>
+            <a
+              className="mmenu__chip mmenu__insta"
+              href={site.instagram.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <InstagramIcon size={16} /> {site.instagram.usuario}
+              <span className="sr-only"> no Instagram (abre em nova aba)</span>
+            </a>
             <p className="mmenu__addr">
               {site.endereco.rua} · {site.endereco.bairro}
               <br />

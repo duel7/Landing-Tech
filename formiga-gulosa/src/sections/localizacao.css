@@ -89,10 +89,28 @@
   pointer-events: none;
 }
 
+.loc__frame {
+  transition:
+    transform 0.6s var(--ease-out),
+    box-shadow 0.6s var(--ease-out);
+}
+
+.loc__frame:hover {
+  box-shadow:
+    0 2px 4px rgba(43, 23, 22, 0.08),
+    0 40px 80px -28px rgba(84, 38, 36, 0.45);
+}
+
+.loc__mapa {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
 .loc__frame iframe {
   position: relative;
   width: 100%;
-  height: clamp(340px, 34vw, 480px);
+  height: 450px;
   border: 0;
   border-radius: 24px;
   filter: saturate(0.85) sepia(0.12) hue-rotate(-8deg);
@@ -116,6 +134,10 @@
 
 .loc__badge:hover {
   transform: scale(1.06) rotate(-6deg);
+}
+
+.loc__badge:hover .loc__badge-ring {
+  animation-duration: 6s;
 }
 
 .loc__badge-ring {
@@ -150,8 +172,13 @@
 }
 
 @media (max-width: 560px) {
-  .loc__actions .btn {
+  .loc__actions .btn,
+  .loc__actions .magnetic {
     flex: 1 1 100%;
+  }
+
+  .loc__actions .magnetic .btn {
+    width: 100%;
   }
 
   .loc__badge {
@@ -167,6 +194,6 @@
   }
 
   .loc__frame iframe {
-    height: 320px;
+    height: 340px;
   }
 }

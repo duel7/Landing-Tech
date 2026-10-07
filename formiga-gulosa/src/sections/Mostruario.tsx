@@ -1,24 +1,24 @@
-import { AnimatePresence, motion, useMotionValue, useScroll, useTransform, type MotionValue } from 'motion/react'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { motion, useScroll, useTransform } from 'motion/react'
+import { useMemo, useRef, useState, type ReactNode } from 'react'
 import { Ant } from '../components/Ant'
 import { Button } from '../components/Button'
+import { Magnetic, Parallax, usePorcentagem, useTilt } from '../components/Motion'
 import { Picture } from '../components/Picture'
+import { BoloRecortado, RedomaFrente, RedomaFundo } from '../components/Redoma'
 import { EASE, MaskLines, Reveal } from '../components/Reveal'
-import { Brigadeiro, Sparkle } from '../components/Sweets'
+import { Brigadeiro } from '../components/Sweets'
 import { linkWhatsapp, site } from '../config/site'
 import type { Categoria } from '../content/bolos'
 import { fotos, rotuloFoto, type Foto } from '../lib/fotos'
-import { useDesktop, useIsScrolling, useReducedMotionPref } from '../lib/hooks'
+import { useIsScrolling, useMediaQuery } from '../lib/hooks'
 import { Lightbox } from './Lightbox'
 import './mostruario.css'
 
-const ALTURAS = [0.9, 0.68, 0.8, 0.62, 0.86, 0.72]
 const num = (n: number) => String(n).padStart(2, '0')
+/** Filtros só fazem sentido com uma vitrine maior. */
+const MINIMO_PARA_FILTROS = 8
 
 export function Mostruario() {
-  const desktop = useDesktop()
-  const reduzir = useReducedMotionPref()
   const [filtro, setFiltro] = useState<Categoria | 'todas'>('todas')
   const [aberta, setAberta] = useState<number | null>(null)
 
@@ -28,26 +28,17 @@ export function Mostruario() {
   )
   const lista = filtro === 'todas' ? fotos : fotos.filter((f) => f.categoria === filtro)
 
-  const cabecalho = (
-    <Cabecalho
-      categorias={categorias}
-      filtro={filtro}
-      setFiltro={setFiltro}
-      total={lista.length}
-      vazio={!fotos.length}
-    />
-  )
-
-  let conteudo: ReactNode
-  if (!fotos.length) conteudo = <VitrineVazia cabecalho={cabecalho} />
-  else if (desktop && !reduzir && lista.length >= 3)
-    conteudo = <TrilhoFixo lista={lista} abrir={setAberta} cabecalho={cabecalho} chave={filtro} />
-  else conteudo = <Carrossel lista={lista} abrir={setAberta} cabecalho={cabecalho} />
-
   return (
     <section id="mostruario" className="vit" aria-labelledby="vit-titulo">
       <div className="scallop" aria-hidden="true" />
-      {conteudo}
+      <Cabecalho
+        categorias={fotos.length >= MINIMO_PARA_FILTROS ? categorias : []}
+        filtro={filtro}
+        setFiltro={setFiltro}
+        total={lista.length}
+        vazio={!fotos.length}
+      />
+      {fotos.length ? <Vitrine lista={lista} abrir={setAberta} /> : <VitrineVazia />}
       <Lightbox fotos={lista} indice={aberta} fechar={() => setAberta(null)} />
     </section>
   )
@@ -67,7 +58,7 @@ function Cabecalho({
   vazio: boolean
 }) {
   return (
-    <div className="container vit__head">
+    <Parallax speed={26} fadeOut className="container vit__head">
       <div className="vit__heading">
         <Reveal>
           <p className="eyebrow">Vitrine da Formiga</p>
@@ -93,194 +84,162 @@ function Cabecalho({
           )}
           <p className="vit__count">
             <span>{num(total)}</span> {total === 1 ? 'criação' : 'criações'}
-            <span className="vit__hint"> · clique para ampliar</span>
+            <span className="vit__hint"> · toque para ver de perto</span>
           </p>
         </Reveal>
       )}
+    </Parallax>
+  )
+}
+
+/* ---------- a vitrine: redomas de vidro em prateleiras ---------- */
+
+function Vitrine({ lista, abrir }: { lista: Foto[]; abrir: (i: number) => void }) {
+  const celular = useMediaQuery('(max-width: 767px)')
+  const colunas = celular ? 2 : 3
+  const ref = useRef<HTMLDivElement>(null)
+  const rolando = useIsScrolling()
+  // a formiga atravessa a primeira prateleira enquanto a vitrine passa pela tela
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 0.85', 'end 0.35'] })
+  const formigaX = useTransform(scrollYProgress, (v) => `calc(${Math.min(1, Math.max(0, v))} * (100% - 56px))`)
+
+  // monta as prateleiras; o convite "gostou?" ocupa a última vaga livre
+  const itens: (Foto | 'convite')[] = [...lista, 'convite']
+  const prateleiras: (Foto | 'convite')[][] = []
+  for (let i = 0; i < itens.length; i += colunas) prateleiras.push(itens.slice(i, i + colunas))
+
+  return (
+    <div ref={ref} className="container vit-case" style={{ ['--colunas' as string]: colunas }}>
+      {prateleiras.map((linha, p) => (
+        <Parallax key={`${colunas}-${p}`} speed={p % 2 ? 22 : 10} className="vit-shelf">
+          <ul className="vit-shelf__itens">
+            {linha.map((item, k) =>
+              item === 'convite' ? (
+                <Convite key="convite" />
+              ) : (
+                <Redomita key={item.id} foto={item} ordem={k} abrir={() => abrir(lista.indexOf(item))} />
+              ),
+            )}
+          </ul>
+          <motion.div
+            className="shelf"
+            aria-hidden="true"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+            transition={{ duration: 1.3, ease: EASE }}
+          >
+            {p === 0 && (
+              <motion.span className="shelf__ant" style={{ left: formigaX }}>
+                <Ant size={42} walking={rolando} carrying="brigadeiro" />
+              </motion.span>
+            )}
+          </motion.div>
+        </Parallax>
+      ))}
     </div>
   )
 }
 
-/* ---------- item da vitrine ---------- */
+/** Uma redoma da vitrine: o bolo sobe para a prateleira e o vidro desce sobre ele. */
+function Redomita({ foto, ordem, abrir }: { foto: Foto; ordem: number; abrir: () => void }) {
+  const tilt = useTilt(7)
+  const luzX = usePorcentagem(tilt.luzX)
+  const luzY = usePorcentagem(tilt.luzY)
+  const largo = (foto.recorteProporcao ?? foto.proporcao) > 1.15
+  const atraso = ordem * 0.14
 
-function Item({ foto, i, abrir }: { foto: Foto; i: number; abrir: (i: number) => void }) {
-  const ar = Math.min(1.45, Math.max(0.62, foto.proporcao))
-  const forma = ar < 0.95 ? (i % 3 === 2 ? 'is-oval' : 'is-arch') : 'is-round'
   return (
     <motion.li
-      className="vit-item"
-      style={{ ['--hf' as string]: ALTURAS[i % ALTURAS.length], ['--ar' as string]: ar }}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.8, delay: (i % 4) * 0.06, ease: EASE }}
+      className={`vit-dome ${largo ? 'is-largo' : ''}`}
+      initial="oculto"
+      whileInView="visivel"
+      viewport={{ once: true, amount: 0.35 }}
     >
-      <button
+      <motion.button
         type="button"
-        className="vit-item__btn"
-        onClick={() => abrir(i)}
+        className="vit-dome__btn"
+        onClick={abrir}
         data-cursor="ver"
-        aria-label={`Ampliar foto: ${rotuloFoto(foto)}`}
+        aria-label={`Ver de perto: ${rotuloFoto(foto)}`}
+        style={tilt.ativo ? { rotateX: tilt.rotateX, rotateY: tilt.rotateY } : undefined}
+        {...tilt.handlers}
       >
-        <span className={`vit-item__frame ${forma}`}>
-          <Picture
-            picture={foto.picture}
-            alt={foto.alt}
-            sizes="(max-width: 1023px) 78vw, 40vw"
-            objectPosition={foto.enquadramento}
-            draggable={false}
-          />
-          <span className="vit-item__veil" aria-hidden="true">
-            <Sparkle size={16} color="#fff" />
+        {foto.recorte ? (
+          <span className="vit-dome__area">
+            <motion.span
+              className="vit-dome__camada"
+              variants={{ oculto: { opacity: 0, y: -46 }, visivel: { opacity: 1, y: 0 } }}
+              transition={{ duration: 1.1, delay: atraso + 0.35, ease: EASE }}
+            >
+              <RedomaFundo />
+            </motion.span>
+            <span className="redoma-palco vit-dome__palco">
+              <motion.span
+                className="vit-dome__camada"
+                variants={{ oculto: { opacity: 0, y: 36 }, visivel: { opacity: 1, y: 0 } }}
+                transition={{ duration: 0.95, delay: atraso, ease: EASE }}
+              >
+                <BoloRecortado foto={foto} sizes="(max-width: 767px) 44vw, (max-width: 1100px) 28vw, 330px" />
+              </motion.span>
+            </span>
+            <motion.span
+              className="vit-dome__camada"
+              variants={{ oculto: { opacity: 0, y: -46 }, visivel: { opacity: 1, y: 0 } }}
+              transition={{ duration: 1.1, delay: atraso + 0.35, ease: EASE }}
+            >
+              <RedomaFrente brilhos={false}>
+                <motion.span className="vit-dome__luz" style={{ left: luzX, top: luzY }} />
+              </RedomaFrente>
+            </motion.span>
           </span>
-        </span>
-      </button>
-      <span className="vit-item__tag" aria-hidden="true">
-        <span className="vit-item__num">nº {num(foto.numero)}</span>
-        <span className="vit-item__label">{rotuloFoto(foto)}</span>
+        ) : (
+          <span className="vit-dome__foto">
+            <Picture
+              picture={foto.picture}
+              alt={foto.alt}
+              sizes="(max-width: 767px) 44vw, 330px"
+              objectPosition={foto.enquadramento}
+            />
+          </span>
+        )}
+      </motion.button>
+      <span className="vit-tag" aria-hidden="true">
+        <span className="vit-tag__num">nº {num(foto.numero)}</span>
+        <span className="vit-tag__label">{rotuloFoto(foto)}</span>
       </span>
     </motion.li>
   )
 }
 
-function CartaoFinal() {
+function Convite() {
   return (
-    <li className="vit-end">
+    <motion.li
+      className="vit-end"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 1, delay: 0.3, ease: EASE }}
+    >
       <div className="vit-end__card">
-        <Brigadeiro size={56} />
+        <Brigadeiro size={52} />
         <p className="note">gostou?</p>
         <p className="vit-end__text">Cada bolo é feito sob encomenda, a partir da sua ideia.</p>
-        <Button href="#contato" small>
-          Montar meu pedido
-        </Button>
+        <Magnetic>
+          <Button href="#contato" small>
+            Montar meu pedido
+          </Button>
+        </Magnetic>
       </div>
-    </li>
-  )
-}
-
-/* ---------- desktop: a vitrine desliza para o lado enquanto a página rola ---------- */
-
-function TrilhoFixo({
-  lista,
-  abrir,
-  cabecalho,
-  chave,
-}: {
-  lista: Foto[]
-  abrir: (i: number) => void
-  cabecalho: ReactNode
-  chave: string
-}) {
-  const fora = useRef<HTMLDivElement>(null)
-  const trilho = useRef<HTMLUListElement>(null)
-  const [distancia, setDistancia] = useState(0)
-  const rolando = useIsScrolling()
-
-  useLayoutEffect(() => {
-    const el = trilho.current
-    if (!el) return
-    const medir = () => setDistancia(Math.max(0, el.scrollWidth - window.innerWidth))
-    medir()
-    const ro = new ResizeObserver(medir)
-    ro.observe(el)
-    window.addEventListener('resize', medir)
-    return () => {
-      ro.disconnect()
-      window.removeEventListener('resize', medir)
-    }
-  }, [lista])
-
-  const { scrollYProgress } = useScroll({ target: fora, offset: ['start start', 'end end'] })
-  const x = useTransform(scrollYProgress, (v) => -v * distancia)
-
-  return (
-    <div ref={fora} className="vit-pin" style={{ height: `calc(100svh + ${distancia}px)` }}>
-      <div className="vit-pin__sticky">
-        {cabecalho}
-        <div className="vit-pin__viewport">
-          <AnimatePresence mode="popLayout">
-            <motion.ul key={chave} ref={trilho} className="vit-track" style={{ x }}>
-              {lista.map((f, i) => (
-                <Item key={f.id} foto={f} i={i} abrir={abrir} />
-              ))}
-              <CartaoFinal />
-            </motion.ul>
-          </AnimatePresence>
-          <Prateleira progresso={scrollYProgress} andando={rolando} />
-        </div>
-      </div>
-    </div>
-  )
-}
-
-/* ---------- celular e tablet: carrossel de deslizar ---------- */
-
-function Carrossel({ lista, abrir, cabecalho }: { lista: Foto[]; abrir: (i: number) => void; cabecalho: ReactNode }) {
-  const ref = useRef<HTMLUListElement>(null)
-  const progresso = useMotionValue(0)
-  const [andando, setAndando] = useState(false)
-  const timer = useRef(0)
-
-  const onScroll = () => {
-    const el = ref.current
-    if (!el) return
-    const max = el.scrollWidth - el.clientWidth
-    progresso.set(max > 0 ? el.scrollLeft / max : 0)
-    setAndando(true)
-    window.clearTimeout(timer.current)
-    timer.current = window.setTimeout(() => setAndando(false), 160)
-  }
-
-  const passo = (dir: number) => {
-    const el = ref.current
-    if (!el) return
-    const item = el.querySelector<HTMLElement>('.vit-item')
-    el.scrollBy({ left: dir * ((item?.offsetWidth ?? 280) + 16), behavior: 'smooth' })
-  }
-
-  return (
-    <div className="vit-car">
-      {cabecalho}
-      <div className="vit-car__viewport">
-        <ul ref={ref} className="vit-track vit-track--scroll" onScroll={onScroll}>
-          {lista.map((f, i) => (
-            <Item key={f.id} foto={f} i={i} abrir={abrir} />
-          ))}
-          <CartaoFinal />
-        </ul>
-        <Prateleira progresso={progresso} andando={andando} />
-      </div>
-      <div className="container vit-car__controls">
-        <button type="button" className="round-btn" onClick={() => passo(-1)} aria-label="Ver criações anteriores">
-          <ArrowLeft size={18} strokeWidth={1.5} />
-        </button>
-        <button type="button" className="round-btn" onClick={() => passo(1)} aria-label="Ver próximas criações">
-          <ArrowRight size={18} strokeWidth={1.5} />
-        </button>
-      </div>
-    </div>
-  )
-}
-
-/** Prateleira de vidro com friso dourado; a formiga atravessa conforme o progresso. */
-function Prateleira({ progresso, andando }: { progresso: MotionValue<number>; andando: boolean }) {
-  const left = useTransform(progresso, (v) => `calc(${v} * (100% - 56px))`)
-  return (
-    <div className="shelf" aria-hidden="true">
-      <motion.span className="shelf__ant" style={{ left }}>
-        <Ant size={46} walking={andando} carrying="brigadeiro" />
-      </motion.span>
-    </div>
+    </motion.li>
   )
 }
 
 /* ---------- ainda sem fotos ---------- */
 
-function VitrineVazia({ cabecalho }: { cabecalho: ReactNode }) {
+function VitrineVazia(): ReactNode {
   return (
     <div className="vit-empty">
-      {cabecalho}
       <div className="container">
         <div className="vit-empty__case">
           <div className="vit-empty__domes" aria-hidden="true">
