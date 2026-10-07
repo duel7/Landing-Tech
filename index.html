@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+    Conteúdo entre colchetes, como [Nome da marca], é provisório e deve ser substituído
+    por informações confirmadas. A lista completa está no README.
+  -->
+  <title>[Nome da marca] · Relógios masculinos</title>
+  <meta name="description" content="Relógios masculinos [Nome da marca]: conheça os modelos da coleção, veja o cronógrafo em detalhe e fale com a equipe de atendimento.">
+  <meta name="theme-color" content="#0b111c">
+  <meta name="color-scheme" content="dark light">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="[Nome da marca]">
+  <meta property="og:title" content="[Nome da marca] · Relógios masculinos">
+  <meta property="og:description" content="Conheça os modelos da coleção e fale com a equipe de atendimento.">
+  <!-- Ao publicar, troque pelo endereço absoluto da imagem (https://…/assets/media/compartilhamento.jpg). -->
+  <meta property="og:image" content="assets/media/compartilhamento.jpg">
+  <meta property="og:image:width" content="810">
+  <meta property="og:image:height" content="424">
+  <meta property="og:image:alt" content="Cronógrafo com caixa em tom rosé e mostrador preto, sobre granito, ao entardecer.">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <script>
+    // Ativa as animações de entrada somente com JavaScript. Se o script principal não
+    // carregar em alguns segundos, a classe sai e todo o conteúdo aparece sem animação.
+    document.documentElement.classList.add('js');
+    setTimeout(function () {
+      if (!window.__siteReady) document.documentElement.classList.remove('js');
+    }, 3000);
+  </script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <svg width="0" height="0" class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 20 20">
+      <path d="M3 10h13M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.3"/>
+    </symbol>
+    <symbol id="i-ring" viewBox="0 0 200 200">
+      <circle class="ring__min" cx="100" cy="100" r="90"/>
+      <circle class="ring__hour" cx="100" cy="100" r="90"/>
+    </symbol>
+  </svg>
+
+  <header class="site-header" data-header>
+    <div class="site-header__inner">
+      <a class="wordmark" href="#inicio" aria-label="[Nome da marca], voltar ao início">
+        <span class="wordmark__text">[Nome da marca]</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Principal">
+        <ul>
+          <li><a href="#colecao">Coleção</a></li>
+          <li><a href="#detalhe">Em detalhe</a></li>
+          <li><a href="#marca">A casa</a></li>
+        </ul>
+      </nav>
+
+      <a class="btn btn--line btn--small site-header__cta" href="#atendimento">Atendimento</a>
+
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+        <span class="menu-toggle__label">Menu</span>
+        <span class="menu-toggle__bars" aria-hidden="true"><span></span><span></span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="menu" id="menu" data-menu hidden>
+    <nav class="menu__nav" aria-label="Menu">
+      <ol>
+        <li><a href="#colecao"><span class="menu__num" aria-hidden="true">03</span>Coleção</a></li>
+        <li><a href="#detalhe"><span class="menu__num" aria-hidden="true">06</span>Em detalhe</a></li>
+        <li><a href="#marca"><span class="menu__num" aria-hidden="true">09</span>A casa</a></li>
+        <li><a href="#atendimento"><span class="menu__num" aria-hidden="true">12</span>Atendimento</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <main id="conteudo">
+    <!-- Abertura -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero__intro container">
+        <p class="eyebrow hero__eyebrow" data-reveal>Coleção <span class="ph">[Nome da coleção]</span></p>
+        <h1 class="display hero__title" id="hero-title">
+          <span class="line"><span>Um cronógrafo</span></span>
+          <span class="line"><span>à hora <em>azul</em>.</span></span>
+        </h1>
+        <div class="hero__actions" data-reveal>
+          <a class="btn btn--solid" href="#colecao">
+            Ver a coleção
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+          <a class="link-arrow" href="#atendimento">Falar com a equipe</a>
+        </div>
+      </div>
+
+      <figure class="hero__plate" data-hero-plate>
+        <div class="hero__media">
+          <div class="hero__media-inner" data-hero-media>
+            <picture>
+              <source srcset="assets/media/cronografo-hora-azul-poster.avif" type="image/avif">
+              <source srcset="assets/media/cronografo-hora-azul-poster.webp" type="image/webp">
+              <img src="assets/media/cronografo-hora-azul-poster.jpg" width="864" height="424"
+                alt="Cronógrafo com caixa em tom rosé, mostrador preto e pulseira escura, apoiado sobre granito entre flores brancas, com montanhas ao entardecer ao fundo."
+                fetchpriority="high" decoding="async">
+            </picture>
+            <video class="hero__video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-hero-video>
+              <source data-src="assets/media/cronografo-hora-azul.webm" type="video/webm">
+              <source data-src="assets/media/cronografo-hora-azul.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <figcaption class="hero__caption">
+          <span class="hero__model"><span class="ph">[Nome do modelo]</span> <span class="hero__ref">Ref. <span class="ph">[Referência]</span></span></span>
+          <button class="media-toggle" type="button" data-video-toggle hidden>
+            <span class="media-toggle__icon" aria-hidden="true"></span>
+            <span class="media-toggle__label">Pausar vídeo</span>
+          </button>
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- Coleção -->
+    <section class="section collection" id="colecao" aria-labelledby="colecao-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="label" data-reveal>
+            <svg class="dial" viewBox="0 0 16 16" aria-hidden="true" style="--h:3"><circle class="dial__marks" cx="8" cy="8" r="6.8"/><line x1="8" y1="8" x2="8" y2="3.6"/><circle class="dial__pivot" cx="8" cy="8" r="1"/></svg>
+            <span class="label__num" aria-hidden="true">03</span> Coleção
+          </p>
+          <h2 class="h2" id="colecao-title" data-reveal>Escolha um modelo</h2>
+          <p class="section-head__lead" data-reveal>Selecione um relógio para vê-lo e, se quiser, peça informações sobre ele à equipe.</p>
+        </header>
+
+        <div class="collection__body" data-collection>
+          <div class="collection__preview" aria-hidden="true">
+            <div class="preview is-active" data-preview="01">
+              <picture>
+                <source srcset="assets/media/cronografo-colecao.avif" type="image/avif">
+                <source srcset="assets/media/cronografo-colecao.webp" type="image/webp">
+                <img src="assets/media/cronografo-colecao.jpg" width="340" height="424" alt="" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="preview slot" data-preview="02">
+              <svg class="ring" aria-hidden="true"><use href="#i-ring"/></svg>
+              <p class="slot__note"><span>Fotografia a fornecer</span>Modelo 02 · vista frontal, fundo neutro · 4:5, mín. 2000 px</p>
+            </div>
+            <div class="preview slot" data-preview="03">
+              <svg class="ring" aria-hidden="true"><use href="#i-ring"/></svg>
+              <p class="slot__note"><span>Fotografia a fornecer</span>Modelo 03 · vista frontal, fundo neutro · 4:5, mín. 2000 px</p>
+            </div>
+            <div class="preview slot" data-preview="04">
+              <svg class="ring" aria-hidden="true"><use href="#i-ring"/></svg>
+              <p class="slot__note"><span>Fotografia a fornecer</span>Modelo 04 · vista frontal, fundo neutro · 4:5, mín. 2000 px</p>
+            </div>
+          </div>
+
+          <ol class="models">
+            <li class="model is-active" data-model="01">
+              <button class="model__select" type="button" aria-expanded="true" aria-controls="modelo-01" data-model-select>
+                <span class="model__num" aria-hidden="true">01</span>
+                <span class="model__name"><span class="ph">[Nome do modelo]</span></span>
+                <span class="model__type">Cronógrafo</span>
+              </button>
+              <div class="model__meta" id="modelo-01">
+                <div class="model__meta-inner">
+                  <picture class="model__thumb">
+                    <source srcset="assets/media/cronografo-colecao.avif" type="image/avif">
+                    <source srcset="assets/media/cronografo-colecao.webp" type="image/webp">
+                    <img src="assets/media/cronografo-colecao.jpg" width="340" height="424" alt="Cronógrafo com caixa em tom rosé e mostrador preto, atravessado por um reflexo de luz." loading="lazy" decoding="async">
+                  </picture>
+                  <p class="model__facts">Caixa em tom rosé, mostrador preto · <span class="ph">[Diâmetro]</span></p>
+                  <p class="model__links">
+                    <a class="link-arrow" href="#detalhe">Ver em detalhe</a>
+                    <a class="link-arrow" href="#atendimento" data-ask-model="01">Pedir informações</a>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="model" data-model="02">
+              <button class="model__select" type="button" aria-expanded="false" aria-controls="modelo-02" data-model-select>
+                <span class="model__num" aria-hidden="true">02</span>
+                <span class="model__name"><span class="ph">[Nome do modelo]</span></span>
+                <span class="model__type"><span class="ph">[Tipo]</span></span>
+              </button>
+              <div class="model__meta" id="modelo-02">
+                <div class="model__meta-inner">
+                  <div class="model__thumb slot" aria-hidden="true">
+                    <svg class="ring"><use href="#i-ring"/></svg>
+                    <p class="slot__note"><span>Fotografia a fornecer</span>Modelo 02 · vista frontal · 4:5</p>
+                  </div>
+                  <p class="model__facts"><span class="ph">[Material da caixa]</span> · <span class="ph">[Cor do mostrador]</span> · <span class="ph">[Diâmetro]</span></p>
+                  <p class="model__links">
+                    <a class="link-arrow" href="#atendimento" data-ask-model="02">Pedir informações</a>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="model" data-model="03">
+              <button class="model__select" type="button" aria-expanded="false" aria-controls="modelo-03" data-model-select>
+                <span class="model__num" aria-hidden="true">03</span>
+                <span class="model__name"><span class="ph">[Nome do modelo]</span></span>
+                <span class="model__type"><span class="ph">[Tipo]</span></span>
+              </button>
+              <div class="model__meta" id="modelo-03">
+                <div class="model__meta-inner">
+                  <div class="model__thumb slot" aria-hidden="true">
+                    <svg class="ring"><use href="#i-ring"/></svg>
+                    <p class="slot__note"><span>Fotografia a fornecer</span>Modelo 03 · vista frontal · 4:5</p>
+                  </div>
+                  <p class="model__facts"><span class="ph">[Material da caixa]</span> · <span class="ph">[Cor do mostrador]</span> · <span class="ph">[Diâmetro]</span></p>
+                  <p class="model__links">
+                    <a class="link-arrow" href="#atendimento" data-ask-model="03">Pedir informações</a>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="model" data-model="04">
+              <button class="model__select" type="button" aria-expanded="false" aria-controls="modelo-04" data-model-select>
+                <span class="model__num" aria-hidden="true">04</span>
+                <span class="model__name"><span class="ph">[Nome do modelo]</span></span>
+                <span class="model__type"><span class="ph">[Tipo]</span></span>
+              </button>
+              <div class="model__meta" id="modelo-04">
+                <div class="model__meta-inner">
+                  <div class="model__thumb slot" aria-hidden="true">
+                    <svg class="ring"><use href="#i-ring"/></svg>
+                    <p class="slot__note"><span>Fotografia a fornecer</span>Modelo 04 · vista frontal · 4:5</p>
+                  </div>
+                  <p class="model__facts"><span class="ph">[Material da caixa]</span> · <span class="ph">[Cor do mostrador]</span> · <span class="ph">[Diâmetro]</span></p>
+                  <p class="model__links">
+                    <a class="link-arrow" href="#atendimento" data-ask-model="04">Pedir informações</a>
+                  </p>
+                </div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Destaque -->
+    <section class="section detail" id="detalhe" aria-labelledby="detalhe-title">
+      <div class="container detail__grid">
+        <header class="section-head detail__head">
+          <p class="label" data-reveal>
+            <svg class="dial" viewBox="0 0 16 16" aria-hidden="true" style="--h:6"><circle class="dial__marks" cx="8" cy="8" r="6.8"/><line x1="8" y1="8" x2="8" y2="3.6"/><circle class="dial__pivot" cx="8" cy="8" r="1"/></svg>
+            <span class="label__num" aria-hidden="true">06</span> Em detalhe
+          </p>
+          <h2 class="h2" id="detalhe-title" data-reveal>O cronógrafo, de perto</h2>
+          <p class="section-head__lead" data-reveal>Cinco pontos para observar nesta peça.</p>
+        </header>
+
+        <figure class="detail__figure" data-figure>
+          <div class="detail__frame">
+            <picture>
+              <source srcset="assets/media/cronografo-detalhe.avif" type="image/avif">
+              <source srcset="assets/media/cronografo-detalhe.webp" type="image/webp">
+              <img src="assets/media/cronografo-detalhe.jpg" width="340" height="424" loading="lazy" decoding="async"
+                alt="Vista aproximada do cronógrafo: mostrador preto com três submostradores, janela de data, coroa entre dois botões e pulseira escura com pesponto claro.">
+            </picture>
+            <ol class="hotspots">
+              <li><button class="hotspot" type="button" style="--x:53.5%;--y:38.2%" data-point="1" aria-describedby="ponto-1" aria-label="Ponto 1: mostrador"><span class="hotspot__n" aria-hidden="true">1</span></button></li>
+              <li><button class="hotspot" type="button" style="--x:36.8%;--y:54.7%" data-point="2" aria-describedby="ponto-2" aria-label="Ponto 2: submostradores"><span class="hotspot__n" aria-hidden="true">2</span></button></li>
+              <li><button class="hotspot" type="button" style="--x:60.5%;--y:71.3%" data-point="3" aria-describedby="ponto-3" aria-label="Ponto 3: data"><span class="hotspot__n" aria-hidden="true">3</span></button></li>
+              <li><button class="hotspot" type="button" style="--x:84.7%;--y:64.2%" data-point="4" aria-describedby="ponto-4" aria-label="Ponto 4: coroa e botões"><span class="hotspot__n" aria-hidden="true">4</span></button></li>
+              <li><button class="hotspot" type="button" style="--x:47%;--y:18%" data-point="5" aria-describedby="ponto-5" aria-label="Ponto 5: pulseira"><span class="hotspot__n" aria-hidden="true">5</span></button></li>
+            </ol>
+          </div>
+          <figcaption class="detail__caption"><span class="ph">[Nome do modelo]</span> · Ref. <span class="ph">[Referência]</span></figcaption>
+        </figure>
+
+        <ol class="points" data-points>
+          <li class="point" data-point="1" data-reveal>
+            <span class="point__num" aria-hidden="true">1</span>
+            <h3 class="point__title">Mostrador</h3>
+            <p id="ponto-1">Preto, com índices aplicados em tom rosé. Às 12 horas, o índice é duplo.</p>
+          </li>
+          <li class="point" data-point="2" data-reveal>
+            <span class="point__num" aria-hidden="true">2</span>
+            <h3 class="point__title">Submostradores</h3>
+            <p id="ponto-2">Três, dispostos às 9, às 6 e às 3 horas, cada um com a sua escala.</p>
+          </li>
+          <li class="point" data-point="3" data-reveal>
+            <span class="point__num" aria-hidden="true">3</span>
+            <h3 class="point__title">Data</h3>
+            <p id="ponto-3">Janela discreta entre as 4 e as 5 horas.</p>
+          </li>
+          <li class="point" data-point="4" data-reveal>
+            <span class="point__num" aria-hidden="true">4</span>
+            <h3 class="point__title">Coroa e botões</h3>
+            <p id="ponto-4">Coroa às 3 horas, entre os dois botões do cronógrafo.</p>
+          </li>
+          <li class="point" data-point="5" data-reveal>
+            <span class="point__num" aria-hidden="true">5</span>
+            <h3 class="point__title">Pulseira</h3>
+            <p id="ponto-5">Escura, com textura gravada e pesponto claro ao longo das bordas.</p>
+          </li>
+        </ol>
+
+        <section class="specs" aria-labelledby="specs-title">
+          <h3 class="specs__title" id="specs-title">Ficha técnica</h3>
+          <dl class="specs__list">
+            <div><dt>Referência</dt><dd><span class="ph">[Referência]</span></dd></div>
+            <div><dt>Movimento</dt><dd><span class="ph">[Calibre e tipo de corda]</span></dd></div>
+            <div><dt>Funções</dt><dd><span class="ph">[Funções confirmadas]</span></dd></div>
+            <div><dt>Caixa</dt><dd><span class="ph">[Material da caixa]</span></dd></div>
+            <div><dt>Diâmetro</dt><dd><span class="ph">[— mm]</span></dd></div>
+            <div><dt>Espessura</dt><dd><span class="ph">[— mm]</span></dd></div>
+            <div><dt>Vidro</dt><dd><span class="ph">[Tipo de vidro]</span></dd></div>
+            <div><dt>Resistência à água</dt><dd><span class="ph">[— m]</span></dd></div>
+            <div><dt>Pulseira</dt><dd><span class="ph">[Material da pulseira]</span></dd></div>
+            <div><dt>Fecho</dt><dd><span class="ph">[Tipo de fecho]</span></dd></div>
+          </dl>
+          <a class="btn btn--line" href="#atendimento" data-ask-model="01">
+            Pedir informações sobre este modelo
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </section>
+      </div>
+    </section>
+
+    <!-- Marca -->
+    <section class="section brand" id="marca" aria-labelledby="marca-title">
+      <div class="container brand__grid">
+        <header class="section-head brand__head">
+          <p class="label" data-reveal>
+            <svg class="dial" viewBox="0 0 16 16" aria-hidden="true" style="--h:9"><circle class="dial__marks" cx="8" cy="8" r="6.8"/><line x1="8" y1="8" x2="8" y2="3.6"/><circle class="dial__pivot" cx="8" cy="8" r="1"/></svg>
+            <span class="label__num" aria-hidden="true">09</span> A casa
+          </p>
+          <h2 class="h2" id="marca-title" data-reveal>Quem faz estes relógios</h2>
+        </header>
+
+        <div class="brand__text" data-reveal>
+          <p class="brand__lead"><span class="ph">[Origem da marca: quem a fundou, quando e onde. Uma ou duas frases, apenas com fatos confirmados.]</span></p>
+          <p><span class="ph">[Processo: como os relógios são desenhados, de onde vêm os componentes e onde são montados e testados.]</span></p>
+        </div>
+
+        <dl class="brand__facts" data-reveal>
+          <div><dt>Fundação</dt><dd><span class="ph">[Ano]</span></dd></div>
+          <div><dt>Sede</dt><dd><span class="ph">[Cidade, estado]</span></dd></div>
+          <div><dt>Montagem</dt><dd><span class="ph">[Local]</span></dd></div>
+        </dl>
+
+        <div class="brand__visual slot slot--paper" data-reveal>
+          <svg class="ring" aria-hidden="true"><use href="#i-ring"/></svg>
+          <p class="slot__note"><span>Fotografia a fornecer</span>Bancada de montagem ou detalhe do ateliê · horizontal 3:2, mín. 2400 px</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Atendimento -->
+    <section class="section contact" id="atendimento" aria-labelledby="atendimento-title">
+      <div class="container contact__grid">
+        <header class="section-head contact__head">
+          <p class="label" data-reveal>
+            <svg class="dial" viewBox="0 0 16 16" aria-hidden="true" style="--h:12"><circle class="dial__marks" cx="8" cy="8" r="6.8"/><line x1="8" y1="8" x2="8" y2="3.6"/><circle class="dial__pivot" cx="8" cy="8" r="1"/></svg>
+            <span class="label__num" aria-hidden="true">12</span> Atendimento
+          </p>
+          <h2 class="h2" id="atendimento-title" data-reveal>Fale com a equipe</h2>
+          <p class="section-head__lead" data-reveal>Pergunte sobre um modelo ou peça um horário de atendimento. Indique como prefere receber a resposta.</p>
+
+          <div class="contact__channels" data-reveal>
+            <h3 class="contact__channels-title">Outros canais</h3>
+            <ul>
+              <li><span class="ph">[E-mail de atendimento]</span></li>
+              <li><span class="ph">[Telefone ou WhatsApp]</span></li>
+              <li><span class="ph">[Endereço e horário de atendimento]</span></li>
+            </ul>
+          </div>
+        </header>
+
+        <!--
+          Envio: preencha data-endpoint com o endereço de um serviço de formulários (que aceite
+          POST e responda em JSON) ou data-email com o e-mail de atendimento. Ver README.
+        -->
+        <form class="form" data-contact-form data-endpoint="" data-email="" action="#" method="post" novalidate>
+          <div class="form__row form__row--2">
+            <div class="field">
+              <label for="f-nome">Nome</label>
+              <input id="f-nome" name="nome" type="text" autocomplete="name" required aria-describedby="f-nome-erro">
+              <p class="field__error" id="f-nome-erro" data-error-for="nome"></p>
+            </div>
+            <div class="field">
+              <label for="f-email">E-mail</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="f-email-erro">
+              <p class="field__error" id="f-email-erro" data-error-for="email"></p>
+            </div>
+          </div>
+
+          <div class="form__row form__row--2">
+            <div class="field">
+              <label for="f-telefone">Telefone <span class="field__opt">(opcional)</span></label>
+              <input id="f-telefone" name="telefone" type="tel" autocomplete="tel" inputmode="tel" placeholder="DDD e número" aria-describedby="f-telefone-erro">
+              <p class="field__error" id="f-telefone-erro" data-error-for="telefone"></p>
+            </div>
+            <div class="field">
+              <label for="f-assunto">Assunto</label>
+              <div class="select">
+                <select id="f-assunto" name="assunto">
+                  <option value="Informações sobre um modelo">Informações sobre um modelo</option>
+                  <option value="Agendar atendimento">Agendar atendimento</option>
+                  <option value="Outro assunto">Outro assunto</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form__row form__row--2">
+            <div class="field">
+              <label for="f-modelo">Modelo de interesse</label>
+              <div class="select">
+                <select id="f-modelo" name="modelo">
+                  <option value="">Ainda não sei</option>
+                  <option value="01">01 · [Nome do modelo]</option>
+                  <option value="02">02 · [Nome do modelo]</option>
+                  <option value="03">03 · [Nome do modelo]</option>
+                  <option value="04">04 · [Nome do modelo]</option>
+                </select>
+              </div>
+            </div>
+            <fieldset class="field field--choice">
+              <legend>Prefere resposta por</legend>
+              <div class="choices">
+                <label class="choice"><input type="radio" name="preferencia" value="E-mail" checked><span>E-mail</span></label>
+                <label class="choice"><input type="radio" name="preferencia" value="Telefone"><span>Telefone</span></label>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="field">
+            <label for="f-mensagem">Mensagem</label>
+            <textarea id="f-mensagem" name="mensagem" rows="4" required aria-describedby="f-mensagem-erro"></textarea>
+            <p class="field__error" id="f-mensagem-erro" data-error-for="mensagem"></p>
+          </div>
+
+          <div class="field field--hp" aria-hidden="true">
+            <label for="f-empresa">Empresa</label>
+            <input id="f-empresa" name="empresa" type="text" tabindex="-1" autocomplete="off">
+          </div>
+
+          <div class="field field--consent">
+            <label class="check">
+              <input type="checkbox" name="consentimento" value="sim" required aria-describedby="f-consent-erro">
+              <span class="check__text">Autorizo o uso destes dados para que a equipe responda a esta solicitação. <span class="ph">[Link para a política de privacidade]</span></span>
+            </label>
+            <p class="field__error" id="f-consent-erro" data-error-for="consentimento"></p>
+          </div>
+
+          <div class="form__footer">
+            <button class="btn btn--solid" type="submit" data-submit>
+              <span data-submit-label>Enviar solicitação</span>
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </button>
+            <p class="form__status" role="status" aria-live="polite" data-form-status></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__grid">
+      <a class="wordmark wordmark--footer" href="#inicio" aria-label="[Nome da marca], voltar ao início">
+        <span class="wordmark__text">[Nome da marca]</span>
+      </a>
+      <nav class="site-footer__nav" aria-label="Rodapé">
+        <ul>
+          <li><a href="#colecao">Coleção</a></li>
+          <li><a href="#detalhe">Em detalhe</a></li>
+          <li><a href="#marca">A casa</a></li>
+          <li><a href="#atendimento">Atendimento</a></li>
+        </ul>
+      </nav>
+      <a class="link-arrow link-arrow--up site-footer__top" href="#inicio">Voltar ao início</a>
+      <p class="site-footer__legal">© <span data-year>2026</span> <span class="ph">[Razão social]</span> · CNPJ <span class="ph">[CNPJ]</span></p>
+    </div>
+  </footer>
+</body>
+</html>
