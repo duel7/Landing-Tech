@@ -11,6 +11,7 @@
   position: absolute;
   left: 0;
   top: 58%;
+  will-change: transform;
   z-index: 0;
   font-family: var(--font-display);
   font-size: clamp(7rem, 22vw, 21rem);
@@ -188,6 +189,14 @@
   height: 84cqw;
   transform-style: preserve-3d;
   transform: rotateX(60deg);
+}
+
+.tray__doily,
+.tray__sprinkles,
+.tray__item,
+.tray__bill {
+  /* camadas mantidas na GPU: a bandeja gira com a rolagem sem ser redesenhada a cada parada */
+  will-change: transform;
 }
 
 .tray__doily,
