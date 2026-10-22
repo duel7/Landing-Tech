@@ -1,0 +1,311 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.15rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.logo__mark {
+  width: 1.9em;
+  height: 1.9em;
+  flex: none;
+}
+
+.logo__thin {
+  margin-left: 0.32em;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+/* --------------------------------------------------------------------------
+   Barra fixa
+   -------------------------------------------------------------------------- */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  color: var(--on-dark);
+  transition:
+    color 0.5s var(--ease-out),
+    transform 0.6s var(--ease-out);
+}
+
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(6, 27, 43, 0.58);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  border-bottom: 1px solid var(--line-dark);
+  opacity: 0;
+  transition:
+    opacity 0.5s var(--ease-out),
+    background 0.5s var(--ease-out),
+    border-color 0.5s var(--ease-out);
+}
+
+.nav.is-scrolled::before {
+  opacity: 1;
+}
+
+.nav.is-light {
+  color: var(--on-light);
+}
+
+.nav.is-light::before {
+  background: rgba(242, 248, 250, 0.72);
+  border-color: var(--line-light);
+}
+
+.nav.is-open::before {
+  opacity: 0;
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: min(100% - 2 * var(--gutter), var(--maxw));
+  height: var(--nav-h);
+  margin-inline: auto;
+}
+
+.nav__brand {
+  position: relative;
+  z-index: 2;
+  border-radius: 8px;
+}
+
+.nav__links ul {
+  display: flex;
+  gap: clamp(1.25rem, 2.4vw, 3rem);
+}
+
+.nav__links a {
+  position: relative;
+  display: inline-block;
+  padding-block: 0.6em;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  opacity: 0.74;
+  transition: opacity 0.35s var(--ease-out);
+}
+
+/* Indicador: uma gota que "cai" sob o item ativo */
+.nav__links a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -0.15em;
+  width: 6px;
+  height: 8px;
+  margin-left: -3px;
+  background: var(--cyan);
+  clip-path: url(#clip-drop);
+  opacity: 0;
+  transform: translateY(-8px) scale(0.6);
+  transition:
+    opacity 0.4s var(--ease-out),
+    transform 0.6s var(--ease-water);
+}
+
+.nav.is-light .nav__links a::after {
+  background: var(--blue);
+}
+
+.nav__links a:hover,
+.nav__links a.is-active {
+  opacity: 1;
+}
+
+.nav__links a.is-active::after {
+  opacity: 1;
+  transform: none;
+}
+
+.nav__toggle {
+  display: none;
+  position: relative;
+  z-index: 2;
+  align-items: center;
+  gap: 0.75em;
+  min-height: 44px;
+  padding: 0 0.25em 0 0.9em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.nav__toggle-bars {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  width: 26px;
+}
+
+.nav__toggle-bars span {
+  display: block;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.nav__toggle-bars span:last-child {
+  width: 62%;
+  justify-self: end;
+}
+
+.nav__toggle[aria-expanded='true'] .nav__toggle-bars span:first-child {
+  transform: translateY(3.75px) rotate(45deg);
+}
+
+.nav__toggle[aria-expanded='true'] .nav__toggle-bars span:last-child {
+  width: 100%;
+  transform: translateY(-3.75px) rotate(-45deg);
+}
+
+@media (max-width: 860px) {
+  .nav__links {
+    display: none;
+  }
+
+  .nav__toggle {
+    display: inline-flex;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Menu mobile
+   -------------------------------------------------------------------------- */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: calc(var(--nav-h) + 24px) var(--gutter) calc(28px + env(safe-area-inset-bottom));
+  background:
+    radial-gradient(120% 70% at 85% 0%, rgba(8, 124, 240, 0.28), transparent 60%),
+    radial-gradient(90% 60% at 0% 100%, rgba(66, 217, 130, 0.18), transparent 60%),
+    var(--abyss);
+  color: var(--on-dark);
+  clip-path: circle(0% at calc(100% - 44px) 32px);
+  visibility: hidden;
+  transition:
+    clip-path 0.8s var(--ease-in-out),
+    visibility 0s linear 0.8s;
+}
+
+.menu.is-open {
+  clip-path: circle(150% at calc(100% - 44px) 32px);
+  visibility: visible;
+  transition:
+    clip-path 0.9s var(--ease-in-out),
+    visibility 0s;
+}
+
+.menu__ripples {
+  position: absolute;
+  top: 32px;
+  right: 44px;
+  pointer-events: none;
+}
+
+.menu__ripples span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 70vmax;
+  height: 70vmax;
+  margin: -35vmax 0 0 -35vmax;
+  border-radius: 50%;
+  border: 1px solid rgba(66, 232, 224, 0.12);
+  transform: scale(0.2);
+  opacity: 0;
+}
+
+.menu.is-open .menu__ripples span {
+  animation: menu-ripple 2.6s var(--ease-out) forwards;
+}
+
+.menu.is-open .menu__ripples span:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+.menu.is-open .menu__ripples span:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+@keyframes menu-ripple {
+  0% {
+    transform: scale(0.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.menu__nav ol {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.menu__nav a {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 0.35rem;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.menu__nav li {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s var(--ease-out),
+    transform 0.8s var(--ease-out);
+}
+
+.menu.is-open .menu__nav li {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(0.25s + var(--i) * 0.06s);
+}
+
+.menu__n {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--cyan);
+}
+
+.menu__label {
+  font-size: clamp(2.2rem, 9vw, 3.4rem);
+  font-weight: 520;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.menu__nav a[aria-current] .menu__label {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.menu__foot {
+  margin-top: 2rem;
+  color: var(--on-dark-3);
+}

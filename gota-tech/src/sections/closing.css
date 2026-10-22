@@ -1,0 +1,185 @@
+/* ==========================================================================
+   Encerramento (água, luz e vegetação)
+   ========================================================================== */
+
+.cl {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(0deg, #03111c 0%, #06303a 70%, #1c6d68 100%);
+}
+
+.cl.is-static .cl__fx {
+  display: none;
+}
+
+.cl.is-static {
+  background:
+    radial-gradient(70% 50% at 50% 0%, rgba(66, 232, 224, 0.25), transparent 70%),
+    linear-gradient(0deg, #03111c 0%, #06303a 70%, #1c6d68 100%);
+}
+
+.cl__fx {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+
+.cl::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 12%;
+  z-index: -1;
+  background: linear-gradient(180deg, var(--deep), transparent);
+}
+
+/* vitórias-régias vistas de baixo, na superfície */
+.cl-pads {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(110px, 14vw, 260px);
+  z-index: -1;
+}
+
+.cl-pad path {
+  fill: rgba(2, 24, 22, 0.88);
+  stroke: rgba(143, 240, 196, 0.4);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  animation: pad-drift 9s ease-in-out infinite alternate;
+  animation-delay: inherit;
+}
+
+@keyframes pad-drift {
+  to {
+    transform: translateX(14px) rotate(3deg);
+  }
+}
+
+.cl-plants {
+  position: absolute;
+  bottom: -2%;
+  width: clamp(140px, 18vw, 360px);
+  height: auto;
+  z-index: -1;
+}
+
+.cl-plants--left {
+  left: -1%;
+}
+
+.cl-plants--right {
+  right: -1%;
+  transform: scaleX(-1);
+}
+
+.cl-plants path {
+  fill: none;
+  stroke: #0e4636;
+  stroke-linecap: round;
+  transform-origin: 50% 100%;
+  transform-box: fill-box;
+  animation: blade-sway 5.5s ease-in-out infinite alternate;
+}
+
+.cl-plants path:nth-child(3n) {
+  stroke: #155c45;
+}
+
+.cl-plants path:nth-child(4n) {
+  stroke: #1d7354;
+}
+
+@keyframes blade-sway {
+  from {
+    transform: rotate(-3deg);
+  }
+  to {
+    transform: rotate(4deg);
+  }
+}
+
+.cl__inner {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: clamp(16px, 2vw, 28px);
+  padding: clamp(120px, 14vw, 240px) var(--gutter) clamp(60px, 8vw, 120px);
+  text-align: center;
+}
+
+.cl__mark {
+  width: clamp(44px, 4vw, 72px);
+  height: auto;
+  filter: drop-shadow(0 0 18px rgba(66, 232, 224, 0.5));
+}
+
+.cl__title {
+  font-size: clamp(2.6rem, 1rem + 5.4vw, 8.6rem);
+  font-weight: 540;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.cl__title .serif {
+  font-size: 1.08em;
+  color: #9ff7e2;
+}
+
+.cl__brand {
+  display: flex;
+  gap: 0.35em;
+  margin-top: clamp(16px, 2vw, 40px);
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 1rem + 1.6vw, 3rem);
+  letter-spacing: 0.04em;
+}
+
+.cl__word {
+  font-weight: 650;
+}
+
+.cl__word--thin {
+  font-weight: 220;
+}
+
+.cl__tagline {
+  font-size: var(--fs-lead);
+  color: var(--on-dark-2);
+}
+
+.cl__top {
+  margin-top: clamp(16px, 2vw, 32px);
+}
+
+.cl__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  width: min(100% - 2 * var(--gutter), var(--maxw));
+  margin: 0 auto;
+  padding: 24px 0 calc(28px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line-dark);
+  color: var(--on-dark-2);
+}
+
+.cl__foot-note {
+  color: var(--on-dark-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cl-pad path,
+  .cl-plants path {
+    animation: none;
+  }
+}

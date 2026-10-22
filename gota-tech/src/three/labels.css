@@ -1,0 +1,131 @@
+/* Rótulos ancorados em pontos da cena 3D */
+
+.scene-labels {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.scene-label {
+  --tone: var(--cyan);
+  --reach: clamp(30px, 3vw, 64px);
+  position: absolute;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.scene-label--green {
+  --tone: var(--green);
+}
+
+.scene-label__dot {
+  position: absolute;
+  left: -5px;
+  top: -5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--tone);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--tone) 22%, transparent),
+    0 0 18px var(--tone);
+}
+
+.scene-label__line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--reach) * 1.18);
+  height: 1px;
+  background: linear-gradient(90deg, var(--tone), color-mix(in srgb, var(--tone) 30%, transparent));
+  transform-origin: 0 0;
+}
+
+.scene-label__box {
+  position: absolute;
+  display: grid;
+  gap: 2px;
+  min-width: max-content;
+  padding: 0.55em 0.85em 0.6em;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--tone) 40%, transparent);
+  background: rgba(3, 17, 28, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--on-dark);
+  font-family: var(--font-sans);
+  white-space: nowrap;
+}
+
+.scene-label--ne .scene-label__line {
+  transform: rotate(-32deg);
+}
+.scene-label--ne .scene-label__box {
+  left: var(--reach);
+  bottom: calc(var(--reach) * 0.55);
+}
+
+.scene-label--nw .scene-label__line {
+  transform: rotate(-148deg);
+}
+.scene-label--nw .scene-label__box {
+  right: var(--reach);
+  bottom: calc(var(--reach) * 0.55);
+}
+
+.scene-label--se .scene-label__line {
+  transform: rotate(32deg);
+}
+.scene-label--se .scene-label__box {
+  left: var(--reach);
+  top: calc(var(--reach) * 0.55);
+}
+
+.scene-label--sw .scene-label__line {
+  transform: rotate(148deg);
+}
+.scene-label--sw .scene-label__box {
+  right: var(--reach);
+  top: calc(var(--reach) * 0.55);
+}
+
+.scene-label__code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.14em;
+  color: var(--tone);
+}
+
+.scene-label__title {
+  font-size: clamp(0.8rem, 0.74rem + 0.25vw, 1.05rem);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+.scene-label__sub {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.04em;
+  color: var(--on-dark-2);
+}
+
+@media (max-width: 640px) {
+  .scene-label {
+    --reach: 22px;
+  }
+  .scene-label__box {
+    padding: 0.35em 0.55em;
+    border-radius: 8px;
+  }
+  .scene-label__title {
+    font-size: 0.72rem;
+  }
+  .scene-label__sub,
+  .scene-label__code {
+    display: none;
+  }
+}

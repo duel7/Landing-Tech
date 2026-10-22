@@ -1,0 +1,454 @@
+/* ==========================================================================
+   03 · Aplicação na escola (verde profundo)
+   ========================================================================== */
+
+.app {
+  overflow: hidden;
+  background:
+    radial-gradient(60% 55% at 78% 45%, rgba(66, 217, 130, 0.14), transparent 70%),
+    radial-gradient(50% 40% at 10% 100%, rgba(8, 124, 240, 0.16), transparent 70%),
+    linear-gradient(180deg, var(--forest) 0%, var(--forest-2) 100%);
+}
+
+.app__light {
+  position: absolute;
+  top: -20%;
+  right: 8%;
+  width: 40vw;
+  height: 140%;
+  background: linear-gradient(180deg, rgba(242, 248, 250, 0.045), transparent 70%);
+  transform: skewX(-18deg);
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+.app__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 40px);
+  align-items: center;
+}
+
+.app__text {
+  grid-column: 1 / span 5;
+}
+
+.app__title {
+  margin-top: clamp(24px, 3vw, 44px);
+  font-size: clamp(2.4rem, 0.6rem + 3.6vw, 6.2rem);
+}
+
+.app__title em {
+  font-size: 1.1em;
+  color: var(--green);
+}
+
+.app__place {
+  margin-top: 1.2rem;
+  color: var(--on-dark-2);
+}
+
+.app__quote {
+  margin: clamp(32px, 4vw, 64px) 0 0;
+  padding-left: clamp(16px, 1.4vw, 24px);
+  border-left: 2px solid var(--green);
+}
+
+.app__quote p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.4rem, 1rem + 1.2vw, 2.5rem);
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+  max-width: 26ch;
+}
+
+.app__uses {
+  display: grid;
+  margin-top: clamp(32px, 4vw, 64px);
+  border-top: 1px solid var(--line-dark);
+}
+
+.use {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: clamp(12px, 1.2vw, 22px);
+  width: 100%;
+  padding: clamp(14px, 1.3vw, 22px) 4px;
+  border-bottom: 1px solid var(--line-dark);
+  text-align: left;
+  transition: background 0.5s var(--ease-out);
+}
+
+.use__n {
+  color: var(--on-dark-3);
+  transition: color 0.4s;
+}
+
+.use__icon {
+  display: grid;
+  place-items: center;
+  width: clamp(40px, 3.2vw, 56px);
+  height: clamp(40px, 3.2vw, 56px);
+  border-radius: 50%;
+  border: 1px solid rgba(66, 217, 130, 0.35);
+  color: var(--green);
+  transition:
+    background 0.5s var(--ease-out),
+    color 0.5s var(--ease-out),
+    transform 0.6s var(--ease-out);
+}
+
+.use__icon svg {
+  width: 55%;
+  height: 55%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.use__text {
+  display: grid;
+  gap: 2px;
+}
+
+.use__title {
+  font-size: clamp(1.05rem, 0.9rem + 0.6vw, 1.6rem);
+  font-weight: 520;
+  letter-spacing: -0.015em;
+}
+
+.use__note {
+  font-size: var(--fs-small);
+  color: var(--on-dark-2);
+}
+
+.use.is-active {
+  background: linear-gradient(90deg, rgba(66, 217, 130, 0.1), transparent 80%);
+}
+
+.use.is-active .use__n {
+  color: var(--green);
+}
+
+.use.is-active .use__icon {
+  background: var(--green);
+  color: var(--forest);
+  transform: scale(1.06);
+}
+
+.app__status {
+  display: flex;
+  gap: 12px;
+  margin-top: clamp(24px, 3vw, 40px);
+  max-width: 46ch;
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--on-dark-2);
+}
+
+.app__status-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 0.5em;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 0 4px rgba(66, 232, 224, 0.15);
+}
+
+.app__figure {
+  grid-column: 6 / span 7;
+  margin-right: calc(var(--gutter) * -1);
+}
+
+.app__figure figcaption {
+  margin-top: 12px;
+  text-align: right;
+  color: var(--on-dark-3);
+}
+
+/* --------------------------------------------------------------------------
+   Ilustração isométrica
+   -------------------------------------------------------------------------- */
+
+.school {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.iso-ground {
+  fill: url(#sc-ground);
+}
+
+.iso-grid {
+  stroke: rgba(242, 248, 250, 0.05);
+  stroke-width: 1;
+}
+
+.iso-shadow {
+  fill: rgba(3, 17, 28, 0.35);
+}
+
+.iso-wall .iso-top {
+  fill: #c9d6da;
+}
+
+.iso-wall .iso-left {
+  fill: #e6eef0;
+}
+
+.iso-wall .iso-right {
+  fill: #a9bcc2;
+}
+
+.iso-gable {
+  fill: #a9bcc2;
+}
+
+.iso-roof {
+  fill: #b4543b;
+}
+
+.iso-roof-back {
+  fill: #8e3b28;
+}
+
+.iso-roof-line {
+  stroke: rgba(60, 18, 10, 0.35);
+  stroke-width: 1;
+}
+
+.iso-window {
+  fill: #1c4a62;
+}
+
+.iso-window-shine {
+  fill: rgba(242, 248, 250, 0.22);
+}
+
+.iso-court {
+  fill: #3c6d68;
+}
+
+.iso-court-line {
+  stroke: rgba(242, 248, 250, 0.1);
+}
+
+.iso-bed .iso-top {
+  fill: #3b2a1f;
+}
+
+.iso-bed .iso-left {
+  fill: #6a4a33;
+}
+
+.iso-bed .iso-right {
+  fill: #553b29;
+}
+
+.iso-plant {
+  fill: #3fbf78;
+}
+
+.iso-trunk {
+  fill: #4a3a2c;
+}
+
+.iso-crown {
+  fill: #1f6f49;
+}
+
+.iso-crown-hi {
+  fill: rgba(66, 217, 130, 0.35);
+}
+
+.iso-gutter {
+  fill: none;
+  stroke: #e3eef2;
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.iso-tank-rib {
+  fill: none;
+  stroke: rgba(242, 248, 250, 0.2);
+}
+
+.iso-tank-top {
+  fill: #2d8ff0;
+  stroke: rgba(242, 248, 250, 0.35);
+}
+
+.iso-filter {
+  fill: #cfe3ea;
+  stroke: var(--deep);
+  stroke-width: 1.5;
+}
+
+.iso-tag rect {
+  fill: rgba(3, 17, 28, 0.78);
+  stroke: rgba(66, 232, 224, 0.35);
+}
+
+.iso-tag text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: rgba(242, 248, 250, 0.7);
+}
+
+.flow {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 3 9;
+  animation: flow-dash 1.2s linear infinite;
+}
+
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.flow--capture {
+  stroke: var(--cyan);
+  filter: drop-shadow(0 0 4px rgba(66, 232, 224, 0.8));
+}
+
+.flow--reuse {
+  stroke: var(--green);
+  opacity: 0.5;
+  transition:
+    opacity 0.5s,
+    stroke-width 0.5s;
+}
+
+.school.is-active-0 .flow--r0,
+.school.is-active-1 .flow--r1,
+.school.is-active-2 .flow--r2 {
+  opacity: 1;
+  stroke-width: 4;
+  filter: drop-shadow(0 0 5px rgba(66, 217, 130, 0.9));
+}
+
+.school-rain line {
+  stroke: rgba(200, 235, 255, 0.35);
+  stroke-width: 1;
+  animation: school-rain 0.8s linear infinite;
+}
+
+@keyframes school-rain {
+  from {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  to {
+    transform: translate(-40px, 260px);
+    opacity: 0;
+  }
+}
+
+.use-pin__dot {
+  fill: var(--forest);
+  stroke: var(--green);
+  stroke-width: 2;
+  transition:
+    fill 0.4s,
+    transform 0.5s var(--ease-out);
+}
+
+.use-pin__n {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--green);
+  transition: fill 0.4s;
+}
+
+.use-pin__pulse {
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 1.5;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.school.is-active-0 .use-pin--0 .use-pin__dot,
+.school.is-active-1 .use-pin--1 .use-pin__dot,
+.school.is-active-2 .use-pin--2 .use-pin__dot {
+  fill: var(--green);
+  transform: scale(1.18);
+}
+
+.school.is-active-0 .use-pin--0 .use-pin__n,
+.school.is-active-1 .use-pin--1 .use-pin__n,
+.school.is-active-2 .use-pin--2 .use-pin__n {
+  fill: var(--forest);
+}
+
+.school.is-active-0 .use-pin--0 .use-pin__pulse,
+.school.is-active-1 .use-pin--1 .use-pin__pulse,
+.school.is-active-2 .use-pin--2 .use-pin__pulse {
+  animation: pin-pulse 1.6s var(--ease-out) infinite;
+}
+
+@keyframes pin-pulse {
+  from {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .app__text,
+  .app__figure {
+    grid-column: 1 / -1;
+  }
+
+  .app__figure {
+    margin: clamp(40px, 8vw, 80px) 0 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .app__figure {
+    overflow: hidden;
+    margin-inline: calc(var(--gutter) * -1);
+  }
+
+  .school {
+    width: 150%;
+    margin-left: -22%;
+  }
+
+  .app__figure figcaption {
+    padding-inline: var(--gutter);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow,
+  .school-rain line {
+    animation: none;
+  }
+  .school-rain {
+    display: none;
+  }
+}
