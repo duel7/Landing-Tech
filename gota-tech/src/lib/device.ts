@@ -6,6 +6,7 @@
 //   ?quality=high   força o perfil completo
 //   ?motion=reduce  simula "reduzir movimento"
 //   ?capture        câmera sem amortecimento e qualidade fixa (capturas automatizadas)
+//   ?monitor=0      qualidade fixa, sem o ajuste automático (gravação quadro a quadro)
 
 export type Tier = 'high' | 'low'
 
@@ -51,4 +52,6 @@ export const device = {
   touch: typeof window !== 'undefined' ? window.matchMedia('(pointer: coarse)').matches : false,
   /** ?capture — modo para capturas de tela automatizadas */
   capture: params.has('capture'),
+  /** ajuste automático de qualidade conforme a taxa de quadros */
+  monitor: !params.has('capture') && params.get('monitor') !== '0',
 }

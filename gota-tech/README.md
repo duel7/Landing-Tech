@@ -81,6 +81,7 @@ Cada etapa tem numeral que "enche de água" conforme a leitura, legenda curta e 
 | `?quality=low` / `?quality=high` | força o perfil leve ou completo |
 | `?motion=reduce` | simula "reduzir movimento" |
 | `?capture` | câmera sem amortecimento e qualidade fixa (capturas automatizadas em ambientes sem GPU) |
+| `?monitor=0` | qualidade fixa, sem o ajuste automático (gravação de vídeo quadro a quadro) |
 
 ## Estrutura
 

@@ -142,9 +142,9 @@ function Contents({ tier, reduced, composer, onReady }: { tier: Tier; reduced: b
   )
 }
 
-// ?capture desliga o ajuste automático de qualidade e o amortecimento da câmera
-// (para capturas de tela em ambientes sem GPU, onde cada quadro leva segundos).
-const monitor = !device.capture
+// ?capture e ?monitor=0 desligam o ajuste automático de qualidade (capturas e
+// gravações em ambientes sem GPU, onde cada quadro leva segundos).
+const monitor = device.monitor
 
 /** Densidade de pixels limitada por um orçamento de área: nítido em 4K sem custo excessivo. */
 function maxDpr(tier: Tier) {
