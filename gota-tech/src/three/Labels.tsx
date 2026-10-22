@@ -16,7 +16,7 @@ type LabelDef = {
 }
 
 const LABELS: LabelDef[] = [
-  { at: anchors.filter, code: '03', title: 'Filtro', sub: 'retém folhas e partículas', tone: 'cyan', dir: 'ne', alpha: () => sc.filter },
+  { at: anchors.filter, code: '03', title: 'Filtro', sub: 'retém folhas e partículas', tone: 'cyan', dir: 'se', alpha: () => sc.filter },
   { at: anchors.tank, code: '04', title: 'Reservatório', sub: 'água armazenada', tone: 'cyan', dir: 'nw', alpha: () => sc.tank * (1 - sc.reuse) },
   { at: anchors.garden, title: 'Irrigação de plantas', tone: 'green', dir: 'nw', alpha: () => sc.reuse * sc.reuseFill },
   { at: anchors.cleaning, title: 'Limpeza de áreas externas', tone: 'green', dir: 'se', alpha: () => sc.reuse * sc.reuseFill },

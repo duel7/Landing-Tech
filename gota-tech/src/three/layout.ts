@@ -155,7 +155,7 @@ export const FILTER_T = (() => {
 
 /** Pontos de interesse usados por rótulos e câmera. */
 export const anchors = {
-  filter: v(FILTER.x, FILTER.y + 0.3, FILTER.z),
+  filter: v(FILTER.x + 0.12, FILTER.y - FILTER.r - 0.04, FILTER.z + 0.05),
   tank: v(TANK.x, TANK_TOP + 0.35, TANK.z),
   garden: v(GARDEN.x, GARDEN.h + 0.55, GARDEN.z),
   cleaning: v(BUCKET.x + 0.55, 0.55, BUCKET.z + 0.45),
