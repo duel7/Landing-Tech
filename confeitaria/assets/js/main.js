@@ -124,7 +124,7 @@
   /* ----------------------------------------------------------------------
      Entradas ao rolar
      ---------------------------------------------------------------------- */
-  var revealEls = $$('[data-reveal], [data-reveal-media]');
+  var revealEls = $$('[data-reveal]');
 
   function revealAll(els) { els.forEach(function (el) { el.classList.add('is-in'); }); }
 
@@ -187,14 +187,6 @@
     }
   }
 
-  function startHero() {
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        hero.classList.add('is-ready');
-        if (useVideo && heroVisible) playVideo();
-      });
-    });
-  }
 
   if (useVideo) {
     toggle.hidden = false;
@@ -246,15 +238,9 @@
     }
   }
 
-  if (animate && document.fonts && document.fonts.ready) {
-    // espera as fontes (no máximo 700 ms) para o título não mudar de forma durante a entrada
-    var started = false;
-    var go = function () { if (!started) { started = true; startHero(); } };
-    document.fonts.ready.then(go);
-    setTimeout(go, 700);
-  } else {
-    startHero();
-  }
+  // O texto da abertura já entrou pelo CSS; o vídeo começa assim que este script roda, por
+  // cima da imagem do primeiro quadro, que está na tela desde o início.
+  if (useVideo && heroVisible) playVideo();
 
   /* ----------------------------------------------------------------------
      Contato: dados preenchidos no <body> (ver comentário no HTML)

@@ -82,12 +82,11 @@
         <ul>
           <li><a href="#inicio" aria-current="true">Início</a></li>
           <li><a href="#produtos">Produtos</a></li>
-          <li><a href="#como-pedir">Como pedir</a></li>
-          <li><a href="#contato">Contato</a></li>
+          <li><a href="#encomendas">Encomendas</a></li>
         </ul>
       </nav>
 
-      <a class="btn btn--outline btn--small site-header__cta" href="#contato">Encomendar</a>
+      <a class="btn btn--outline btn--small site-header__cta" href="#pedido">Encomendar</a>
 
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
         <span class="menu-toggle__label">Menu</span>
@@ -101,12 +100,11 @@
       <ol>
         <li style="--i:0"><a href="#inicio"><span class="menu__num" aria-hidden="true">01</span>Início</a></li>
         <li style="--i:1"><a href="#produtos"><span class="menu__num" aria-hidden="true">02</span>Produtos</a></li>
-        <li style="--i:2"><a href="#como-pedir"><span class="menu__num" aria-hidden="true">03</span>Como pedir</a></li>
-        <li style="--i:3"><a href="#contato"><span class="menu__num" aria-hidden="true">04</span>Contato</a></li>
+        <li style="--i:2"><a href="#encomendas"><span class="menu__num" aria-hidden="true">03</span>Encomendas</a></li>
       </ol>
     </nav>
     <div class="menu__foot">
-      <a class="btn btn--primary" href="#contato">
+      <a class="btn btn--primary" href="#pedido">
         Fazer meu pedido
         <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
       </a>
@@ -147,7 +145,7 @@
         </h1>
         <p class="hero__lead" data-hero-in style="--i:3">Escolha o seu bolo, chame no WhatsApp e reserve a data do seu pedido.</p>
         <div class="hero__actions" data-hero-in style="--i:4">
-          <a class="btn btn--primary" href="#contato">
+          <a class="btn btn--primary" href="#pedido">
             Encomendar agora
             <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
           </a>
@@ -163,20 +161,24 @@
     </section>
 
     <!--
-      Produtos. Cada <li class="offer"> é um item do cardápio: nome, uma frase e o botão que leva ao
-      formulário de pedido já com o item escolhido (data-order, igual a uma opção do formulário).
-      Para incluir um item (Salgados, por exemplo), copie um <li> e acrescente a mesma opção no
-      <select name="produto">; para tirar, apague os dois. Confirme se as categorias são as da
-      confeitaria.
+      Produtos. Cada <li class="offer"> é um item do cardápio: número, nome, uma frase e o botão
+      que leva ao formulário de pedido já com o item escolhido (data-order, igual a uma opção do
+      <select name="produto">). Para incluir um item, copie um <li> e acrescente a mesma opção no
+      formulário; para tirar, apague os dois. Confirme se as categorias são as da confeitaria.
+
+      Foto de cada item: quando houver uma fotografia real, coloque-a como primeiro filho do <li>
+      e o item passa a mostrá-la ao lado do nome (vertical 4:5, de preferência 800 px de largura):
+        <img class="offer__photo" src="assets/media/produtos/bolos.jpg" width="800" height="1000"
+          alt="Descrição do que aparece na foto" loading="lazy" decoding="async">
     -->
     <section class="section products" id="produtos" aria-labelledby="produtos-title">
       <div class="container products__grid">
-        <figure class="products__figure" data-reveal-media>
+        <figure class="products__figure" data-reveal>
           <picture>
             <source srcset="assets/media/bolo.avif" type="image/avif">
             <source srcset="assets/media/bolo.webp" type="image/webp">
-            <img src="assets/media/bolo.jpg" width="456" height="570" loading="lazy" decoding="async"
-              alt="Bolo com cobertura de chocolate escorrendo pela lateral, morangos e rosetas de chantili no topo, sobre um pedestal rosa.">
+            <img src="assets/media/bolo.jpg" width="576" height="576" loading="lazy" decoding="async"
+              alt="Bolo com cobertura de chocolate escorrendo, morangos e rosetas de chantili no topo, sobre um pedestal rosa, com morangos suspensos no ar.">
           </picture>
         </figure>
 
@@ -191,30 +193,33 @@
           <ul class="offers">
             <li class="offer" data-reveal>
               <div class="offer__text">
+                <span class="offer__num" aria-hidden="true">01</span>
                 <h3 class="offer__name" id="oferta-bolos">Bolos</h3>
                 <p>Para aniversário, casamento ou aquele dia que pede um bolo bonito. Você escolhe o sabor e a decoração.</p>
               </div>
-              <a class="btn btn--outline offer__cta" href="#contato" data-order="Bolo" aria-describedby="oferta-bolos">
+              <a class="btn btn--outline offer__cta" href="#pedido" data-order="Bolo" aria-describedby="oferta-bolos">
                 Pedir bolo
                 <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
               </a>
             </li>
             <li class="offer" data-reveal>
               <div class="offer__text">
+                <span class="offer__num" aria-hidden="true">02</span>
                 <h3 class="offer__name" id="oferta-doces">Doces</h3>
                 <p>Docinhos para festa, mesa de sobremesas e lembrancinhas.</p>
               </div>
-              <a class="btn btn--outline offer__cta" href="#contato" data-order="Doces" aria-describedby="oferta-doces">
+              <a class="btn btn--outline offer__cta" href="#pedido" data-order="Doces" aria-describedby="oferta-doces">
                 Pedir doces
                 <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
               </a>
             </li>
             <li class="offer" data-reveal>
               <div class="offer__text">
+                <span class="offer__num" aria-hidden="true">03</span>
                 <h3 class="offer__name" id="oferta-especiais">Encomendas especiais</h3>
                 <p>Tem uma ideia para a sua data? Conte como você imagina e o pedido é montado com você.</p>
               </div>
-              <a class="btn btn--outline offer__cta" href="#contato" data-order="Encomenda especial" aria-describedby="oferta-especiais">
+              <a class="btn btn--outline offer__cta" href="#pedido" data-order="Encomenda especial" aria-describedby="oferta-especiais">
                 Pedir orçamento
                 <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
               </a>
@@ -224,60 +229,46 @@
       </div>
     </section>
 
-    <!-- Como pedir -->
-    <section class="section steps-section" id="como-pedir" aria-labelledby="como-pedir-title">
-      <div class="container">
-        <header class="section-head">
-          <p class="label" data-reveal>Como pedir</p>
-          <h2 class="h2" id="como-pedir-title" data-reveal>Seu pedido em 3 passos</h2>
-        </header>
-
-        <ol class="steps">
-          <li class="step" data-reveal>
-            <span class="step__num" aria-hidden="true">1</span>
-            <h3 class="step__title">Escolha</h3>
-            <p>Bolo, doces ou uma encomenda especial.</p>
-          </li>
-          <li class="step" data-reveal>
-            <span class="step__num" aria-hidden="true">2</span>
-            <h3 class="step__title">Preencha o pedido</h3>
-            <p>Data, quantidade de pessoas e o que você imagina.</p>
-          </li>
-          <li class="step" data-reveal>
-            <span class="step__num" aria-hidden="true">3</span>
-            <h3 class="step__title">Envie e confirme</h3>
-            <p>A mensagem segue pronta para o WhatsApp da confeitaria, que confirma os detalhes com você.</p>
-          </li>
-        </ol>
-
-        <a class="btn btn--primary steps__cta" href="#contato" data-reveal>
-          Fazer meu pedido
-          <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
-        </a>
-      </div>
-    </section>
-
     <!--
-      Pedido e contato. O formulário monta a mensagem e abre o WhatsApp do número em data-whatsapp
-      (no <body>); nada é enviado sem que a pessoa confirme o envio no próprio WhatsApp. Os canais
-      e o link direto só aparecem quando preenchidos.
+      Encomendas: como funciona, os canais de contato e o formulário. O formulário monta a mensagem
+      e abre o WhatsApp do número em data-whatsapp (no <body>); nada é enviado sem que a pessoa
+      confirme o envio no próprio WhatsApp. Os canais e o link direto só aparecem quando preenchidos.
     -->
-    <section class="section order" id="contato" aria-labelledby="contato-title">
+    <section class="section order" id="encomendas" aria-labelledby="encomendas-title">
       <div class="container order__inner">
         <div class="order__intro">
-          <p class="label" data-reveal>Pedido</p>
-          <h2 class="h2" id="contato-title" data-reveal>Faça o seu pedido</h2>
-          <p class="lead" data-reveal>Preencha os dados e envie: a mensagem chega pronta no WhatsApp da confeitaria.</p>
+          <p class="label" data-reveal>Encomendas</p>
+          <h2 class="h2" id="encomendas-title" data-reveal>Faça o seu pedido</h2>
+          <p class="lead" data-reveal>Preencha os dados e envie: a mensagem chega pronta no WhatsApp da confeitaria, que confirma os detalhes com você.</p>
+
+          <ol class="steps" aria-label="Como funciona" data-reveal>
+            <li class="step">
+              <span class="step__num" aria-hidden="true">1</span>
+              <h3 class="step__title">Escolha</h3>
+              <p>Bolo, doces ou uma encomenda especial.</p>
+            </li>
+            <li class="step">
+              <span class="step__num" aria-hidden="true">2</span>
+              <h3 class="step__title">Preencha</h3>
+              <p>A data, para quantas pessoas e o que você imagina.</p>
+            </li>
+            <li class="step">
+              <span class="step__num" aria-hidden="true">3</span>
+              <h3 class="step__title">Envie e confirme</h3>
+              <p>No WhatsApp, a confeitaria combina os detalhes com você.</p>
+            </li>
+          </ol>
+
           <dl class="channels" data-channels hidden>
             <div data-channel="whatsapp" hidden><dt>WhatsApp</dt><dd></dd></div>
             <div data-channel="instagram" hidden><dt>Instagram</dt><dd></dd></div>
             <div data-channel="endereco" hidden><dt>Endereço</dt><dd></dd></div>
             <div data-channel="horario" hidden><dt>Atendimento</dt><dd></dd></div>
           </dl>
-          <a class="link-arrow link-arrow--light" href="#contato" data-whatsapp-link hidden>Prefere conversar? Chamar no WhatsApp</a>
+          <a class="link-arrow" href="#encomendas" data-whatsapp-link hidden>Prefere conversar? Chamar no WhatsApp</a>
         </div>
 
-        <form class="order-form" id="pedido" data-order-form novalidate data-reveal>
+        <form class="order-form" id="pedido" data-order-form novalidate aria-labelledby="encomendas-title">
           <div class="field">
             <label for="f-produto">O que você quer encomendar</label>
             <div class="select">
@@ -336,8 +327,7 @@
       <nav class="site-footer__nav" aria-label="Rodapé">
         <ul>
           <li><a href="#produtos">Produtos</a></li>
-          <li><a href="#como-pedir">Como pedir</a></li>
-          <li><a href="#contato">Contato</a></li>
+          <li><a href="#encomendas">Encomendas</a></li>
         </ul>
       </nav>
       <a class="link-arrow link-arrow--up site-footer__top" href="#inicio">Voltar ao início</a>
