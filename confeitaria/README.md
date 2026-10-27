@@ -37,6 +37,8 @@ tools/                  scripts que geraram a mídia a partir do vídeo aprovado
   - acima de 21:10 (ultralargos): vídeo inteiro, sem corte, ancorado à direita, com a borda esquerda dissolvida no rosa da parede;
   - celular e tablet em pé: o texto vem primeiro, sobre o rosa da parede, e o vídeo vem abaixo, recortado em volta do bolo (o recorte mostra sempre mais que a largura do bolo).
 - **Telas grandes**: acima de 1920 px de largura a escala inteira (texto, espaços, componentes) cresce com a tela, para um monitor 4K com zoom de 100 % ter a mesma composição do Full HD, sem se espalhar nem ficar miúda. Com zoom de 200 % (o padrão do 4K na maioria dos sistemas), o navegador já entrega a composição do Full HD com o dobro de densidade.
+- **Uma só borda**: logo, texto da abertura e seções partem da mesma borda esquerda (`--edge`, a margem da página ou a borda do conteúdo centralizado, a que for maior). O texto da abertura fica um pouco mais para dentro, como no mockup, e o título é proporcional à tela, limitado a ~40 % da largura para não encostar no bolo.
+- **Escala de texto e espaçamento** (tokens no início do CSS): rótulos em caixa-alta com 12 px (`--fs-caps`), texto menor com 14 px (`--fs-small`), texto com 16 px, apoio (`--fs-lead`), subtítulos (`--fs-h3`) e títulos de seção (`--fs-h2`, até 60 px); entre seções, `--section-y`; entre o título de uma seção e o conteúdo, `--head-gap`. Botões principais (abertura e envio do pedido) em cereja, secundários com contorno e ações dos itens como links discretos com seta.
 - **Movimento**: o cabeçalho e o texto da abertura entram em sequência curta (0,8 s) só com CSS — não esperam o JavaScript, as fontes nem o vídeo, e aparecem junto com a imagem mesmo em conexão lenta. Não há tela de carregamento nem introdução. Ao rolar, títulos, textos e a foto dos produtos surgem com um leve deslocamento; o formulário, que é destino dos botões de pedido, já está no lugar. Tudo é desligado com "reduzir movimento"; sem JavaScript, o conteúdo aparece completo.
 - **Ritmo das seções**: abertura (vídeo) → Produtos (creme) → Encomendas (rosa-claro, formulário branco com detalhes bordô) → rodapé (creme). Encomendas usa fundo claro, e não bordô, para continuar a sequência de tons claros da página; o bordô fica nos títulos, nos números e no botão de envio.
 
@@ -66,7 +68,7 @@ Campo vazio não aparece em lugar nenhum.
 
 ### Formulário de pedido
 
-Campos: o que encomendar (obrigatório), para quando (obrigatório, a partir de hoje), quantas pessoas (opcional), sabor e detalhes (opcional) e nome (obrigatório). Os opcionais são marcados como tal.
+Campos: o que encomendar e para quando (obrigatórios, a data a partir de hoje), seu nome (obrigatório) e quantas pessoas (opcional), sabor e detalhes (opcional). Os opcionais são marcados como tal. A partir de 520 px os campos curtos ficam em pares, alinhados mesmo quando um rótulo quebra linha; no celular, um embaixo do outro.
 
 - Erros em português ao lado de cada campo, com aviso geral e foco no primeiro campo a corrigir; os erros somem conforme os campos são corrigidos.
 - Com o número configurado, o envio abre o WhatsApp da confeitaria com a mensagem montada — produto, data no formato dd/mm/aaaa, pessoas, detalhes e nome — e a página diz: "Abrimos o WhatsApp com o seu pedido. Confira e toque em enviar para a confeitaria receber." O pedido só chega quando a pessoa envia no WhatsApp; a página não anuncia nada além disso.
@@ -81,6 +83,8 @@ Os itens ficam na lista `<ul class="offers">`: **Bolos**, **Doces** e **Encomend
 A frase de apresentação da confeitaria fica no início da seção de produtos (há um comentário marcando o lugar): troque-a por um texto real — quem faz, onde fica — quando houver.
 
 **Foto de cada item.** Não há fotografias reais dos produtos no projeto, então os itens aparecem só com número, nome, frase e botão — sem molduras vazias. Quando houver fotos, basta colocar uma `<img class="offer__photo">` como primeiro filho do `<li>` (o comentário acima da lista traz o trecho pronto): o item passa a mostrá-la ao lado do nome, na proporção 4:5 (de preferência 800 px de largura).
+
+**Composição.** A seção tem duas linhas com as mesmas colunas: título e apresentação em cima; foto e lista embaixo, com a mesma altura (a lista divide a altura da foto igualmente entre os itens). Cada item tem número, nome, frase e um link "Pedir…".
 
 **Foto da seção.** Ao lado da lista fica o bolo do vídeo aprovado, `assets/media/bolo.*`: um recorte quadrado de 576 × 576 px do último quadro, com o bolo inteiro, o pedestal e respiro dos dois lados. Ela aparece a partir de 1024 px (no celular e no tablet em pé o mesmo bolo acabou de aparecer no vídeo) e a moldura tem a mesma proporção do arquivo e no máximo 600 px — o CSS não corta nem amplia a imagem além do que ela comporta. Por isso, em monitores 4K com zoom de 100 %, ela fica proporcionalmente menor que o texto: é o limite do arquivo. Com uma fotografia real em alta resolução, troque os arquivos mantendo os nomes e aumente o limite (`max-width` de `.products__figure` e a primeira coluna de `.products__grid`).
 

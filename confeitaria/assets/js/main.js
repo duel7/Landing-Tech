@@ -317,18 +317,19 @@
     var todayIso = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
     dateInput.min = todayIso;
 
+    // na ordem em que os campos aparecem: o foco vai para o primeiro erro de cima para baixo
     var rules = {
       produto: function (v) { return v ? '' : 'Escolha o que você quer encomendar.'; },
       data: function (v) {
         if (!v) return 'Informe para quando é o pedido.';
         return v < todayIso ? 'Escolha uma data a partir de hoje.' : '';
       },
+      nome: function (v) { return v.trim().length >= 2 ? '' : 'Informe seu nome.'; },
       pessoas: function (v, el) {
         if (!v && !el.validity.badInput) return '';
         var n = Number(v);
         return el.validity.badInput || !Number.isInteger(n) || n < 1 || n > 2000 ? 'Informe um número de pessoas válido.' : '';
-      },
-      nome: function (v) { return v.trim().length >= 2 ? '' : 'Informe seu nome.'; }
+      }
     };
 
     var setStatus = function (kind, text, fieldsError) {

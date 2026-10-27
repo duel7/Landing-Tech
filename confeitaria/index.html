@@ -166,13 +166,21 @@
       <select name="produto">). Para incluir um item, copie um <li> e acrescente a mesma opção no
       formulário; para tirar, apague os dois. Confirme se as categorias são as da confeitaria.
 
-      Foto de cada item: quando houver uma fotografia real, coloque-a como primeiro filho do <li>
-      e o item passa a mostrá-la ao lado do nome (vertical 4:5, de preferência 800 px de largura):
+      Foto de cada item: quando houver uma fotografia real, coloque-a logo depois do número
+      (<span class="offer__num">) e o item passa a mostrá-la ao lado do nome (vertical 4:5, de
+      preferência 800 px de largura):
         <img class="offer__photo" src="assets/media/produtos/bolos.jpg" width="800" height="1000"
           alt="Descrição do que aparece na foto" loading="lazy" decoding="async">
     -->
     <section class="section products" id="produtos" aria-labelledby="produtos-title">
       <div class="container products__grid">
+        <header class="products__head">
+          <p class="label" data-reveal>Produtos</p>
+          <h2 class="h2" id="produtos-title" data-reveal>O que você pode encomendar</h2>
+        </header>
+        <!-- Apresentação da confeitaria: troque por um texto real (quem faz, onde fica) quando houver. -->
+        <p class="lead products__lead" data-reveal>A Confeitaria Águas Lindas trabalha sob encomenda: cada bolo e cada doce é combinado com você — sabor, decoração, quantidade e data.</p>
+
         <figure class="products__figure" data-reveal>
           <picture>
             <source srcset="assets/media/bolo.avif" type="image/avif">
@@ -182,50 +190,32 @@
           </picture>
         </figure>
 
-        <div class="products__body">
-          <header class="section-head">
-            <p class="label" data-reveal>Produtos</p>
-            <h2 class="h2" id="produtos-title" data-reveal>O que você pode encomendar</h2>
-            <!-- Apresentação da confeitaria: troque por um texto real (quem faz, onde fica) quando houver. -->
-            <p class="lead" data-reveal>A Confeitaria Águas Lindas trabalha sob encomenda: cada bolo e cada doce é combinado com você — sabor, decoração, quantidade e data.</p>
-          </header>
-
-          <ul class="offers">
-            <li class="offer" data-reveal>
-              <div class="offer__text">
-                <span class="offer__num" aria-hidden="true">01</span>
-                <h3 class="offer__name" id="oferta-bolos">Bolos</h3>
-                <p>Para aniversário, casamento ou aquele dia que pede um bolo bonito. Você escolhe o sabor e a decoração.</p>
-              </div>
-              <a class="btn btn--outline offer__cta" href="#pedido" data-order="Bolo" aria-describedby="oferta-bolos">
-                Pedir bolo
-                <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
-              </a>
-            </li>
-            <li class="offer" data-reveal>
-              <div class="offer__text">
-                <span class="offer__num" aria-hidden="true">02</span>
-                <h3 class="offer__name" id="oferta-doces">Doces</h3>
-                <p>Docinhos para festa, mesa de sobremesas e lembrancinhas.</p>
-              </div>
-              <a class="btn btn--outline offer__cta" href="#pedido" data-order="Doces" aria-describedby="oferta-doces">
-                Pedir doces
-                <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
-              </a>
-            </li>
-            <li class="offer" data-reveal>
-              <div class="offer__text">
-                <span class="offer__num" aria-hidden="true">03</span>
-                <h3 class="offer__name" id="oferta-especiais">Encomendas especiais</h3>
-                <p>Tem uma ideia para a sua data? Conte como você imagina e o pedido é montado com você.</p>
-              </div>
-              <a class="btn btn--outline offer__cta" href="#pedido" data-order="Encomenda especial" aria-describedby="oferta-especiais">
-                Pedir orçamento
-                <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
-              </a>
-            </li>
-          </ul>
-        </div>
+        <ul class="offers">
+          <li class="offer" data-reveal>
+            <span class="offer__num" aria-hidden="true">01</span>
+            <div class="offer__text">
+              <h3 class="offer__name" id="oferta-bolos">Bolos</h3>
+              <p>Para aniversário, casamento ou aquele dia que pede um bolo bonito. Você escolhe o sabor e a decoração.</p>
+            </div>
+            <a class="link-arrow offer__cta" href="#pedido" data-order="Bolo" aria-describedby="oferta-bolos">Pedir bolo</a>
+          </li>
+          <li class="offer" data-reveal>
+            <span class="offer__num" aria-hidden="true">02</span>
+            <div class="offer__text">
+              <h3 class="offer__name" id="oferta-doces">Doces</h3>
+              <p>Docinhos para festa, mesa de sobremesas e lembrancinhas.</p>
+            </div>
+            <a class="link-arrow offer__cta" href="#pedido" data-order="Doces" aria-describedby="oferta-doces">Pedir doces</a>
+          </li>
+          <li class="offer" data-reveal>
+            <span class="offer__num" aria-hidden="true">03</span>
+            <div class="offer__text">
+              <h3 class="offer__name" id="oferta-especiais">Encomendas especiais</h3>
+              <p>Tem uma ideia para a sua data? Conte como você imagina e o pedido é montado com você.</p>
+            </div>
+            <a class="link-arrow offer__cta" href="#pedido" data-order="Encomenda especial" aria-describedby="oferta-especiais">Pedir orçamento</a>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -269,24 +259,31 @@
         </div>
 
         <form class="order-form" id="pedido" data-order-form novalidate aria-labelledby="encomendas-title">
-          <div class="field">
-            <label for="f-produto">O que você quer encomendar</label>
-            <div class="select">
-              <select id="f-produto" name="produto" required aria-describedby="f-produto-erro">
-                <option value="">Escolha uma opção</option>
-                <option value="Bolo">Bolo</option>
-                <option value="Doces">Doces</option>
-                <option value="Encomenda especial">Encomenda especial</option>
-              </select>
-            </div>
-            <p class="field__error" id="f-produto-erro" data-error-for="produto"></p>
-          </div>
-
           <div class="order-form__row">
+            <div class="field">
+              <label for="f-produto">O que você quer encomendar</label>
+              <div class="select">
+                <select id="f-produto" name="produto" required aria-describedby="f-produto-erro">
+                  <option value="">Escolha uma opção</option>
+                  <option value="Bolo">Bolo</option>
+                  <option value="Doces">Doces</option>
+                  <option value="Encomenda especial">Encomenda especial</option>
+                </select>
+              </div>
+              <p class="field__error" id="f-produto-erro" data-error-for="produto"></p>
+            </div>
             <div class="field">
               <label for="f-data">Para quando</label>
               <input id="f-data" name="data" type="date" required aria-describedby="f-data-erro">
               <p class="field__error" id="f-data-erro" data-error-for="data"></p>
+            </div>
+          </div>
+
+          <div class="order-form__row">
+            <div class="field">
+              <label for="f-nome">Seu nome</label>
+              <input id="f-nome" name="nome" type="text" autocomplete="name" required maxlength="80" aria-describedby="f-nome-erro">
+              <p class="field__error" id="f-nome-erro" data-error-for="nome"></p>
             </div>
             <div class="field">
               <label for="f-pessoas">Quantas pessoas <span class="field__opt">(opcional)</span></label>
@@ -298,12 +295,6 @@
           <div class="field">
             <label for="f-detalhes">Sabor e detalhes <span class="field__opt">(opcional)</span></label>
             <textarea id="f-detalhes" name="detalhes" rows="3" maxlength="600" placeholder="Ex.: sabor, cores, tema da festa"></textarea>
-          </div>
-
-          <div class="field">
-            <label for="f-nome">Seu nome</label>
-            <input id="f-nome" name="nome" type="text" autocomplete="name" required maxlength="80" aria-describedby="f-nome-erro">
-            <p class="field__error" id="f-nome-erro" data-error-for="nome"></p>
           </div>
 
           <button class="btn btn--primary order-form__submit" type="submit">
