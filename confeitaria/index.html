@@ -36,9 +36,9 @@
   <script src="assets/js/main.js" defer></script>
 </head>
 <!--
-  CONTATO — preencha aqui (todos os botões de pedido usam estes dados):
+  CONTATO — preencha aqui:
     data-whatsapp   número com DDI e DDD, só dígitos (ex.: 55 61 9XXXX-XXXX → 5561900000000).
-                    Com ele, todo botão de pedido abre o WhatsApp com a mensagem já escrita.
+                    É o destino do formulário de pedido e do link "Chamar no WhatsApp".
     data-instagram  nome do perfil, sem @.
     data-endereco   endereço para retirada ou da loja (aparece no contato, com link para o mapa).
     data-horario    dias e horários de atendimento.
@@ -87,7 +87,7 @@
         </ul>
       </nav>
 
-      <a class="btn btn--outline btn--small site-header__cta" href="#contato" data-whatsapp-link>Encomendar</a>
+      <a class="btn btn--outline btn--small site-header__cta" href="#contato">Encomendar</a>
 
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
         <span class="menu-toggle__label">Menu</span>
@@ -106,9 +106,9 @@
       </ol>
     </nav>
     <div class="menu__foot">
-      <a class="btn btn--primary" href="#contato" data-whatsapp-link>
-        <svg class="icon icon--lead" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-        Encomendar pelo WhatsApp
+      <a class="btn btn--primary" href="#contato">
+        Fazer meu pedido
+        <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
       </a>
     </div>
   </div>
@@ -147,7 +147,7 @@
         </h1>
         <p class="hero__lead" data-hero-in style="--i:3">Escolha o seu bolo, chame no WhatsApp e reserve a data do seu pedido.</p>
         <div class="hero__actions" data-hero-in style="--i:4">
-          <a class="btn btn--primary" href="#contato" data-whatsapp-link>
+          <a class="btn btn--primary" href="#contato">
             Encomendar agora
             <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
           </a>
@@ -163,9 +163,11 @@
     </section>
 
     <!--
-      Produtos. Cada <li class="offer"> é um item do cardápio: nome, uma frase e o botão que abre o
-      WhatsApp com a mensagem de data-whatsapp-text. Para incluir um item (Salgados, por exemplo),
-      copie um <li>; para tirar, apague. Confirme se as três categorias abaixo são as da confeitaria.
+      Produtos. Cada <li class="offer"> é um item do cardápio: nome, uma frase e o botão que leva ao
+      formulário de pedido já com o item escolhido (data-order, igual a uma opção do formulário).
+      Para incluir um item (Salgados, por exemplo), copie um <li> e acrescente a mesma opção no
+      <select name="produto">; para tirar, apague os dois. Confirme se as categorias são as da
+      confeitaria.
     -->
     <section class="section products" id="produtos" aria-labelledby="produtos-title">
       <div class="container products__grid">
@@ -182,7 +184,8 @@
           <header class="section-head">
             <p class="label" data-reveal>Produtos</p>
             <h2 class="h2" id="produtos-title" data-reveal>O que você pode encomendar</h2>
-            <p class="lead" data-reveal>Toque no que você quer e a mensagem do pedido já vai pronta para o WhatsApp.</p>
+            <!-- Apresentação da confeitaria: troque por um texto real (quem faz, onde fica) quando houver. -->
+            <p class="lead" data-reveal>A Confeitaria Águas Lindas trabalha sob encomenda: cada bolo e cada doce é combinado com você — sabor, decoração, quantidade e data.</p>
           </header>
 
           <ul class="offers">
@@ -191,8 +194,7 @@
                 <h3 class="offer__name" id="oferta-bolos">Bolos</h3>
                 <p>Para aniversário, casamento ou aquele dia que pede um bolo bonito. Você escolhe o sabor e a decoração.</p>
               </div>
-              <a class="btn btn--outline offer__cta" href="#contato" data-whatsapp-link
-                data-whatsapp-text="Olá! Quero encomendar um bolo." aria-describedby="oferta-bolos">
+              <a class="btn btn--outline offer__cta" href="#contato" data-order="Bolo" aria-describedby="oferta-bolos">
                 Pedir bolo
                 <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
               </a>
@@ -202,8 +204,7 @@
                 <h3 class="offer__name" id="oferta-doces">Doces</h3>
                 <p>Docinhos para festa, mesa de sobremesas e lembrancinhas.</p>
               </div>
-              <a class="btn btn--outline offer__cta" href="#contato" data-whatsapp-link
-                data-whatsapp-text="Olá! Quero encomendar doces." aria-describedby="oferta-doces">
+              <a class="btn btn--outline offer__cta" href="#contato" data-order="Doces" aria-describedby="oferta-doces">
                 Pedir doces
                 <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
               </a>
@@ -213,8 +214,7 @@
                 <h3 class="offer__name" id="oferta-especiais">Encomendas especiais</h3>
                 <p>Tem uma ideia para a sua data? Conte como você imagina e o pedido é montado com você.</p>
               </div>
-              <a class="btn btn--outline offer__cta" href="#contato" data-whatsapp-link
-                data-whatsapp-text="Olá! Tenho uma ideia de encomenda especial e queria um orçamento." aria-describedby="oferta-especiais">
+              <a class="btn btn--outline offer__cta" href="#contato" data-order="Encomenda especial" aria-describedby="oferta-especiais">
                 Pedir orçamento
                 <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
               </a>
@@ -236,44 +236,91 @@
           <li class="step" data-reveal>
             <span class="step__num" aria-hidden="true">1</span>
             <h3 class="step__title">Escolha</h3>
-            <p>Bolo, doces ou uma encomenda especial para a sua data.</p>
+            <p>Bolo, doces ou uma encomenda especial.</p>
           </li>
           <li class="step" data-reveal>
             <span class="step__num" aria-hidden="true">2</span>
-            <h3 class="step__title">Chame no WhatsApp</h3>
-            <p>Diga a data, o sabor e para quantas pessoas.</p>
+            <h3 class="step__title">Preencha o pedido</h3>
+            <p>Data, quantidade de pessoas e o que você imagina.</p>
           </li>
           <li class="step" data-reveal>
             <span class="step__num" aria-hidden="true">3</span>
-            <h3 class="step__title">Garanta a sua data</h3>
-            <p>Combine os detalhes com a confeitaria e o pedido fica reservado.</p>
+            <h3 class="step__title">Envie e confirme</h3>
+            <p>A mensagem segue pronta para o WhatsApp da confeitaria, que confirma os detalhes com você.</p>
           </li>
         </ol>
 
-        <a class="btn btn--primary steps__cta" href="#contato" data-whatsapp-link data-reveal>
-          <svg class="icon icon--lead" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-          Começar meu pedido
+        <a class="btn btn--primary steps__cta" href="#contato" data-reveal>
+          Fazer meu pedido
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
         </a>
       </div>
     </section>
 
-    <!-- Contato: os dados vêm do <body> (ver comentário no topo) e só aparecem se preenchidos -->
-    <section class="section cta-band" id="contato" aria-labelledby="contato-title">
-      <div class="container cta-band__inner">
-        <div class="cta-band__text">
-          <h2 class="h2" id="contato-title" data-reveal>Peça agora pelo WhatsApp</h2>
-          <p class="lead" data-reveal>Quanto antes você chamar, mais fácil garantir o dia da sua festa.</p>
-          <a class="btn btn--cream" href="#contato" data-whatsapp-link data-reveal>
-            <svg class="icon icon--lead" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-            Chamar no WhatsApp
-          </a>
+    <!--
+      Pedido e contato. O formulário monta a mensagem e abre o WhatsApp do número em data-whatsapp
+      (no <body>); nada é enviado sem que a pessoa confirme o envio no próprio WhatsApp. Os canais
+      e o link direto só aparecem quando preenchidos.
+    -->
+    <section class="section order" id="contato" aria-labelledby="contato-title">
+      <div class="container order__inner">
+        <div class="order__intro">
+          <p class="label" data-reveal>Pedido</p>
+          <h2 class="h2" id="contato-title" data-reveal>Faça o seu pedido</h2>
+          <p class="lead" data-reveal>Preencha os dados e envie: a mensagem chega pronta no WhatsApp da confeitaria.</p>
+          <dl class="channels" data-channels hidden>
+            <div data-channel="whatsapp" hidden><dt>WhatsApp</dt><dd></dd></div>
+            <div data-channel="instagram" hidden><dt>Instagram</dt><dd></dd></div>
+            <div data-channel="endereco" hidden><dt>Endereço</dt><dd></dd></div>
+            <div data-channel="horario" hidden><dt>Atendimento</dt><dd></dd></div>
+          </dl>
+          <a class="link-arrow link-arrow--light" href="#contato" data-whatsapp-link hidden>Prefere conversar? Chamar no WhatsApp</a>
         </div>
-        <dl class="channels" data-channels hidden>
-          <div data-channel="whatsapp" hidden><dt>WhatsApp</dt><dd></dd></div>
-          <div data-channel="instagram" hidden><dt>Instagram</dt><dd></dd></div>
-          <div data-channel="endereco" hidden><dt>Endereço</dt><dd></dd></div>
-          <div data-channel="horario" hidden><dt>Atendimento</dt><dd></dd></div>
-        </dl>
+
+        <form class="order-form" id="pedido" data-order-form novalidate data-reveal>
+          <div class="field">
+            <label for="f-produto">O que você quer encomendar</label>
+            <div class="select">
+              <select id="f-produto" name="produto" required aria-describedby="f-produto-erro">
+                <option value="">Escolha uma opção</option>
+                <option value="Bolo">Bolo</option>
+                <option value="Doces">Doces</option>
+                <option value="Encomenda especial">Encomenda especial</option>
+              </select>
+            </div>
+            <p class="field__error" id="f-produto-erro" data-error-for="produto"></p>
+          </div>
+
+          <div class="order-form__row">
+            <div class="field">
+              <label for="f-data">Para quando</label>
+              <input id="f-data" name="data" type="date" required aria-describedby="f-data-erro">
+              <p class="field__error" id="f-data-erro" data-error-for="data"></p>
+            </div>
+            <div class="field">
+              <label for="f-pessoas">Quantas pessoas <span class="field__opt">(opcional)</span></label>
+              <input id="f-pessoas" name="pessoas" type="number" min="1" max="2000" step="1" inputmode="numeric" aria-describedby="f-pessoas-erro">
+              <p class="field__error" id="f-pessoas-erro" data-error-for="pessoas"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-detalhes">Sabor e detalhes <span class="field__opt">(opcional)</span></label>
+            <textarea id="f-detalhes" name="detalhes" rows="3" maxlength="600" placeholder="Ex.: sabor, cores, tema da festa"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="f-nome">Seu nome</label>
+            <input id="f-nome" name="nome" type="text" autocomplete="name" required maxlength="80" aria-describedby="f-nome-erro">
+            <p class="field__error" id="f-nome-erro" data-error-for="nome"></p>
+          </div>
+
+          <button class="btn btn--primary order-form__submit" type="submit">
+            <svg class="icon icon--lead" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            Enviar pelo WhatsApp
+          </button>
+          <p class="order-form__status" role="status" aria-live="polite" data-order-status></p>
+        </form>
       </div>
     </section>
   </main>
@@ -296,7 +343,7 @@
       <a class="link-arrow link-arrow--up site-footer__top" href="#inicio">Voltar ao início</a>
       <p class="site-footer__legal">
         <span>© <span data-year>2026</span> Confeitaria Águas Lindas</span>
-        <span>Bolos e doces sob encomenda</span>
+        <span class="site-footer__contact" data-footer-contact hidden></span>
       </p>
     </div>
   </footer>

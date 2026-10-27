@@ -1,8 +1,8 @@
 # Site — Confeitaria Águas Lindas
 
-Página única da confeitaria, feita para levar o visitante ao pedido: abertura com o vídeo aprovado, o que dá para encomendar, como pedir em 3 passos e uma faixa final de pedido. Todos os botões de pedido abrem o WhatsApp com a mensagem já escrita. HTML, CSS e JavaScript sem dependências nem etapa de build — a mesma base do site de relógios na raiz deste repositório.
+Página única da confeitaria, feita para levar o visitante ao pedido: abertura com o vídeo aprovado, o que dá para encomendar, como pedir em 3 passos e o formulário de pedido, que monta a mensagem e abre o WhatsApp da confeitaria. HTML, CSS e JavaScript sem dependências nem etapa de build — a mesma base do site de relógios na raiz deste repositório.
 
-> **Para os botões funcionarem, falta o número do WhatsApp** (ver *Contato e WhatsApp*). Enquanto ele não for preenchido, os botões levam à faixa de pedido no fim da página.
+> **Para o formulário enviar pedidos, falta o número do WhatsApp** (ver *Contato e WhatsApp*). Sem ele, o formulário valida os dados e avisa que os pedidos ainda não estão ativos — não finge um envio.
 
 ## Abrir localmente
 
@@ -20,7 +20,7 @@ python3 -m http.server 8080
 index.html              página (conteúdo, metadados, configuração do contato no <body>)
 assets/css/main.css     tokens de cor e tipo, layout, componentes, movimento
 assets/js/main.js       cabeçalho, menu, entradas, vídeo da abertura, links de pedido e contato
-assets/fonts/           EB Garamond e Manrope (woff2 variáveis, licença OFL)
+assets/fonts/           EB Garamond e Manrope (woff2 variáveis, só o estilo normal, licença OFL)
 assets/media/           vídeo, imagens e logo derivados do vídeo aprovado
 tools/                  scripts que geraram a mídia a partir do vídeo aprovado
 ```
@@ -56,18 +56,30 @@ Tudo fica no `<body>` do `index.html` (há um comentário logo acima dele):
 
 | Atributo | O que faz |
 | --- | --- |
-| `data-whatsapp="5561900000000"` | DDI + DDD + número, só dígitos. Todos os botões de pedido (topo, cabeçalho, menu, produtos, passos e faixa final) passam a abrir o WhatsApp com a mensagem pronta, e o número aparece na faixa final. |
-| `data-instagram="perfil"` | Nome do perfil, sem @. Aparece na faixa final, com link. |
-| `data-endereco="Rua…, nº — bairro, cidade"` | Aparece na faixa final, com link para o mapa. |
-| `data-horario="Seg. a sáb., 9h às 18h"` | Aparece na faixa final. |
+| `data-whatsapp="5561900000000"` | DDI + DDD + número, só dígitos. É o destino do formulário de pedido; também faz aparecer o número e o link "Prefere conversar? Chamar no WhatsApp" na seção de pedido, e o WhatsApp no rodapé. |
+| `data-instagram="perfil"` | Nome do perfil, sem @. Aparece na seção de pedido e no rodapé, com link. |
+| `data-endereco="Rua…, nº — bairro, cidade"` | Aparece na seção de pedido, com link para o mapa. |
+| `data-horario="Seg. a sáb., 9h às 18h"` | Aparece na seção de pedido. |
 
-Campo vazio não aparece. Sem nenhum canal preenchido, a faixa final mostra só o convite e o botão, centralizados.
+Campo vazio não aparece em lugar nenhum.
+
+### Formulário de pedido
+
+Campos: o que encomendar (obrigatório), para quando (obrigatório, a partir de hoje), quantas pessoas (opcional), sabor e detalhes (opcional) e nome (obrigatório). Os opcionais são marcados como tal.
+
+- Erros em português ao lado de cada campo, com aviso geral e foco no primeiro campo a corrigir; os erros somem conforme os campos são corrigidos.
+- Com o número configurado, o envio abre o WhatsApp da confeitaria com a mensagem montada — produto, data no formato dd/mm/aaaa, pessoas, detalhes e nome — e a página diz: "Abrimos o WhatsApp com o seu pedido. Confira e toque em enviar para a confeitaria receber." O pedido só chega quando a pessoa envia no WhatsApp; a página não anuncia nada além disso.
+- Sem o número, nada é aberto: a página avisa que os pedidos ainda não estão ativos e o console registra o que falta configurar.
+- Os botões de cada produto levam ao formulário com o item já escolhido.
+- Campos com 16 px de texto, para o iPhone não aproximar a tela ao tocar; data com o calendário nativo do aparelho.
 
 ### Produtos
 
-Os itens ficam na lista `<ul class="offers">`: **Bolos**, **Doces** e **Encomendas especiais** (categorias do briefing; Salgados ficou de fora por não aparecer no vídeo). Cada `<li class="offer">` tem o nome, uma frase e um botão com a mensagem própria em `data-whatsapp-text` — "Olá! Quero encomendar um bolo.", por exemplo. Confirme se as categorias e as frases correspondem ao que a confeitaria faz; para incluir um item, copie um `<li>`, para tirar, apague.
+Os itens ficam na lista `<ul class="offers">`: **Bolos**, **Doces** e **Encomendas especiais** (categorias do briefing; Salgados ficou de fora por não aparecer no vídeo). Cada `<li class="offer">` tem o nome, uma frase e um botão com `data-order`, que leva ao formulário com aquele item escolhido. Para incluir um item, copie um `<li>` e acrescente a mesma opção no `<select name="produto">`; para tirar, apague os dois. Confirme se as categorias e as frases correspondem ao que a confeitaria faz.
 
-A foto ao lado da lista (só em telas largas — no celular o mesmo bolo acabou de aparecer no vídeo) é o bolo do vídeo, `assets/media/bolo.*`. Com fotografias reais dos produtos, ela pode ser trocada mantendo o nome dos arquivos (vertical 4:5, de preferência com 1600 px de largura ou mais).
+A frase de apresentação da confeitaria fica no início da seção de produtos (há um comentário marcando o lugar): troque-a por um texto real — quem faz, onde fica — quando houver.
+
+A foto ao lado da lista aparece a partir de 1200 px de largura (no celular e no tablet o mesmo bolo acabou de aparecer no vídeo) e nunca passa de ~1,15× o tamanho do arquivo, para não esticar; em telas muito largas, foto e lista ficam juntas no centro. Ela é o bolo do vídeo, `assets/media/bolo.*` (456 × 570 px). Com fotografias reais dos produtos, troque mantendo o nome dos arquivos (vertical 4:5, de preferência com 1600 px de largura ou mais) e aumente o limite em `.products__grid`.
 
 ### Logo
 
@@ -87,7 +99,7 @@ Para regenerar a mídia a partir do vídeo: `tools/preparar_midia.sh caminho/do/
 ## Antes de publicar
 
 - [ ] Preencher `data-whatsapp` (e, se houver, Instagram, endereço e horário) no `<body>`.
-- [ ] Confirmar as categorias e as frases dos produtos.
+- [ ] Confirmar as categorias e as frases dos produtos e a frase de apresentação.
 - [ ] Trocar a logo e o favicon pelos arquivos originais.
 - [ ] Trocar `og:image` por um endereço absoluto (`https://…/assets/media/compartilhamento.jpg`) e acrescentar `<link rel="canonical">`.
 - [ ] Acrescentar dados estruturados (`Bakery`, com nome, endereço, telefone e horário reais).

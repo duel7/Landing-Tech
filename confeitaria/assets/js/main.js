@@ -1,7 +1,7 @@
 /*
   Interações do site. Sem dependências: tudo funciona sem este arquivo
   (o conteúdo aparece completo e a abertura mostra a imagem); com ele,
-  entram o vídeo, o movimento, o menu e os links de pedido configurados.
+  entram o vídeo, o movimento, o menu, o formulário de pedido e os contatos.
 */
 (function () {
   'use strict';
@@ -257,17 +257,19 @@
   }
 
   /* ----------------------------------------------------------------------
-     Pedido e contato: dados preenchidos no <body> (ver comentário no HTML)
-     Todo [data-whatsapp-link] abre a conversa com a mensagem do próprio
-     botão (data-whatsapp-text) ou a mensagem padrão. Os canais vazios não
-     aparecem.
+     Contato: dados preenchidos no <body> (ver comentário no HTML)
+     Os canais vazios não aparecem, nem na seção de pedido nem no rodapé.
      ---------------------------------------------------------------------- */
   var body = document.body;
   var phone = (body.getAttribute('data-whatsapp') || '').replace(/\D/g, '');
+  var hasPhone = phone.length >= 12;
   var insta = (body.getAttribute('data-instagram') || '').replace(/^@/, '').trim();
   var address = (body.getAttribute('data-endereco') || '').trim();
   var hours = (body.getAttribute('data-horario') || '').trim();
-  var defaultMessage = 'Olá! Gostaria de fazer uma encomenda.';
+
+  function waUrl(text) {
+    return 'https://wa.me/' + phone + (text ? '?text=' + encodeURIComponent(text) : '');
+  }
 
   function outLink(href, text) {
     var a = document.createElement('a');
@@ -278,33 +280,153 @@
     return a;
   }
 
-  function showChannel(name, content) {
+  var footerContact = $('[data-footer-contact]');
+  function showChannel(name, href, text) {
     var row = $('[data-channel="' + name + '"]');
-    if (!row) return;
     var dd = $('dd', row);
-    if (typeof content === 'string') dd.textContent = content;
-    else dd.appendChild(content);
+    dd.appendChild(href ? outLink(href, text) : document.createTextNode(text));
     row.hidden = false;
     $('[data-channels]').hidden = false;
+    // no rodapé, só os canais de conversa
+    if (name === 'whatsapp' || name === 'instagram') {
+      if (footerContact.childNodes.length) footerContact.appendChild(document.createTextNode(' · '));
+      footerContact.appendChild(outLink(href, (name === 'whatsapp' ? 'WhatsApp ' : 'Instagram ') + text));
+      footerContact.hidden = false;
+    }
   }
 
-  if (phone.length >= 12) {
-    $$('[data-whatsapp-link]').forEach(function (a) {
-      var text = a.getAttribute('data-whatsapp-text') || defaultMessage;
-      a.href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(text);
-      a.target = '_blank';
-      a.rel = 'noopener';
-    });
+  if (hasPhone) {
     // 55 + DDD + número → (DDD) número
     var local = phone.slice(2);
     var pretty = '(' + local.slice(0, 2) + ') ' + local.slice(2, local.length - 4) + '-' + local.slice(-4);
-    showChannel('whatsapp', outLink('https://wa.me/' + phone + '?text=' + encodeURIComponent(defaultMessage), pretty));
-  } else if (window.console) {
-    console.info('WhatsApp ainda não configurado: preencha data-whatsapp no <body> (ver README).');
+    var hello = 'Olá! Gostaria de fazer uma encomenda.';
+    showChannel('whatsapp', waUrl(hello), pretty);
+    $$('[data-whatsapp-link]').forEach(function (a) {
+      a.href = waUrl(hello);
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.hidden = false;
+    });
   }
-  if (insta) showChannel('instagram', outLink('https://www.instagram.com/' + encodeURIComponent(insta) + '/', '@' + insta));
-  if (address) showChannel('endereco', outLink('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address), address));
-  if (hours) showChannel('horario', hours);
+  if (insta) showChannel('instagram', 'https://www.instagram.com/' + encodeURIComponent(insta) + '/', '@' + insta);
+  if (address) showChannel('endereco', 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address), address);
+  if (hours) showChannel('horario', null, hours);
+
+  /* ----------------------------------------------------------------------
+     Formulário de pedido
+     Valida os campos, monta a mensagem e abre o WhatsApp da confeitaria. O
+     pedido só é enviado quando a pessoa confirma no próprio WhatsApp — a
+     página diz exatamente isso, sem anunciar um envio que não aconteceu.
+     ---------------------------------------------------------------------- */
+  var form = $('[data-order-form]');
+  if (form) {
+    var statusEl = $('[data-order-status]', form);
+    var submitBtn = $('.order-form__submit', form);
+    var productSelect = form.elements.produto;
+    var dateInput = form.elements.data;
+    var submitted = false;
+
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var now = new Date();
+    var todayIso = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+    dateInput.min = todayIso;
+
+    var rules = {
+      produto: function (v) { return v ? '' : 'Escolha o que você quer encomendar.'; },
+      data: function (v) {
+        if (!v) return 'Informe para quando é o pedido.';
+        return v < todayIso ? 'Escolha uma data a partir de hoje.' : '';
+      },
+      pessoas: function (v, el) {
+        if (!v && !el.validity.badInput) return '';
+        var n = Number(v);
+        return el.validity.badInput || !Number.isInteger(n) || n < 1 || n > 2000 ? 'Informe um número de pessoas válido.' : '';
+      },
+      nome: function (v) { return v.trim().length >= 2 ? '' : 'Informe seu nome.'; }
+    };
+
+    var showError = function (name, msg) {
+      var el = form.elements[name];
+      el.closest('.field').classList.toggle('is-invalid', !!msg);
+      el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      $('[data-error-for="' + name + '"]', form).textContent = msg;
+    };
+
+    var validate = function (name) {
+      var el = form.elements[name];
+      var msg = rules[name](el.value, el);
+      showError(name, msg);
+      return msg;
+    };
+
+    Object.keys(rules).forEach(function (name) {
+      var el = form.elements[name];
+      el.addEventListener('blur', function () { if (submitted || el.value) validate(name); });
+      el.addEventListener('input', function () {
+        if (el.closest('.field').classList.contains('is-invalid')) validate(name);
+      });
+      el.addEventListener('change', function () { if (submitted) validate(name); });
+    });
+
+    var setStatus = function (kind, text) {
+      statusEl.className = 'order-form__status' + (kind ? ' is-' + kind : '');
+      statusEl.textContent = text;
+    };
+
+    var buildMessage = function () {
+      var d = dateInput.value.split('-');
+      var lines = [
+        'Olá! Gostaria de fazer uma encomenda.',
+        '',
+        'Pedido: ' + productSelect.value,
+        'Para: ' + d[2] + '/' + d[1] + '/' + d[0]
+      ];
+      if (form.elements.pessoas.value) lines.push('Pessoas: ' + Number(form.elements.pessoas.value));
+      var details = form.elements.detalhes.value.trim();
+      if (details) lines.push('Detalhes: ' + details);
+      lines.push('Nome: ' + form.elements.nome.value.trim());
+      return lines.join('\n');
+    };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (submitBtn.getAttribute('aria-disabled') === 'true') return;
+      submitted = true;
+      var firstInvalid = null;
+      Object.keys(rules).forEach(function (name) {
+        if (validate(name) && !firstInvalid) firstInvalid = form.elements[name];
+      });
+      if (firstInvalid) {
+        setStatus('error', 'Confira os campos indicados.');
+        firstInvalid.focus();
+        return;
+      }
+
+      if (!hasPhone) {
+        setStatus('error', 'Os pedidos pelo WhatsApp ainda não estão ativos neste site.');
+        if (window.console) console.warn('Formulário de pedido sem destino: preencha data-whatsapp no <body> (ver README).');
+        return;
+      }
+
+      var url = waUrl(buildMessage());
+      // sem 'noopener' na chamada: com ele, window.open sempre devolve null
+      var win = window.open(url, '_blank');
+      if (win) win.opener = null;
+      else window.location.href = url; // bloqueador de janelas: abre na própria página
+      setStatus('success', 'Abrimos o WhatsApp com o seu pedido. Confira e toque em enviar para a confeitaria receber.');
+      submitBtn.setAttribute('aria-disabled', 'true');
+      setTimeout(function () { submitBtn.removeAttribute('aria-disabled'); }, 2000);
+    });
+
+    // botões dos produtos: chegam ao formulário com o item já escolhido
+    $$('[data-order]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        productSelect.value = a.getAttribute('data-order');
+        if (submitted) validate('produto');
+        productSelect.focus({ preventScroll: true });
+      });
+    });
+  }
 
   /* ----------------------------------------------------------------------
      Ano no rodapé
