@@ -208,8 +208,12 @@
       if (!video.ended) setState('paused');
     });
     video.addEventListener('ended', function () { setState('ended'); });
-    // sem vídeo (arquivo ausente ou formato sem suporte), a imagem continua e o botão sai
+    // Sem vídeo (arquivos ausentes ou formato sem suporte), a imagem continua e o botão sai.
+    // Ao ler a página, o navegador já testa os <source> ainda sem endereço e dispara erros neles;
+    // por isso só contam os erros depois do carregamento, e só quando nenhuma fonte serviu.
     video.addEventListener('error', function () {
+      if (!videoLoaded) return;
+      if (!video.error && video.networkState !== video.NETWORK_NO_SOURCE) return;
       toggle.hidden = true;
       video.classList.remove('is-playing');
     }, true);
