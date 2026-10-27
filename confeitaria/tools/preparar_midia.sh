@@ -57,7 +57,7 @@ first = Image.open(frames[0])   # 1024 × 576: o vídeo começa aqui
 last = Image.open(frames[-1])   # composição final, onde o vídeo para
 save(first, "hero-inicio")
 save(last, "hero-final")
-save(last.crop((462, 3, 918, 573)), "sobre")   # 456 × 570 (4:5), o bolo no pedestal
+save(last.crop((462, 3, 918, 573)), "bolo")   # 456 × 570 (4:5), o bolo no pedestal
 last.crop((0, 20, 1024, 556)).convert("RGB").save(
     f"{out}/compartilhamento.jpg", quality=88, optimize=True, progressive=True)
 PY

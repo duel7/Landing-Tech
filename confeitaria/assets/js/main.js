@@ -1,7 +1,7 @@
 /*
   Interações do site. Sem dependências: tudo funciona sem este arquivo
   (o conteúdo aparece completo e a abertura mostra a imagem); com ele,
-  entram o vídeo, o movimento, o menu e os links de contato configurados.
+  entram o vídeo, o movimento, o menu e os links de pedido configurados.
 */
 (function () {
   'use strict';
@@ -257,49 +257,54 @@
   }
 
   /* ----------------------------------------------------------------------
-     Contato: WhatsApp e Instagram configurados em <section data-contact>
+     Pedido e contato: dados preenchidos no <body> (ver comentário no HTML)
+     Todo [data-whatsapp-link] abre a conversa com a mensagem do próprio
+     botão (data-whatsapp-text) ou a mensagem padrão. Os canais vazios não
+     aparecem.
      ---------------------------------------------------------------------- */
-  var contact = $('[data-contact]');
-  if (contact) {
-    var phone = (contact.getAttribute('data-whatsapp') || '').replace(/\D/g, '');
-    var message = contact.getAttribute('data-whatsapp-text') || '';
-    var insta = (contact.getAttribute('data-instagram') || '').replace(/^@/, '').trim();
+  var body = document.body;
+  var phone = (body.getAttribute('data-whatsapp') || '').replace(/\D/g, '');
+  var insta = (body.getAttribute('data-instagram') || '').replace(/^@/, '').trim();
+  var address = (body.getAttribute('data-endereco') || '').trim();
+  var hours = (body.getAttribute('data-horario') || '').trim();
+  var defaultMessage = 'Olá! Gostaria de fazer uma encomenda.';
 
-    if (phone.length >= 12) {
-      var waUrl = 'https://wa.me/' + phone + (message ? '?text=' + encodeURIComponent(message) : '');
-      $$('[data-whatsapp-link]').forEach(function (a) {
-        a.href = waUrl;
-        a.target = '_blank';
-        a.rel = 'noopener';
-      });
-      // 55 + DDD + número → (DDD) número
-      var local = phone.slice(2);
-      var pretty = '(' + local.slice(0, 2) + ') ' + local.slice(2, local.length - 4) + '-' + local.slice(-4);
-      $$('[data-whatsapp-display]').forEach(function (dd) {
-        dd.textContent = '';
-        var link = document.createElement('a');
-        link.href = waUrl;
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.textContent = pretty;
-        dd.appendChild(link);
-      });
-    } else if (window.console) {
-      console.info('WhatsApp ainda não configurado: preencha data-whatsapp em <section data-contact> (ver README).');
-    }
-
-    if (insta) {
-      $$('[data-instagram-display]').forEach(function (dd) {
-        dd.textContent = '';
-        var link = document.createElement('a');
-        link.href = 'https://www.instagram.com/' + encodeURIComponent(insta) + '/';
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.textContent = '@' + insta;
-        dd.appendChild(link);
-      });
-    }
+  function outLink(href, text) {
+    var a = document.createElement('a');
+    a.href = href;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = text;
+    return a;
   }
+
+  function showChannel(name, content) {
+    var row = $('[data-channel="' + name + '"]');
+    if (!row) return;
+    var dd = $('dd', row);
+    if (typeof content === 'string') dd.textContent = content;
+    else dd.appendChild(content);
+    row.hidden = false;
+    $('[data-channels]').hidden = false;
+  }
+
+  if (phone.length >= 12) {
+    $$('[data-whatsapp-link]').forEach(function (a) {
+      var text = a.getAttribute('data-whatsapp-text') || defaultMessage;
+      a.href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(text);
+      a.target = '_blank';
+      a.rel = 'noopener';
+    });
+    // 55 + DDD + número → (DDD) número
+    var local = phone.slice(2);
+    var pretty = '(' + local.slice(0, 2) + ') ' + local.slice(2, local.length - 4) + '-' + local.slice(-4);
+    showChannel('whatsapp', outLink('https://wa.me/' + phone + '?text=' + encodeURIComponent(defaultMessage), pretty));
+  } else if (window.console) {
+    console.info('WhatsApp ainda não configurado: preencha data-whatsapp no <body> (ver README).');
+  }
+  if (insta) showChannel('instagram', outLink('https://www.instagram.com/' + encodeURIComponent(insta) + '/', '@' + insta));
+  if (address) showChannel('endereco', outLink('https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(address), address));
+  if (hours) showChannel('horario', hours);
 
   /* ----------------------------------------------------------------------
      Ano no rodapé

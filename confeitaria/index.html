@@ -3,20 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <!--
-    Conteúdo entre colchetes, como [Categoria], é provisório e deve ser substituído por
-    informações confirmadas. A lista completa está no README.
-  -->
-  <title>Confeitaria Águas Lindas · Doces momentos em cada pedacinho</title>
-  <meta name="description" content="Confeitaria Águas Lindas: doces momentos em cada pedacinho. Conheça os produtos e combine a sua encomenda diretamente com a confeitaria.">
+  <title>Confeitaria Águas Lindas · Bolos e doces sob encomenda</title>
+  <meta name="description" content="Bolos e doces sob encomenda na Confeitaria Águas Lindas. Escolha o seu e faça o pedido pelo WhatsApp.">
   <meta name="theme-color" content="#fff8f0">
   <meta name="color-scheme" content="light">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="Confeitaria Águas Lindas">
-  <meta property="og:title" content="Confeitaria Águas Lindas">
-  <meta property="og:description" content="Doces momentos em cada pedacinho. Conheça os produtos e faça a sua encomenda.">
+  <meta property="og:title" content="Confeitaria Águas Lindas · Bolos e doces sob encomenda">
+  <meta property="og:description" content="Escolha o seu bolo e faça o pedido pelo WhatsApp.">
   <!-- Ao publicar, troque pelo endereço absoluto da imagem (https://…/assets/media/compartilhamento.jpg). -->
   <meta property="og:image" content="assets/media/compartilhamento.jpg">
   <meta property="og:image:width" content="1024">
@@ -25,7 +21,7 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="assets/media/favicon.png" type="image/png">
-  <link rel="preload" href="assets/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/eb-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/main.css">
 
@@ -39,7 +35,16 @@
   </script>
   <script src="assets/js/main.js" defer></script>
 </head>
-<body>
+<!--
+  CONTATO — preencha aqui (todos os botões de pedido usam estes dados):
+    data-whatsapp   número com DDI e DDD, só dígitos (ex.: 55 61 9XXXX-XXXX → 5561900000000).
+                    Com ele, todo botão de pedido abre o WhatsApp com a mensagem já escrita.
+    data-instagram  nome do perfil, sem @.
+    data-endereco   endereço para retirada ou da loja (aparece no contato, com link para o mapa).
+    data-horario    dias e horários de atendimento.
+  Campos vazios simplesmente não aparecem no site.
+-->
+<body data-whatsapp="" data-instagram="" data-endereco="" data-horario="">
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <svg width="0" height="0" class="sprite" aria-hidden="true" focusable="false">
@@ -49,6 +54,9 @@
     <symbol id="i-heart" viewBox="0 0 12 11">
       <path d="M6 10.4 1.5 6A2.8 2.8 0 0 1 6 2.4 2.8 2.8 0 0 1 10.5 6Z" fill="currentColor"/>
     </symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24">
+      <path d="M12 2.5a9.4 9.4 0 0 0-8.1 14.2L2.6 21.4l4.8-1.3A9.4 9.4 0 1 0 12 2.5Zm0 17.1c-1.4 0-2.8-.4-4-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A7.7 7.7 0 1 1 12 19.6Zm4.3-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6.3 6.3 0 0 1-3.1-2.7c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3 2.7 2.7 0 0 0-.8 2c0 1.2.9 2.3 1 2.5.1.2 1.7 2.7 4.2 3.7 1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z" fill="currentColor"/>
+    </symbol>
     <symbol id="i-pause" viewBox="0 0 16 16">
       <path d="M5 3v10M11 3v10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
     </symbol>
@@ -57,12 +65,6 @@
     </symbol>
     <symbol id="i-replay" viewBox="0 0 16 16">
       <path d="M3 8a5 5 0 1 0 1.5-3.6M3.2 1.8v2.9h2.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </symbol>
-    <!-- arco com a borda recortada do pedestal do vídeo, usado nas molduras à espera de foto -->
-    <symbol id="i-arch" viewBox="0 0 120 150">
-      <path d="M12 146V62a48 48 0 0 1 96 0v84" fill="none" stroke="currentColor" stroke-width="1"/>
-      <path d="M4 146h112" fill="none" stroke="currentColor" stroke-width="1"/>
-      <path d="M22 62q4.75 5 9.5 0t9.5 0 9.5 0 9.5 0 9.5 0 9.5 0 9.5 0 9.5 0" fill="none" stroke="currentColor" stroke-width="1"/>
     </symbol>
   </svg>
 
@@ -80,12 +82,12 @@
         <ul>
           <li><a href="#inicio" aria-current="true">Início</a></li>
           <li><a href="#produtos">Produtos</a></li>
-          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="#como-pedir">Como pedir</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
       </nav>
 
-      <a class="btn btn--outline btn--small site-header__cta" href="#contato">Encomendar</a>
+      <a class="btn btn--outline btn--small site-header__cta" href="#contato" data-whatsapp-link>Encomendar</a>
 
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
         <span class="menu-toggle__label">Menu</span>
@@ -99,15 +101,14 @@
       <ol>
         <li style="--i:0"><a href="#inicio"><span class="menu__num" aria-hidden="true">01</span>Início</a></li>
         <li style="--i:1"><a href="#produtos"><span class="menu__num" aria-hidden="true">02</span>Produtos</a></li>
-        <li style="--i:2"><a href="#sobre"><span class="menu__num" aria-hidden="true">03</span>Sobre nós</a></li>
+        <li style="--i:2"><a href="#como-pedir"><span class="menu__num" aria-hidden="true">03</span>Como pedir</a></li>
         <li style="--i:3"><a href="#contato"><span class="menu__num" aria-hidden="true">04</span>Contato</a></li>
       </ol>
     </nav>
     <div class="menu__foot">
-      <p class="menu__tagline">Doces momentos em cada pedacinho.</p>
-      <a class="btn btn--primary" href="#contato">
-        Fazer uma encomenda
-        <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+      <a class="btn btn--primary" href="#contato" data-whatsapp-link>
+        <svg class="icon icon--lead" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+        Encomendar pelo WhatsApp
       </a>
     </div>
   </div>
@@ -138,16 +139,20 @@
       </div>
 
       <div class="hero__content">
-        <p class="hero__eyebrow" data-hero-in style="--i:0">Doces momentos<br> em cada pedacinho</p>
+        <p class="hero__eyebrow" data-hero-in style="--i:0">Bolos e doces sob encomenda</p>
         <span class="hero__rule" aria-hidden="true" data-hero-in style="--i:1"><svg><use href="#i-heart"/></svg></span>
         <h1 class="hero__title" id="hero-title">
           <span class="line" data-hero-in style="--i:1">Confeitaria</span>
           <span class="line" data-hero-in style="--i:2">Águas Lindas</span>
         </h1>
-        <a class="btn btn--primary hero__cta" href="#produtos" data-hero-in style="--i:3">
-          Ver produtos
-          <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
-        </a>
+        <p class="hero__lead" data-hero-in style="--i:3">Escolha o seu bolo, chame no WhatsApp e reserve a data do seu pedido.</p>
+        <div class="hero__actions" data-hero-in style="--i:4">
+          <a class="btn btn--primary" href="#contato" data-whatsapp-link>
+            Encomendar agora
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+          <a class="btn btn--light" href="#produtos">Ver produtos</a>
+        </div>
       </div>
 
       <button class="video-toggle" type="button" aria-label="Pausar animação" data-state="playing" data-video-toggle hidden>
@@ -157,155 +162,117 @@
       </button>
     </section>
 
-    <!-- Produtos -->
+    <!--
+      Produtos. Cada <li class="offer"> é um item do cardápio: nome, uma frase e o botão que abre o
+      WhatsApp com a mensagem de data-whatsapp-text. Para incluir um item (Salgados, por exemplo),
+      copie um <li>; para tirar, apague. Confirme se as três categorias abaixo são as da confeitaria.
+    -->
     <section class="section products" id="produtos" aria-labelledby="produtos-title">
-      <div class="container">
-        <header class="section-head section-head--split">
-          <p class="label" data-reveal>Produtos</p>
-          <h2 class="h2" id="produtos-title" data-reveal>Feitos para despertar <em>desejos</em></h2>
-          <p class="lead" data-reveal>Sabores especiais para tornar cada momento inesquecível.</p>
-        </header>
-
-        <!--
-          Catálogo: cada <li class="product"> é uma peça. Para publicar uma, troque os textos entre
-          colchetes e substitua a <div class="product__media slot"> pela fotografia:
-
-            <figure class="product__media">
-              <picture>
-                <source srcset="assets/media/produtos/nome.avif" type="image/avif">
-                <img src="assets/media/produtos/nome.jpg" width="1600" height="2000" alt="Descrição do que aparece na foto" loading="lazy" decoding="async">
-              </picture>
-            </figure>
-
-          As classes product--a, --b, --c e --d definem posição e proporção (5:4, 4:5, 4:5 e 1:1).
-          Para ter menos peças, apague um <li>; para mais, repita o padrão (ver README).
-        -->
-        <ul class="products__grid">
-          <li class="product product--a">
-            <div class="product__media slot" data-reveal-media>
-              <div class="slot__inner">
-                <svg class="slot__arch" viewBox="0 0 120 150" aria-hidden="true"><use href="#i-arch"/></svg>
-              </div>
-              <p class="slot__note"><span>Fotografia a fornecer</span>Horizontal 5:4 · mín. 2000 px de largura</p>
-            </div>
-            <div class="product__body" data-reveal>
-              <span class="product__num" aria-hidden="true">01</span>
-              <h3 class="product__name" id="produto-1"><span class="ph">[Categoria ou produto]</span></h3>
-              <p class="product__desc"><span class="ph">[Descrição curta, apenas com o que for confirmado: sabores, tamanhos ou ocasiões.]</span></p>
-              <a class="link-arrow" href="#contato" aria-describedby="produto-1">Encomendar</a>
-            </div>
-          </li>
-          <li class="product product--b">
-            <div class="product__media slot" data-reveal-media>
-              <div class="slot__inner">
-                <svg class="slot__arch" viewBox="0 0 120 150" aria-hidden="true"><use href="#i-arch"/></svg>
-              </div>
-              <p class="slot__note"><span>Fotografia a fornecer</span>Vertical 4:5 · mín. 1600 px de largura</p>
-            </div>
-            <div class="product__body" data-reveal>
-              <span class="product__num" aria-hidden="true">02</span>
-              <h3 class="product__name" id="produto-2"><span class="ph">[Categoria ou produto]</span></h3>
-              <p class="product__desc"><span class="ph">[Descrição curta.]</span></p>
-              <a class="link-arrow" href="#contato" aria-describedby="produto-2">Encomendar</a>
-            </div>
-          </li>
-          <li class="product product--c">
-            <div class="product__media slot" data-reveal-media>
-              <div class="slot__inner">
-                <svg class="slot__arch" viewBox="0 0 120 150" aria-hidden="true"><use href="#i-arch"/></svg>
-              </div>
-              <p class="slot__note"><span>Fotografia a fornecer</span>Vertical 4:5 · mín. 1600 px de largura</p>
-            </div>
-            <div class="product__body" data-reveal>
-              <span class="product__num" aria-hidden="true">03</span>
-              <h3 class="product__name" id="produto-3"><span class="ph">[Categoria ou produto]</span></h3>
-              <p class="product__desc"><span class="ph">[Descrição curta.]</span></p>
-              <a class="link-arrow" href="#contato" aria-describedby="produto-3">Encomendar</a>
-            </div>
-          </li>
-          <li class="product product--d">
-            <div class="product__media slot" data-reveal-media>
-              <div class="slot__inner">
-                <svg class="slot__arch" viewBox="0 0 120 150" aria-hidden="true"><use href="#i-arch"/></svg>
-              </div>
-              <p class="slot__note"><span>Fotografia a fornecer</span>Quadrada 1:1 · mín. 1800 px de lado</p>
-            </div>
-            <div class="product__body" data-reveal>
-              <span class="product__num" aria-hidden="true">04</span>
-              <h3 class="product__name" id="produto-4"><span class="ph">[Categoria ou produto]</span></h3>
-              <p class="product__desc"><span class="ph">[Descrição curta.]</span></p>
-              <a class="link-arrow" href="#contato" aria-describedby="produto-4">Encomendar</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Sobre -->
-    <section class="section about" id="sobre" aria-labelledby="sobre-title">
-      <div class="container about__grid">
-        <figure class="about__figure">
-          <div class="arch" data-reveal-media>
-            <picture>
-              <source srcset="assets/media/sobre.avif" type="image/avif">
-              <source srcset="assets/media/sobre.webp" type="image/webp">
-              <img src="assets/media/sobre.jpg" width="456" height="570" loading="lazy" decoding="async"
-                alt="Detalhe do bolo: cobertura de chocolate escorrendo pela lateral, morangos e rosetas de chantili no topo.">
-            </picture>
-          </div>
+      <div class="container products__grid">
+        <figure class="products__figure" data-reveal-media>
+          <picture>
+            <source srcset="assets/media/bolo.avif" type="image/avif">
+            <source srcset="assets/media/bolo.webp" type="image/webp">
+            <img src="assets/media/bolo.jpg" width="456" height="570" loading="lazy" decoding="async"
+              alt="Bolo com cobertura de chocolate escorrendo pela lateral, morangos e rosetas de chantili no topo, sobre um pedestal rosa.">
+          </picture>
         </figure>
 
-        <div class="about__text">
-          <p class="label" data-reveal>Sobre nós</p>
-          <h2 class="h2" id="sobre-title" data-reveal>Feito com carinho, pensado em cada detalhe.</h2>
-          <p class="about__lead" data-reveal>Cada encomenda é preparada para o momento de quem vai recebê-la — do sabor escolhido ao último acabamento.</p>
-          <p data-reveal><span class="ph">[Espaço para a história da confeitaria: quem faz os doces, desde quando e onde. Uma ou duas frases, apenas com informações confirmadas.]</span></p>
-          <a class="link-arrow" href="#contato" data-reveal>Fazer uma encomenda</a>
+        <div class="products__body">
+          <header class="section-head">
+            <p class="label" data-reveal>Produtos</p>
+            <h2 class="h2" id="produtos-title" data-reveal>O que você pode encomendar</h2>
+            <p class="lead" data-reveal>Toque no que você quer e a mensagem do pedido já vai pronta para o WhatsApp.</p>
+          </header>
+
+          <ul class="offers">
+            <li class="offer" data-reveal>
+              <div class="offer__text">
+                <h3 class="offer__name" id="oferta-bolos">Bolos</h3>
+                <p>Para aniversário, casamento ou aquele dia que pede um bolo bonito. Você escolhe o sabor e a decoração.</p>
+              </div>
+              <a class="btn btn--outline offer__cta" href="#contato" data-whatsapp-link
+                data-whatsapp-text="Olá! Quero encomendar um bolo." aria-describedby="oferta-bolos">
+                Pedir bolo
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </a>
+            </li>
+            <li class="offer" data-reveal>
+              <div class="offer__text">
+                <h3 class="offer__name" id="oferta-doces">Doces</h3>
+                <p>Docinhos para festa, mesa de sobremesas e lembrancinhas.</p>
+              </div>
+              <a class="btn btn--outline offer__cta" href="#contato" data-whatsapp-link
+                data-whatsapp-text="Olá! Quero encomendar doces." aria-describedby="oferta-doces">
+                Pedir doces
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </a>
+            </li>
+            <li class="offer" data-reveal>
+              <div class="offer__text">
+                <h3 class="offer__name" id="oferta-especiais">Encomendas especiais</h3>
+                <p>Tem uma ideia para a sua data? Conte como você imagina e o pedido é montado com você.</p>
+              </div>
+              <a class="btn btn--outline offer__cta" href="#contato" data-whatsapp-link
+                data-whatsapp-text="Olá! Tenho uma ideia de encomenda especial e queria um orçamento." aria-describedby="oferta-especiais">
+                Pedir orçamento
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!--
-      Encomendas e contato. Configure aqui:
-        data-whatsapp         número com DDI e DDD, só dígitos (ex.: 55 + DDD + número). Ativa os
-                              botões de WhatsApp com a mensagem de data-whatsapp-text.
-        data-instagram        nome do perfil, sem @. Transforma o item Instagram em link.
-      Endereço e horário: edite o texto dos itens abaixo. Enquanto estiverem vazios, os campos
-      mostram os marcadores entre colchetes.
-    -->
-    <section class="section contact" id="contato" aria-labelledby="contato-title"
-      data-contact data-whatsapp="" data-whatsapp-text="Olá! Gostaria de fazer uma encomenda." data-instagram="">
-      <div class="container contact__grid">
-        <div class="contact__intro">
-          <p class="label" data-reveal>Encomendas e contato</p>
-          <h2 class="h2" id="contato-title" data-reveal>Vamos combinar a sua encomenda?</h2>
-          <p class="lead" data-reveal>Conte o que você imagina — a ocasião, o sabor, a data — e combine os detalhes diretamente com a confeitaria.</p>
-          <div class="contact__actions" data-reveal>
-            <a class="btn btn--primary" href="#canais" data-whatsapp-link>
-              Conversar pelo WhatsApp
-              <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
-            </a>
-            <a class="link-arrow" href="#produtos">Ver produtos</a>
-          </div>
-        </div>
+    <!-- Como pedir -->
+    <section class="section steps-section" id="como-pedir" aria-labelledby="como-pedir-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="label" data-reveal>Como pedir</p>
+          <h2 class="h2" id="como-pedir-title" data-reveal>Seu pedido em 3 passos</h2>
+        </header>
 
-        <dl class="contact__channels" id="canais" data-reveal>
-          <div>
-            <dt>WhatsApp</dt>
-            <dd data-whatsapp-display><span class="ph">[(DDD) número]</span></dd>
-          </div>
-          <div>
-            <dt>Instagram</dt>
-            <dd data-instagram-display><span class="ph">[@perfil]</span></dd>
-          </div>
-          <div>
-            <dt>Endereço</dt>
-            <dd><span class="ph">[Rua, número — bairro, cidade]</span></dd>
-          </div>
-          <div>
-            <dt>Atendimento</dt>
-            <dd><span class="ph">[Dias e horários]</span></dd>
-          </div>
+        <ol class="steps">
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">1</span>
+            <h3 class="step__title">Escolha</h3>
+            <p>Bolo, doces ou uma encomenda especial para a sua data.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">2</span>
+            <h3 class="step__title">Chame no WhatsApp</h3>
+            <p>Diga a data, o sabor e para quantas pessoas.</p>
+          </li>
+          <li class="step" data-reveal>
+            <span class="step__num" aria-hidden="true">3</span>
+            <h3 class="step__title">Garanta a sua data</h3>
+            <p>Combine os detalhes com a confeitaria e o pedido fica reservado.</p>
+          </li>
+        </ol>
+
+        <a class="btn btn--primary steps__cta" href="#contato" data-whatsapp-link data-reveal>
+          <svg class="icon icon--lead" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+          Começar meu pedido
+        </a>
+      </div>
+    </section>
+
+    <!-- Contato: os dados vêm do <body> (ver comentário no topo) e só aparecem se preenchidos -->
+    <section class="section cta-band" id="contato" aria-labelledby="contato-title">
+      <div class="container cta-band__inner">
+        <div class="cta-band__text">
+          <h2 class="h2" id="contato-title" data-reveal>Peça agora pelo WhatsApp</h2>
+          <p class="lead" data-reveal>Quanto antes você chamar, mais fácil garantir o dia da sua festa.</p>
+          <a class="btn btn--cream" href="#contato" data-whatsapp-link data-reveal>
+            <svg class="icon icon--lead" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            Chamar no WhatsApp
+          </a>
+        </div>
+        <dl class="channels" data-channels hidden>
+          <div data-channel="whatsapp" hidden><dt>WhatsApp</dt><dd></dd></div>
+          <div data-channel="instagram" hidden><dt>Instagram</dt><dd></dd></div>
+          <div data-channel="endereco" hidden><dt>Endereço</dt><dd></dd></div>
+          <div data-channel="horario" hidden><dt>Atendimento</dt><dd></dd></div>
         </dl>
       </div>
     </section>
@@ -322,14 +289,14 @@
       <nav class="site-footer__nav" aria-label="Rodapé">
         <ul>
           <li><a href="#produtos">Produtos</a></li>
-          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="#como-pedir">Como pedir</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
       </nav>
-      <a class="link-arrow link-arrow--up" href="#inicio">Voltar ao início</a>
+      <a class="link-arrow link-arrow--up site-footer__top" href="#inicio">Voltar ao início</a>
       <p class="site-footer__legal">
         <span>© <span data-year>2026</span> Confeitaria Águas Lindas</span>
-        <span>Doces momentos em cada pedacinho.</span>
+        <span>Bolos e doces sob encomenda</span>
       </p>
     </div>
   </footer>
