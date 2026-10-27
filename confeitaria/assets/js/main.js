@@ -345,6 +345,12 @@
       nome: function (v) { return v.trim().length >= 2 ? '' : 'Informe seu nome.'; }
     };
 
+    var setStatus = function (kind, text, fieldsError) {
+      statusEl.className = 'order-form__status' + (kind ? ' is-' + kind : '');
+      statusEl.textContent = text;
+      statusEl.toggleAttribute('data-fields-error', !!fieldsError);
+    };
+
     var showError = function (name, msg) {
       var el = form.elements[name];
       el.closest('.field').classList.toggle('is-invalid', !!msg);
@@ -356,6 +362,8 @@
       var el = form.elements[name];
       var msg = rules[name](el.value, el);
       showError(name, msg);
+      // corrigido o último campo, o aviso geral de erro sai também
+      if (!msg && statusEl.hasAttribute('data-fields-error') && !$('.field.is-invalid', form)) setStatus('', '');
       return msg;
     };
 
@@ -367,11 +375,6 @@
       });
       el.addEventListener('change', function () { if (submitted) validate(name); });
     });
-
-    var setStatus = function (kind, text) {
-      statusEl.className = 'order-form__status' + (kind ? ' is-' + kind : '');
-      statusEl.textContent = text;
-    };
 
     var buildMessage = function () {
       var d = dateInput.value.split('-');
@@ -397,7 +400,7 @@
         if (validate(name) && !firstInvalid) firstInvalid = form.elements[name];
       });
       if (firstInvalid) {
-        setStatus('error', 'Confira os campos indicados.');
+        setStatus('error', 'Confira os campos indicados.', true);
         firstInvalid.focus();
         return;
       }
