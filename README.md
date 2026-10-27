@@ -2,6 +2,8 @@
 
 Página única de apresentação de relógios masculinos: abertura com vídeo, coleção, um modelo em detalhe, a marca e um formulário de atendimento. HTML, CSS e JavaScript sem dependências nem etapa de build.
 
+> Este repositório também guarda o site da **Confeitaria Águas Lindas**, independente deste, na pasta [`confeitaria/`](confeitaria/README.md).
+
 > **Conteúdo provisório.** Tudo o que aparece entre colchetes — `[Nome da marca]`, `[Referência]`, `[Material da caixa]`… — é um marcador a substituir por informação confirmada. No site, esses trechos têm sublinhado pontilhado para nunca passarem por dados reais. Nenhuma especificação, história, preço ou dado de contato foi inventado.
 
 ## Abrir localmente
