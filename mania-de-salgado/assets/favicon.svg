@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Ícone provisório (silhueta de coxinha). Substituir pelo símbolo da marca. -->
+  <rect width="64" height="64" rx="16" fill="#fbf0f2"/>
+  <path d="M32 9c4 8 17.5 18.5 17.5 30.5C49.5 49.5 41.6 55 32 55s-17.5-5.5-17.5-15.5C14.5 27.5 28 17 32 9z" fill="#c6a15b"/>
+</svg>

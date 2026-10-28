@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+    Protótipo. Conteúdo entre colchetes, como [Bairro, Cidade], é provisório e deve ser
+    substituído por informação confirmada. A lista completa está no README.
+  -->
+  <title>Mania de Salgado · Salgados fritos e assados</title>
+  <meta name="description" content="Salgados fritos e assados, por unidade ou por cento para festas. Veja o cardápio, monte seu pedido e finalize pelo WhatsApp.">
+  <meta name="theme-color" content="#fffdfa">
+  <meta name="color-scheme" content="light">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Mania de Salgado">
+  <meta property="og:title" content="Mania de Salgado · Salgados fritos e assados">
+  <meta property="og:description" content="Por unidade ou por cento. Monte seu pedido e finalize pelo WhatsApp.">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/fraunces-soft-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <script>
+    // Ativa as entradas animadas somente com JavaScript. Se o script principal não
+    // carregar em alguns segundos, a classe sai e todo o conteúdo aparece sem animação.
+    document.documentElement.classList.add('js');
+    setTimeout(function () {
+      if (!window.__siteReady) document.documentElement.classList.remove('js');
+    }, 3000);
+  </script>
+  <script src="assets/js/loja.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <svg width="0" height="0" class="sprite" aria-hidden="true" focusable="false">
+    <!-- Ícones de interface (24 × 24) -->
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8.5h14l-1.1 11.5H6.1z M9 8.5V7a3 3 0 0 1 6 0v1.5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4.5 12h14M13.5 7l5 5-5 5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5.5v13M5.5 12h13"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5.5 12h13"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M12 4.5a7.5 7.5 0 0 0-6.6 11L4.5 19.5l4-1A7.5 7.5 0 1 0 12 4.5z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4.5 9h15M4.5 15h15"/></symbol>
+    <!-- Pictogramas dos salgados (48 × 48), desenhados para a marca -->
+    <symbol id="p-coxinha" viewBox="0 0 48 48"><path d="M24 7c3 6 13 14 13 23 0 7.5-5.8 12-13 12s-13-4.5-13-12c0-9 10-17 13-23z"/><path d="M18.5 29.5c.4-3 2-5.6 4.2-7.6"/></symbol>
+    <symbol id="p-kibe" viewBox="0 0 48 48"><path d="M5 24c7-10.5 31-10.5 38 0-7 10.5-31 10.5-38 0z"/><path d="M13 24c7-2.4 15-2.4 22 0"/></symbol>
+    <symbol id="p-bolinha" viewBox="0 0 48 48"><circle cx="24" cy="25" r="13"/><path d="M17.5 21a8 8 0 0 1 5-4.4"/></symbol>
+    <symbol id="p-risole" viewBox="0 0 48 48"><path d="M7.5 33c0-10.5 7.4-18 16.5-18s16.5 7.5 16.5 18z"/><path d="M12.5 31c0-7.6 5.2-12.3 11.5-12.3S35.5 23.4 35.5 31" stroke-dasharray="1.5 3.2"/></symbol>
+    <symbol id="p-enroladinho" viewBox="0 0 48 48"><rect x="6.5" y="17" width="35" height="14" rx="7"/><path d="M17 17.4l-3.6 13.2M25.4 17l-3.8 14M33.8 17.4l-3.6 13.2"/></symbol>
+    <symbol id="p-esfiha" viewBox="0 0 48 48"><path d="M24 9.5 40 37.5H8z"/><path d="M24 9.5v18.5M8 37.5l16-9.5M40 37.5l-16-9.5"/></symbol>
+    <symbol id="p-empada" viewBox="0 0 48 48"><path d="M10.5 23h27l-3.4 15.5H13.9z"/><path d="M10.5 23c0-6.2 6.2-10 13.5-10s13.5 3.8 13.5 10"/><path d="M21 17.5h6"/></symbol>
+    <symbol id="p-cento" viewBox="0 0 48 48"><circle cx="14" cy="14" r="2.6"/><circle cx="24" cy="14" r="2.6"/><circle cx="34" cy="14" r="2.6"/><circle cx="14" cy="24" r="2.6"/><circle cx="24" cy="24" r="2.6"/><circle cx="34" cy="24" r="2.6"/><circle cx="14" cy="34" r="2.6"/><circle cx="24" cy="34" r="2.6"/><circle cx="34" cy="34" r="2.6"/></symbol>
+  </svg>
+
+  <header class="site-header" data-header>
+    <div class="container site-header__inner">
+      <a class="logo" href="index.html" aria-label="Mania de Salgado, página inicial">
+        <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4c3.4 6.8 15 15.6 15 26 0 8.4-6.6 14-15 14S9 38.4 9 30C9 19.6 20.6 10.8 24 4z"/></svg>
+        <span class="logo__text">Mania de Salgado</span>
+      </a>
+
+      <nav class="site-nav" id="menu" aria-label="Principal" data-nav>
+        <ul>
+          <li><a href="cardapio.html">Cardápio</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__actions">
+        <button class="cart-btn" type="button" aria-controls="pedido" aria-expanded="false" data-cart-open>
+          <svg class="icon" aria-hidden="true"><use href="#i-bag"/></svg>
+          <span class="cart-btn__label">Pedido</span>
+          <span class="cart-btn__count" data-cart-count hidden>0</span>
+        </button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu" data-menu-toggle>
+          <svg class="icon" aria-hidden="true"><use href="#i-menu"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <!-- Abertura -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div class="hero__text">
+          <p class="eyebrow" data-reveal>Salgaderia em <span class="ph">[Bairro, Cidade]</span></p>
+          <h1 class="display" id="hero-title" data-reveal>Crocante por fora, recheado até a ponta.</h1>
+          <p class="hero__lead" data-reveal>Salgados fritos e assados, por unidade ou por cento. Escolha aqui e finalize o pedido no WhatsApp.</p>
+          <div class="hero__actions" data-reveal>
+            <a class="btn btn--primary" href="cardapio.html">
+              Ver cardápio
+              <svg class="icon icon--next" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+            <a class="link" href="#contato" data-whatsapp-link>
+              <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
+              Pedir pelo WhatsApp
+            </a>
+          </div>
+          <dl class="facts" data-reveal>
+            <div><dt>Hoje</dt><dd data-store-status><span class="ph">[Aberto até 19h]</span></dd></div>
+            <div><dt>Entrega</dt><dd><span class="ph">[Bairros atendidos]</span></dd></div>
+            <div><dt>Retirada</dt><dd><span class="ph">[Rua, número]</span></dd></div>
+          </dl>
+        </div>
+
+        <figure class="hero__media" data-reveal>
+          <div class="slot slot--hero">
+            <svg class="slot__pict" aria-hidden="true"><use href="#p-coxinha"/></svg>
+            <p class="slot__note"><strong>Foto a fornecer</strong>Bandeja com 6 a 8 salgados, um deles partido ao meio. Luz natural lateral, fundo claro. Vertical 4:5, mín. 2000 px.</p>
+          </div>
+          <figcaption class="hero__caption">Na foto: <span class="ph">[salgados que aparecem]</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Mais pedidos -->
+    <section class="section" aria-labelledby="mais-title">
+      <div class="container">
+        <header class="section-head section-head--row">
+          <h2 class="h2" id="mais-title" data-reveal>Os mais pedidos</h2>
+          <a class="link" href="cardapio.html" data-reveal>
+            Cardápio completo
+            <svg class="icon icon--next" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </header>
+
+        <ul class="products">
+          <li class="product" data-product="coxinha-frango" data-reveal>
+            <div class="product__media slot" aria-hidden="true"><svg class="slot__pict"><use href="#p-coxinha"/></svg></div>
+            <h3 class="product__name">Coxinha de frango</h3>
+            <p class="product__desc">Frango desfiado com tempero verde, massa macia e casquinha fina.</p>
+            <p class="product__foot"><data class="price" value=""><span class="ph">R$ [0,00]</span></data> <span class="price__unit">unidade</span></p>
+          </li>
+          <li class="product" data-product="kibe" data-reveal>
+            <div class="product__media slot" aria-hidden="true"><svg class="slot__pict"><use href="#p-kibe"/></svg></div>
+            <h3 class="product__name">Kibe</h3>
+            <p class="product__desc">Carne moída e trigo, com hortelã e um toque de limão.</p>
+            <p class="product__foot"><data class="price" value=""><span class="ph">R$ [0,00]</span></data> <span class="price__unit">unidade</span></p>
+          </li>
+          <li class="product" data-product="bolinha-queijo" data-reveal>
+            <div class="product__media slot" aria-hidden="true"><svg class="slot__pict"><use href="#p-bolinha"/></svg></div>
+            <h3 class="product__name">Bolinha de queijo</h3>
+            <p class="product__desc">Muçarela no centro, que estica quando você parte ao meio.</p>
+            <p class="product__foot"><data class="price" value=""><span class="ph">R$ [0,00]</span></data> <span class="price__unit">unidade</span></p>
+          </li>
+          <li class="product" data-product="esfiha-carne" data-reveal>
+            <div class="product__media slot" aria-hidden="true"><svg class="slot__pict"><use href="#p-esfiha"/></svg></div>
+            <h3 class="product__name">Esfiha de carne</h3>
+            <p class="product__desc">Carne temperada com tomate e cebola, em massa de forno.</p>
+            <p class="product__foot"><data class="price" value=""><span class="ph">R$ [0,00]</span></data> <span class="price__unit">unidade</span></p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Para festas -->
+    <section class="section section--flush" aria-labelledby="festa-title">
+      <div class="container">
+        <div class="band" data-reveal>
+          <div class="band__text">
+            <p class="eyebrow">Para festas</p>
+            <h2 class="h2" id="festa-title">Monte seu cento com até 4 sabores.</h2>
+            <p>Escolha os sabores em múltiplos de 25 e diga para quando. Encomendas com <span class="ph">[24 horas]</span> de antecedência.</p>
+            <a class="btn btn--primary" href="cardapio.html#festa">
+              Montar meu cento
+              <svg class="icon icon--next" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
+          <div class="tray tray--demo" aria-hidden="true" data-tray-demo></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Clientes -->
+    <section class="section" aria-labelledby="clientes-title">
+      <div class="container">
+        <header class="section-head section-head--row">
+          <h2 class="h2" id="clientes-title" data-reveal>O que dizem os clientes</h2>
+          <p class="rating" data-reveal><strong><span class="ph">[4,8]</span> de 5</strong> no Google, em <span class="ph">[000]</span> avaliações</p>
+        </header>
+
+        <ul class="quotes">
+          <li class="quote" data-reveal>
+            <blockquote><p><span class="ph">[Trecho de uma avaliação real que cite um salgado pelo nome. Até 30 palavras, com autorização do cliente.]</span></p></blockquote>
+            <p class="quote__by"><span class="ph">[Nome]</span>, <span class="ph">[bairro]</span> · Google</p>
+          </li>
+          <li class="quote" data-reveal>
+            <blockquote><p><span class="ph">[Avaliação de quem encomendou para uma festa: quantidade, pontualidade, como chegou.]</span></p></blockquote>
+            <p class="quote__by"><span class="ph">[Nome]</span>, <span class="ph">[bairro]</span> · Google</p>
+          </li>
+          <li class="quote" data-reveal>
+            <blockquote><p><span class="ph">[Avaliação sobre entrega ou atendimento: tempo, temperatura, cuidado com a embalagem.]</span></p></blockquote>
+            <p class="quote__by"><span class="ph">[Nome]</span>, <span class="ph">[bairro]</span> · <span class="ph">[Plataforma]</span></p>
+          </li>
+        </ul>
+
+        <div class="partners" data-reveal>
+          <p class="partners__label">Também entregamos pelo</p>
+          <ul class="partners__list">
+            <li><span class="ph">[Logo do iFood]</span></li>
+            <li><span class="ph">[Logo de outra plataforma]</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="section about" id="sobre" aria-labelledby="sobre-title">
+      <div class="container about__grid">
+        <div class="slot slot--about" data-reveal>
+          <svg class="slot__pict" aria-hidden="true"><use href="#p-empada"/></svg>
+          <p class="slot__note"><strong>Foto a fornecer</strong>Balcão ou cozinha, com quem faz os salgados. Horizontal 3:2, mín. 2400 px.</p>
+        </div>
+        <div class="about__text">
+          <h2 class="h2" id="sobre-title" data-reveal>Sobre a Mania</h2>
+          <p data-reveal>A Mania de Salgado abriu em <span class="ph">[ano]</span>, em <span class="ph">[bairro]</span>. <span class="ph">[Quem começou e por quê, em uma frase.]</span></p>
+          <p data-reveal><span class="ph">[O que é feito na casa e quando. Por exemplo: “Massa e recheios são preparados aqui, toda manhã.” Só o que for verdade.]</span></p>
+          <a class="link" href="cardapio.html" data-reveal>
+            Ver o cardápio
+            <svg class="icon icon--next" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contato" aria-labelledby="contato-title">
+    <div class="container">
+      <h2 class="h2 site-footer__title" id="contato-title">Contato</h2>
+      <div class="site-footer__grid">
+        <div class="site-footer__col">
+          <h3>Endereço</h3>
+          <address><span class="ph">[Rua, número]</span><br><span class="ph">[Bairro, cidade]</span></address>
+          <a class="link" href="#" data-maps-link>Como chegar</a>
+        </div>
+        <div class="site-footer__col">
+          <h3>WhatsApp</h3>
+          <p><span class="ph">[(00) 00000-0000]</span></p>
+          <a class="link" href="#contato" data-whatsapp-link>Chamar no WhatsApp</a>
+        </div>
+        <div class="site-footer__col">
+          <h3>Horários</h3>
+          <dl class="hours">
+            <div><dt>Segunda a sexta</dt><dd><span class="ph">[9h às 19h]</span></dd></div>
+            <div><dt>Sábado</dt><dd><span class="ph">[9h às 14h]</span></dd></div>
+            <div><dt>Domingo</dt><dd><span class="ph">[Fechado]</span></dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <a class="logo" href="index.html" aria-label="Mania de Salgado, página inicial">
+          <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4c3.4 6.8 15 15.6 15 26 0 8.4-6.6 14-15 14S9 38.4 9 30C9 19.6 20.6 10.8 24 4z"/></svg>
+          <span class="logo__text">Mania de Salgado</span>
+        </a>
+        <p class="site-footer__legal">© <span data-year>2026</span> <span class="ph">[Razão social]</span> · CNPJ <span class="ph">[00.000.000/0000-00]</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Barra do pedido (celular): aparece quando há itens -->
+  <button class="cart-bar" type="button" aria-controls="pedido" aria-expanded="false" data-cart-open data-cart-bar hidden>
+    <span class="cart-bar__count" data-cart-count-text></span>
+    <span class="cart-bar__label">Ver pedido</span>
+    <span class="cart-bar__total" data-cart-total-text></span>
+  </button>
+
+  <!-- Pedido -->
+  <div class="drawer" id="pedido" data-drawer hidden>
+    <div class="drawer__scrim" data-drawer-close></div>
+    <section class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="pedido-title" tabindex="-1">
+      <header class="drawer__head">
+        <h2 class="drawer__title" id="pedido-title">Seu pedido</h2>
+        <button class="icon-btn" type="button" aria-label="Fechar pedido" data-drawer-close>
+          <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+      </header>
+
+      <div class="drawer__body">
+        <div class="drawer__empty" data-cart-empty>
+          <p>Seu pedido está vazio.</p>
+          <a class="link" href="cardapio.html">
+            Ver o cardápio
+            <svg class="icon icon--next" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </div>
+        <ul class="lines" data-cart-lines></ul>
+
+        <form class="checkout" id="checkout" data-checkout novalidate>
+          <fieldset class="segmented">
+            <legend>Como prefere receber</legend>
+            <label><input type="radio" name="recebimento" value="entrega" checked><span>Entrega</span></label>
+            <label><input type="radio" name="recebimento" value="retirada"><span>Retirada no balcão</span></label>
+          </fieldset>
+          <div class="field" data-field-address>
+            <label for="c-endereco">Endereço de entrega</label>
+            <textarea id="c-endereco" name="endereco" rows="2" autocomplete="street-address" placeholder="Rua, número, bairro e complemento" aria-describedby="c-endereco-erro"></textarea>
+            <p class="field__error" id="c-endereco-erro" data-error-for="endereco"></p>
+          </div>
+          <div class="field" data-field-date hidden>
+            <label for="c-data">Data da festa</label>
+            <input id="c-data" name="data" type="date" aria-describedby="c-data-erro">
+            <p class="field__error" id="c-data-erro" data-error-for="data"></p>
+          </div>
+          <div class="field">
+            <label for="c-obs">Observações <span class="field__opt">(opcional)</span></label>
+            <input id="c-obs" name="obs" type="text" placeholder="Ex.: troco para R$ 50">
+          </div>
+        </form>
+      </div>
+
+      <footer class="drawer__foot" data-cart-foot>
+        <dl class="total"><dt>Subtotal</dt><dd data-cart-total>—</dd></dl>
+        <p class="drawer__note">Taxa de entrega e forma de pagamento são combinadas no WhatsApp.</p>
+        <button class="btn btn--primary btn--block" type="submit" form="checkout">
+          <svg class="icon" aria-hidden="true"><use href="#i-chat"/></svg>
+          Enviar pedido pelo WhatsApp
+        </button>
+        <p class="drawer__status" role="status" aria-live="polite" data-send-status></p>
+      </footer>
+    </section>
+  </div>
+
+  <p class="sr-only" role="status" aria-live="polite" data-announce></p>
+</body>
+</html>
