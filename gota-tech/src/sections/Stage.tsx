@@ -267,7 +267,6 @@ export function Stage() {
                   )
                 })}
               </ol>
-              <p className="sys__note mono">Visualização ilustrativa · fora de escala</p>
             </div>
 
             <nav className="sys__rail" aria-label="Etapas do sistema">

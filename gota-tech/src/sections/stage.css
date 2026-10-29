@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .stage {
-  --unit: calc(100vh * 1.05);
+  --unit: calc(100vh * 0.85);
   position: relative;
   height: calc(100vh + var(--unit) * var(--units));
   background: var(--deep);
@@ -374,12 +374,6 @@
   color: var(--on-dark-2);
 }
 
-.sys__note {
-  margin-top: clamp(28px, 5vh, 60px);
-  color: var(--on-dark-3);
-  font-size: 0.64rem;
-}
-
 /* Trilha de progresso */
 .sys__rail {
   position: absolute;
@@ -563,10 +557,6 @@
 
   .sys__text {
     font-size: 1.02rem;
-  }
-
-  .sys__note {
-    margin-top: 18px;
   }
 
   .sys__rail {

@@ -104,27 +104,19 @@ export function Materials() {
         <p className="eyebrow" data-reveal>
           <span className="eyebrow__index">04</span>
           <span className="eyebrow__rule" />
-          Materiais e construção
         </p>
         <h2 id="bp-title" className="h2 bp__title" data-split>
           <span className="split-line">
-            <span>Quatro peças,</span>
-          </span>
-          <span className="split-line">
             <span>
-              <em className="serif">um percurso</em>
-              <span className="drop-dot" aria-hidden="true" />
+              Materiais e <em className="serif">construção</em>
             </span>
           </span>
         </h2>
-        <p className="lead bp__lead" data-reveal="1">
-          Os componentes necessários para conduzir a água do telhado até o reservatório. Toque ou passe o cursor em cada peça.
-        </p>
       </div>
 
       <div className="container bp__body">
         <div ref={drawing} className="bp__drawing" data-reveal style={{ '--asm': 0 } as CSSProperties}>
-          <svg viewBox="0 0 1200 760" className="bp__svg" role="group" aria-label="Desenho técnico do sistema em vista explodida">
+          <svg viewBox="0 30 1200 690" className="bp__svg" role="group" aria-label="Desenho técnico do sistema em vista explodida">
             <defs>
               <pattern id="bp-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
                 <line x1="0" y1="0" x2="0" y2="8" className="bp-hatch-line" />
@@ -149,9 +141,6 @@ export function Materials() {
                 <circle className="bp-dash" r="62" />
                 <path className="bp-line bp-line--thick" d="M-40 -16 V2 A40 40 0 0 0 40 2 V-16" />
                 <path className="bp-thin" d="M-48 -16 H-36 M36 -16 H48" />
-                <text className="bp-note" y="88" textAnchor="middle">
-                  seção · meia-cana
-                </text>
               </g>
               <path className="bp-leader" d="M250 193 L250 160" />
               <Tag x={96} y={66} code="A" title="Calhas" />
@@ -190,40 +179,8 @@ export function Materials() {
               <path className="bp-thin" d="M880 490 H1120 M880 545 H1120 M880 600 H1120 M880 650 H1120" />
               <rect className="bp-body" x="896" y="406" width="208" height="16" rx="6" />
               <path className="bp-body" d="M1120 664 H1146 V678 H1138 V690 H1130 V678 H1120 Z" />
-              {/* cotas sem valores: a pesquisa não define dimensões */}
-              <g className="bp-dim">
-                <path d="M1170 420 V690 M1162 420 H1178 M1162 690 H1178" />
-                <text x="1188" y="560" transform="rotate(90 1188 560)" textAnchor="middle">
-                  altura · a definir
-                </text>
-                <path d="M880 722 H1120 M880 714 V730 M1120 714 V730" />
-                <text x="1000" y="748" textAnchor="middle">
-                  diâmetro · a definir
-                </text>
-              </g>
               <Tag x={860} y={520} code="D" title="Reservatório" anchor="end" />
             </Part>
-
-            {/* carimbo da prancha */}
-            <g className="bp-stamp" transform="translate(60 640)">
-              <rect width="330" height="84" />
-              <path d="M0 30 H330 M200 30 V84" />
-              <text x="14" y="21">
-                GOTA TECH · CAPTAÇÃO PLUVIAL
-              </text>
-              <text x="14" y="52">
-                Montagem
-              </text>
-              <text x="14" y="72">
-                esquemática
-              </text>
-              <text x="214" y="52">
-                Escala
-              </text>
-              <text x="214" y="72">
-                sem escala
-              </text>
-            </g>
           </svg>
         </div>
 
@@ -249,16 +206,6 @@ export function Materials() {
             </span>
             <h3 className="bp__card-title">{current.title}</h3>
             <p className="bp__card-text">{current.text}</p>
-            <dl className="bp__spec">
-              <div>
-                <dt className="mono">Função</dt>
-                <dd>{current.fn}</dd>
-              </div>
-              <div>
-                <dt className="mono">Especificações</dt>
-                <dd>Definidas na elaboração da proposta</dd>
-              </div>
-            </dl>
           </div>
         </aside>
       </div>

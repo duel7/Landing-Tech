@@ -51,9 +51,6 @@ export function Research() {
             </span>
           </span>
         </h2>
-        <p className="lead rs__lead" data-reveal="1">
-          As etapas previstas pela pesquisa, da investigação à apresentação da proposta para a comunidade escolar.
-        </p>
       </div>
 
       <div className="container">
@@ -69,7 +66,6 @@ export function Research() {
                   <span className="tl__node" aria-hidden="true" />
                   <span className="tl__n mono">{String(i + 1).padStart(2, '0')}</span>
                   <p className="tl__text">{text}</p>
-                  {conditional ? <span className="tl__tag mono">Etapa condicional</span> : null}
                 </li>
               )
             })}

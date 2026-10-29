@@ -79,9 +79,6 @@ export function Results() {
               </span>
             </span>
           </h2>
-          <p className="out__note mono" data-reveal="1">
-            Objetivos da pesquisa · não são medições
-          </p>
         </div>
 
         <ol className="out__list">
@@ -94,9 +91,6 @@ export function Results() {
           ))}
         </ol>
       </div>
-      <p className="out__hint mono" aria-hidden="true">
-        Mova o cursor sobre a água
-      </p>
     </section>
   )
 }

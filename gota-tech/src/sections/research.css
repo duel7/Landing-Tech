@@ -6,7 +6,7 @@
   background:
     radial-gradient(50% 60% at 100% 0%, rgba(8, 124, 240, 0.08), transparent 70%),
     var(--mist);
-  padding-block: clamp(96px, 10vw, 180px);
+  padding-block: clamp(72px, 7vw, 130px);
 }
 
 .rs__head {
@@ -23,7 +23,7 @@
 
 .rs__title {
   grid-column: 1 / span 7;
-  font-size: clamp(2.6rem, 1rem + 4.6vw, 7rem);
+  font-size: clamp(2.3rem, 1rem + 3.6vw, 5.6rem);
 }
 
 .rs__title em {
@@ -31,15 +31,10 @@
   color: var(--blue);
 }
 
-.rs__lead {
-  grid-column: 9 / span 4;
-  padding-bottom: 0.5em;
-}
-
 .tl {
   --p: 0;
   position: relative;
-  margin-top: clamp(56px, 6vw, 110px);
+  margin-top: clamp(40px, 4.5vw, 80px);
 }
 
 .tl__track {
@@ -124,23 +119,9 @@
   color: var(--on-light-2);
 }
 
-.tl__tag {
-  justify-self: start;
-  padding: 4px 9px;
-  border: 1px dashed rgba(16, 61, 50, 0.45);
-  border-radius: 999px;
-  color: var(--forest);
-  font-size: 0.62rem;
-}
-
 @media (max-width: 1100px) {
-  .rs__title,
-  .rs__lead {
+  .rs__title {
     grid-column: 1 / -1;
-  }
-
-  .rs__lead {
-    margin-top: 20px;
   }
 
   .tl__track {
@@ -170,9 +151,5 @@
 
   .tl__n {
     margin-top: 2px;
-  }
-
-  .tl__tag {
-    grid-column: 3;
   }
 }

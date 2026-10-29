@@ -69,16 +69,12 @@ export const importance = {
 
 export const application = {
   quote: 'Uma proposta para transformar a chuva em um recurso útil para a comunidade escolar.',
-  status:
-    'A pesquisa investiga uma proposta de captação e reaproveitamento da água da chuva para a escola. A ilustração é conceitual e não representa o prédio real.',
 }
 
 export type Component = {
   key: 'calhas' | 'tubos' | 'filtro' | 'reservatorio'
   code: string
   title: string
-  /** função em uma palavra (derivada das etapas do sistema) */
-  fn: string
   text: string
 }
 
@@ -89,29 +85,25 @@ export const components: Component[] = [
     key: 'calhas',
     code: 'A',
     title: 'Calhas',
-    fn: 'Coletar',
-    text: 'Ficam nas bordas do telhado e recolhem a água da chuva que escorre pela superfície, encaminhando-a para as tubulações.',
+    text: 'Recolhem a água que escorre do telhado.',
   },
   {
     key: 'tubos',
     code: 'B',
     title: 'Tubos e conexões',
-    fn: 'Conduzir',
-    text: 'Conduzem a água das calhas até a área de armazenamento. As conexões unem os trechos e mudam a direção do percurso.',
+    text: 'Levam a água das calhas até o reservatório.',
   },
   {
     key: 'filtro',
     code: 'C',
     title: 'Filtro para folhas e partículas',
-    fn: 'Reter folhas e partículas',
-    text: 'Um filtro simples ajuda a reter folhas e outras partículas antes que a água chegue ao reservatório.',
+    text: 'Retém folhas e outras partículas.',
   },
   {
     key: 'reservatorio',
     code: 'D',
     title: 'Reservatório adequado',
-    fn: 'Armazenar',
-    text: 'Armazena a água captada até o momento do uso, sempre em atividades que não exigem potabilidade.',
+    text: 'Guarda a água para usos não potáveis.',
   },
 ]
 

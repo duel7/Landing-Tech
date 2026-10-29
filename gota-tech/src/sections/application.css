@@ -36,7 +36,7 @@
 
 .app__title {
   margin-top: clamp(24px, 3vw, 44px);
-  font-size: clamp(2.4rem, 0.6rem + 3.6vw, 6.2rem);
+  font-size: clamp(2.2rem, 0.6rem + 3vw, 5.2rem);
 }
 
 .app__title em {
@@ -50,7 +50,7 @@
 }
 
 .app__quote {
-  margin: clamp(32px, 4vw, 64px) 0 0;
+  margin: clamp(24px, 3vw, 44px) 0 0;
   padding-left: clamp(16px, 1.4vw, 24px);
   border-left: 2px solid var(--green);
 }
@@ -66,7 +66,7 @@
 
 .app__uses {
   display: grid;
-  margin-top: clamp(32px, 4vw, 64px);
+  margin-top: clamp(24px, 3vw, 44px);
   border-top: 1px solid var(--line-dark);
 }
 
@@ -139,26 +139,6 @@
   background: var(--green);
   color: var(--forest);
   transform: scale(1.06);
-}
-
-.app__status {
-  display: flex;
-  gap: 12px;
-  margin-top: clamp(24px, 3vw, 40px);
-  max-width: 46ch;
-  font-size: var(--fs-small);
-  line-height: 1.55;
-  color: var(--on-dark-2);
-}
-
-.app__status-dot {
-  flex: none;
-  width: 8px;
-  height: 8px;
-  margin-top: 0.5em;
-  border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 0 4px rgba(66, 232, 224, 0.15);
 }
 
 .app__figure {

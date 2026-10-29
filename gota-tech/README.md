@@ -46,10 +46,10 @@ Cada etapa tem numeral que "enche de água" conforme a leitura, legenda curta e 
 
 **Demais seções.**
 
-- **Cada gota conta** (clara): três ilustrações com tratamentos distintos (gota com nível d'água, curvas de nível com rio, ondas que alcançam a comunidade); o painel alto acompanha a leitura.
+- **Cada gota conta** (clara): três ilustrações com tratamentos distintos (gota com nível d'água, curvas de nível com rio, ondas que alcançam a comunidade), lado a lado em uma única faixa.
 - **Aplicação na escola** (verde): ilustração isométrica conceitual com o percurso da água e os três usos; passar o cursor, focar ou tocar em um uso destaca o ponto na ilustração.
-- **Materiais e construção** (prancha técnica): vista explodida que se monta com a rolagem e, montada, mostra o fluxo; cada peça (A–D) responde a cursor, toque e teclado com a explicação da função.
-- **Pesquisa e desenvolvimento**: linha do tempo das sete etapas da metodologia, com a sétima marcada como condicional.
+- **Materiais e construção** (prancha técnica): vista explodida que se monta com a rolagem e, montada, mostra o fluxo; cada peça (A–D) responde a cursor, toque e teclado com uma explicação curta da função.
+- **Pesquisa e desenvolvimento**: linha do tempo das sete etapas da metodologia (a sétima, condicional, tem marcador tracejado).
 - **O futuro começa com uma gota**: superfície d'água interativa (cursor e toque criam ondas) e os quatro resultados esperados.
 - **Encerramento**: cena de água, luz e vegetação em shader, frase final, assinatura da escola e botão de volta ao início.
 
@@ -59,8 +59,9 @@ Cada etapa tem numeral que "enche de água" conforme a leitura, legenda curta e 
 
 - O texto vem do conteúdo da pesquisa fornecido no briefing (objetivos, justificativa, metodologia, materiais e resultados esperados) e está centralizado em `src/content/site.ts`.
 - **O PDF da pesquisa e o vídeo de referência não estavam disponíveis no ambiente de desenvolvimento.** A cena 3D segue a descrição do vídeo dada no briefing (casa com telhado vermelho, calhas, tubulações, reservatório azul e torneira). Vale conferir os textos contra o PDF antes de publicar.
-- Nenhum número foi inventado: não há percentuais, litros, custos, capacidade ou medições. Dimensões aparecem como "a definir" e as especificações como "definidas na elaboração da proposta" (etapa 4 da metodologia).
-- O site trata o sistema como **proposta em investigação**: não afirma que foi instalado nem que houve economia. A ilustração da escola é identificada como conceitual, e a cena 3D, como "visualização ilustrativa · fora de escala".
+- Nenhum número foi inventado: não há percentuais, litros, custos, capacidade, dimensões ou medições.
+- Sem frases de enchimento: os textos visíveis são os da pesquisa, mais títulos curtos e as explicações de uma linha de cada peça.
+- O site trata o sistema como **proposta em investigação**: não afirma que foi instalado nem que houve economia. A ilustração da escola é identificada como conceitual.
 - O reservatório traz a etiqueta "água não potável", e as descargas sanitárias aparecem com a ressalva "desde que a instalação seja tecnicamente adequada".
 
 ## Desempenho, acessibilidade e alternativas

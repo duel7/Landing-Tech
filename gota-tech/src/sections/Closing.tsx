@@ -200,7 +200,6 @@ export function Closing() {
         <p className="mono">
           {site.school} · {site.city} — {site.stateShort}
         </p>
-        <p className="mono cl__foot-note">Projeto de pesquisa escolar · {site.subtitle}</p>
       </footer>
     </section>
   )

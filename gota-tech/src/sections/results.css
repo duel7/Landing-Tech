@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .out {
-  min-height: 100vh;
+  min-height: 80vh;
   display: grid;
   align-items: center;
   overflow: hidden;
@@ -46,7 +46,7 @@
 
 .out__title {
   margin-top: clamp(24px, 3vw, 44px);
-  font-size: clamp(2.8rem, 1rem + 5.6vw, 8.8rem);
+  font-size: clamp(2.4rem, 1rem + 4.2vw, 6.6rem);
 }
 
 .out__title em {
@@ -56,11 +56,6 @@
   background-clip: text;
   color: transparent;
   padding-right: 0.04em;
-}
-
-.out__note {
-  margin-top: clamp(20px, 2.4vw, 36px);
-  color: var(--on-dark-3);
 }
 
 .out__list {
@@ -96,20 +91,6 @@
   font-size: clamp(1.05rem, 0.9rem + 0.55vw, 1.6rem);
   line-height: 1.3;
   letter-spacing: -0.015em;
-}
-
-.out__hint {
-  position: absolute;
-  right: max(var(--gutter), calc((100vw - var(--maxw)) / 2));
-  bottom: clamp(24px, 3vw, 48px);
-  color: var(--on-dark-3);
-  font-size: 0.64rem;
-}
-
-@media (pointer: coarse) {
-  .out__hint {
-    display: none;
-  }
 }
 
 /* Glifos */

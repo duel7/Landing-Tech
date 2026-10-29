@@ -102,16 +102,11 @@ export function Application() {
               </li>
             ))}
           </ol>
-
-          <p className="app__status" data-reveal>
-            <span className="app__status-dot" aria-hidden="true" />
-            {application.status}
-          </p>
         </div>
 
         <figure className="app__figure" data-reveal="1">
           <SchoolIllustration active={active} />
-          <figcaption className="mono">Ilustração conceitual · fora de escala</figcaption>
+          <figcaption className="mono">Ilustração conceitual</figcaption>
         </figure>
       </div>
     </section>

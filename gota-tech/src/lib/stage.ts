@@ -4,7 +4,7 @@
 
 export const STEP_COUNT = 5
 /** Unidades de rolagem da seção: 1 de abertura + 5 etapas + uma pausa final. */
-export const STAGE_UNITS = 6.4
+export const STAGE_UNITS = 6.2
 
 export const stage = {
   /** 0–1 ao longo da seção fixada (abertura + sistema). */
