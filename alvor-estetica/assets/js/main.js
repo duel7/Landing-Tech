@@ -230,22 +230,6 @@
       items.forEach(function (item) { listObserver.observe(item); });
     }
 
-    // Links que apontam para um tratamento (faixa de anúncio).
-    $$('[data-treatment-link]').forEach(function (link) {
-      link.addEventListener('click', function () {
-        var key = link.getAttribute('data-treatment-link');
-        setActive(key);
-        if (!desktop.matches && track) {
-          var target = $('[data-treatment="' + key + '"]', track);
-          if (target) {
-            window.setTimeout(function () {
-              track.scrollTo({ left: target.offsetLeft - track.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft), behavior: reduceMotion.matches ? 'auto' : 'smooth' });
-            }, 450);
-          }
-        }
-      });
-    });
-
     // Celular e tablet: carrossel com contador e botões.
     if (track && items.length) {
       var step = function () {

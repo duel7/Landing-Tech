@@ -88,17 +88,13 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   await demo('cursorShow', false);
   await page.mouse.move(1430, 400);
 
-  await scrollTo('desk', 470, 1700);
+  await scrollTo('desk', 430, 1600);
   await wait(1200);
-  await scrollToEl('desk', '#clinica', 30, 1800);
-  await wait(1600);
-  await scrollTo('desk', (await demo('top', 'desk', '#clinica', 30)) + 470, 2000);
-  await wait(900);
 
   await scrollToEl('desk', '#tratamentos', 20, 1800);
   await wait(1100);
   const lastTreatment = await demo('top', 'desk', '#tratamento-ritual', 330);
-  await scrollTo('desk', lastTreatment, 8500);
+  await scrollTo('desk', lastTreatment, 6500);
   await wait(500);
   await demo('cursorTo', 1250, 720, 0);
   await demo('cursorShow', true);
@@ -106,6 +102,9 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   await wait(1000);
   await demo('cursorShow', false);
   await page.mouse.move(1430, 400);
+
+  await scrollToEl('desk', '#clinica', 0, 1800);
+  await wait(1800);
 
   await scrollToEl('desk', '#espaco', 20, 1800);
   await wait(900);

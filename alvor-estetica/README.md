@@ -29,7 +29,7 @@ assets/img/                fotografias tratadas em AVIF, WebP e JPEG + imagem de
 assets/favicon.svg         ícone (o "alvor" — sol nascendo sobre a linha do horizonte)
 tools/preparar_imagens.py  recorte, tratamento de cor e exportação das fotografias
 tools/demo/                palco e roteiro que gravam o vídeo de demonstração
-demo/alvor-demo.mp4        vídeo de demonstração (1080p, ~80 s)
+demo/alvor-demo.mp4        vídeo de demonstração (1080p, ~75 s)
 ```
 
 ## Do modelo à Alvor
@@ -40,9 +40,8 @@ O ponto de partida foi o modelo de estilo *"clinical journal in morning light"* 
 
 - tela clara com **uma única camada de cartão** e elevação só por linha fina (nenhuma sombra difusa);
 - **serifada editorial** na abertura e nos títulos de seção, **Geist** na interface, com tracking negativo que aumenta com o tamanho;
-- a **palavra-assinatura**: um único termo do título na cor da marca ("tempo", "método", "desacelerar", "avaliação");
-- **pílula de categoria** com contorno acima do título, **faixa de anúncio** no topo, **cabeçalho fixo** com botão-fantasma à direita;
-- **cartão flutuante** sobre a foto da abertura (no modelo, uma conversa; aqui, um exemplo de protocolo);
+- a **palavra-assinatura**: um único termo do título na cor da marca ("cuidada", "tratamento", "avaliação");
+- **pílula de categoria** com contorno acima do título e **cabeçalho fixo** com botão-fantasma à direita;
 - a **fórmula de prova**: rótulo em caixa-alta → ícone de linha → número grande → legenda;
 - botões em pílula — **escuro preenchido + contorno** — e raios só em 8/12 px, 20/24 px ou pílula;
 - largura máxima de 1200 px, texto alinhado à esquerda, colunas de leitura curtas.
@@ -53,7 +52,7 @@ O ponto de partida foi o modelo de estilo *"clinical journal in morning light"* 
 - **Assinatura em itálico**: o itálico da Libre Caslon dá à palavra colorida um tom mais humano.
 - **Tratamentos sem grade de cartões**: no computador, uma lista editorial com a foto fixa ao lado, que troca conforme a leitura; no celular, um carrossel com contador.
 - **O espaço** em mosaico assimétrico, **depoimentos** com monogramas (sem rostos atribuídos a pessoas inventadas) e **dúvidas** em acordeão.
-- A faixa de logos de parceiros do modelo foi omitida: inventar parcerias ou menções na imprensa passaria por informação real.
+- **Texto enxuto**: só o essencial — o que é cada tratamento, duração, valor, como agendar, onde fica e quando abre. A faixa de anúncio e o cartão flutuante do modelo ficaram de fora, assim como a faixa de logos de parceiros (inventar parcerias passaria por informação real).
 
 ## Identidade
 
@@ -69,7 +68,7 @@ O ponto de partida foi o modelo de estilo *"clinical journal in morning light"* 
 | `--accent-light` | `#aebda2` | assinatura sobre fundo escuro | 8,1:1 |
 
 - **Tipografia**: Libre Caslon Text (títulos e assinatura) e Geist (texto e interface).
-- **Marca**: "Alvor" é a primeira luz da manhã. O símbolo é um sol nascendo sobre a linha do horizonte; o conceito da clínica é **estética sem pressa**.
+- **Marca**: "Alvor" é a primeira luz da manhã. O símbolo é um sol nascendo sobre a linha do horizonte.
 - **Ícones**: desenhados em linha de 1,5 px, sempre em verde eucalipto.
 
 ## Fotografia
@@ -108,7 +107,7 @@ O celular não é o computador encolhido: na abertura, a foto vem logo depois do
 
 ## Vídeo de demonstração
 
-`demo/alvor-demo.mp4` — 1920 × 1080, 60 quadros/s, cerca de 80 segundos, sem áudio: cartela de abertura, tour pela página no computador (entrada da abertura, seções, troca de fotos dos tratamentos, galeria, depoimentos, dúvidas e agendamento), a experiência no celular dentro de um aparelho, com legendas, e uma cartela final que identifica o projeto como demonstrativo.
+`demo/alvor-demo.mp4` — 1920 × 1080, 60 quadros/s, cerca de 75 segundos, sem áudio: cartela de abertura, tour pela página no computador (entrada da abertura, seções, troca de fotos dos tratamentos, galeria, depoimentos, dúvidas e agendamento), a experiência no celular dentro de um aparelho, com legendas, e uma cartela final que identifica o projeto como demonstrativo.
 
 O vídeo é gravado de forma automática a partir de `tools/demo/demo.html` (palco com cartelas, cursor e moldura de celular) e `tools/demo/gravar_demo.js` (roteiro). Para regravar depois de mudar a página, a partir desta pasta:
 
