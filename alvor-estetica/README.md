@@ -28,6 +28,8 @@ assets/fonts/              Libre Caslon Text e Geist (woff2, licença OFL)
 assets/img/                fotografias tratadas em AVIF, WebP e JPEG + imagem de compartilhamento
 assets/favicon.svg         ícone (o "alvor" — sol nascendo sobre a linha do horizonte)
 tools/preparar_imagens.py  recorte, tratamento de cor e exportação das fotografias
+tools/demo/                palco e roteiro que gravam o vídeo de demonstração
+demo/alvor-demo.mp4        vídeo de demonstração (1080p, ~80 s)
 ```
 
 ## Do modelo à Alvor
@@ -103,6 +105,22 @@ As fotos de **ambiente** são ilustrativas: com um cliente real, substitua-as po
 ## Celular
 
 O celular não é o computador encolhido: na abertura, a foto vem logo depois do título e os botões ocupam toda a largura; os tratamentos viram um carrossel com contador e botões; depoimentos deslizam para os lados; o menu ocupa a tela com links grandes e o botão de agendamento; o WhatsApp flutuante só aparece depois da abertura e some ao chegar ao bloco de agendamento.
+
+## Vídeo de demonstração
+
+`demo/alvor-demo.mp4` — 1920 × 1080, 60 quadros/s, cerca de 80 segundos, sem áudio: cartela de abertura, tour pela página no computador (entrada da abertura, seções, troca de fotos dos tratamentos, galeria, depoimentos, dúvidas e agendamento), a experiência no celular dentro de um aparelho, com legendas, e uma cartela final que identifica o projeto como demonstrativo.
+
+O vídeo é gravado de forma automática a partir de `tools/demo/demo.html` (palco com cartelas, cursor e moldura de celular) e `tools/demo/gravar_demo.js` (roteiro). Para regravar depois de mudar a página, a partir desta pasta:
+
+```bash
+python3 -m http.server 8766 --bind 127.0.0.1
+```
+
+```bash
+node tools/demo/gravar_demo.js http://127.0.0.1:8766/tools/demo/demo.html demo/alvor-demo.mp4
+```
+
+Requer Node com Playwright (Chromium) e ffmpeg com libx264.
 
 ## Antes de publicar para um cliente real
 
